@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 675" role="img" aria-labelledby="title desc">
+<title id="title">Northstar proposed To-Be enquiry and customer process</title>
+<desc id="desc">Enquiries are captured, classified and assigned under agreed rules. Sales enquiries and support requests follow separate paths. Customer records and activities support a reporting process. All elements are illustrative and subject to validation.</desc>
+<defs><style>.bx{fill:#fff;stroke:#bed4c5;stroke-width:1.7;rx:12}.soft{fill:#eef7f1;stroke:#b1d1bc;stroke-width:1.7;rx:12}.decision{fill:#fff9ea;stroke:#c6ad68;stroke-width:1.7}.label{fill:#1c3040;font:16px Arial,sans-serif;text-anchor:middle}.fine{fill:#536879;font:13px Arial,sans-serif;text-anchor:middle}.line{stroke:#799e87;stroke-width:2.5;fill:none;marker-end:url(#arr)}.title{font:700 21px Georgia,serif;fill:#192c3e}.note{fill:#0e7b41;font:bold 12px Arial,sans-serif;text-anchor:middle}</style><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#799e87"/></marker></defs>
+<text x="21" y="32" class="title">Proposed future-state process — illustrative, not approved</text>
+<rect x="341" y="55" width="318" height="56" class="soft"/><text x="500" y="89" class="label">Enquiry submitted</text>
+<path class="line" d="M500 111 V140"/>
+<rect x="266" y="140" width="468" height="72" class="bx"/><text x="500" y="168" class="label">Record agreed minimum enquiry details</text><text x="500" y="191" class="fine">Check possible duplicates / existing customers</text>
+<path class="line" d="M500 212 V245"/>
+<path class="decision" d="M500 244 L628 312 L500 380 L372 312 Z"/><text x="500" y="304" class="label">Classify</text><text x="500" y="325" class="label">enquiry</text>
+<path class="line" d="M372 312 H250 V404"/><path class="line" d="M628 312 H752 V404"/>
+<text x="268" y="298" class="note">SALES</text><text x="725" y="298" class="note">SUPPORT</text>
+<rect x="65" y="404" width="372" height="90" class="bx"/><text x="251" y="433" class="label">Assign Sales owner and follow up</text><text x="251" y="456" class="fine">Log interactions; update agreed lifecycle</text><text x="251" y="476" class="fine">Converted · Not converted · Still open</text>
+<rect x="566" y="404" width="372" height="90" class="bx"/><text x="752" y="433" class="label">Assign Support owner and handle case</text><text x="752" y="456" class="fine">Share relevant history with permission</text><text x="752" y="476" class="fine">Resolved · Pending · Escalated</text>
+<path class="line" d="M251 494 V537 H500 V555"/><path class="line" d="M752 494 V537 H500"/>
+<rect x="247" y="555" width="506" height="59" class="soft"/><text x="500" y="579" class="label">Maintain consistent, appropriately accessible records</text><text x="500" y="600" class="fine">Use agreed data definitions, ownership and quality controls</text>
+<text x="500" y="651" class="fine">Related reporting activity: management reviews agreed KPIs from maintained records.</text>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 492" role="img" aria-labelledby="title desc">
+<title id="title">Northstar preliminary As-Is process landscape</title>
+<desc id="desc">Known enquiry sources lead to several storage or handling routes. Sales follow-up process needs validation. Customer Support ticketing and management reporting are related workflows, not necessarily sequential steps.</desc>
+<defs><style>.bx{fill:#fff;stroke:#b8caca;stroke-width:1.6;rx:12}.label{fill:#203142;font:17px Arial,sans-serif;text-anchor:middle}.fine{fill:#4c6070;font:13px Arial,sans-serif;text-anchor:middle}.line{stroke:#789c88;stroke-width:2.4;fill:none;marker-end:url(#arr)}.note{fill:#f4f7f8;stroke:#d1dddf;stroke-width:1.5;rx:12}.tag{fill:#137c42;font:bold 12px Arial,sans-serif;text-anchor:middle}.title{font:700 21px Georgia,serif;fill:#192c3e}</style><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#789c88"/></marker></defs>
+<text x="22" y="32" class="title">Current-state view — scenario facts and questions</text>
+<rect x="300" y="56" width="400" height="68" class="bx"/><text x="500" y="84" class="label">Customer / prospect enquiries</text><text x="500" y="105" class="fine">Website · WhatsApp · Phone · Referral · Campaign</text>
+<path class="line" d="M500 124 V153"/>
+<rect x="104" y="154" width="792" height="99" class="bx"/><text x="500" y="181" class="label">Different known intake / handling routes</text><text x="500" y="208" class="fine">Website → shared inbox  ·  WhatsApp → two salespeople  ·  Campaigns → spreadsheets</text><text x="500" y="230" class="fine">Referrals → individual reps sometimes  ·  Phone handling needs verification</text>
+<path class="line" d="M500 253 V282"/>
+<rect x="282" y="282" width="436" height="72" class="bx"/><text x="500" y="308" class="label">Sales representatives maintain prospect information</text><text x="500" y="330" class="fine">Spreadsheets · Email · Individual notes</text>
+<path class="line" d="M500 354 V388"/>
+<rect x="282" y="389" width="436" height="65" class="bx"/><text x="500" y="417" class="label">Follow-up activities</text><text x="500" y="439" class="fine">Management reports inconsistency; workflow unverified</text>
+<rect x="12" y="286" width="247" height="132" class="note"/><text x="135" y="311" class="tag">RELATED WORKSTREAM</text><text x="135" y="339" class="label">Customer Support</text><text x="135" y="363" class="fine">Separate ticketing tool</text><text x="135" y="386" class="fine">Handoffs not yet confirmed</text>
+<rect x="741" y="286" width="247" height="132" class="note"/><text x="864" y="311" class="tag">RELATED WORKSTREAM</text><text x="864" y="339" class="label">Management reporting</text><text x="864" y="363" class="fine">Weekly Excel report</text><text x="864" y="386" class="fine">Data sources not verified</text>
+<text x="500" y="483" class="fine">This diagram is illustrative. No real Northstar stakeholders have been interviewed.</text>
+</svg>
