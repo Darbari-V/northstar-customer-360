@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#138342"><meta name="description" content="Northstar Customer 360: simulated requirements catalogue, business rules, user stories, acceptance criteria, traceability and change impact analysis.">
+<title>Requirements &amp; Traceability | Customer 360 Case Study</title><link rel="stylesheet" href="assets/style.css"></head>
+<body><header class="site-header"><div class="container inner"><a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a><nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html" aria-current="page">Requirements</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav></div></header>
+<main class="container paper"><a class="back" href="index.html">← Case study overview</a>
+<div class="eyebrow" style="margin-top:28px">Artefact 004 · v1.0 · Completed case-study specification</div>
+<h1>Requirements Catalogue &amp; Traceability</h1>
+<p class="lead">A scoped, solution-neutral requirements specification for Sales enquiry visibility and ownership—connecting stakeholder needs to rules, system behaviour, data and proposed acceptance criteria.</p>
+<div class="notice"><strong>Evidence boundary:</strong> Northstar is fictional. The author-selected rules form a coherent <em>case-study baseline</em>, not a stakeholder-approved business specification. No interviews, CRM deployment or execution of acceptance tests are claimed. The hypothetical change analysis and validation-question dispositions are completed documentation, not unresolved publication tasks.</div>
+<div class="status-row"><span class="pill">Session 4 artefact finalised</span><span class="pill neutral">Simulated requirements</span><span class="pill neutral">No production implementation</span></div>
+<h2>Business objective &amp; scoped need</h2>
+<p><strong>BO-02:</strong> Strengthen lead ownership and follow-up visibility. <strong>GAP-02:</strong> Enquiry capture, ownership and follow-up. The bounded case-study need is to identify unassigned Sales work and provide appropriate visibility of enquiry ownership.</p>
+<h2>Candidate functional requirements</h2>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Required behaviour</th><th>Supports</th></tr></thead><tbody>
+<tr><td>FR-001</td><td>Show <strong>New AND unassigned</strong> Sales enquiries to an authorised Sales Manager.</td><td>SR-001 / BR-001</td></tr>
+<tr><td>FR-002</td><td>Show a signed-in Sales Representative their assigned enquiries, including Closed records under the selected exercise assumption.</td><td>SR-002 / BR-002</td></tr>
+<tr><td>FR-003</td><td>Exclude Closed enquiries from the separate Active Enquiry List.</td><td>SR-003 / BR-003</td></tr>
+<tr><td>FR-004</td><td>Display each active-list enquiry's owner, or the label Unassigned if the owner reference is unset.</td><td>SR-003 / AS-02</td></tr>
+<tr><td>FR-005</td><td>Prevent a new unassigned Sales enquiry changing status to Contacted.</td><td>SR-004 / BR-004</td></tr>
+</tbody></table></div>
+<p class="small">Four simulated stakeholder requirements, four business rules, five functional requirements and three supporting data requirements are linked in the full catalogue. No automatic assignment, date filter or unsupported performance dashboard was introduced.</p>
+<h2>Two distinct views, two distinct rules</h2><div class="grid-2">
+<article class="card"><h3>My Assigned Enquiries</h3><p>Includes records owned by the signed-in representative <strong>regardless of status</strong>. In AC-002, Sales Rep A sees ENQ-501 and ENQ-504 (Closed), but not ENQ-502 or ENQ-503.</p><span class="label-note">Selected case-study rule: AS-03 / BR-002</span></article>
+<article class="card"><h3>Active Enquiry List</h3><p>Excludes records with status <strong>Closed</strong>. This does not mean that only Open records qualify. In AC-003, ENQ-501, ENQ-503 and ENQ-505 appear; ENQ-504 does not.</p><span class="label-note">Selected case-study rule: AS-04 / BR-003</span></article></div>
+<h2>Acceptance criteria: testing both conditions</h2>
+<p>AC-001 checks the candidate <em>New Unassigned Enquiries</em> view using five synthetic records. Both conditions must match simultaneously.</p>
+<div class="table-wrap"><table><thead><tr><th>Record</th><th>Status</th><th>Owner</th><th>Expected result</th></tr></thead><tbody>
+<tr><td>ENQ-601</td><td>New</td><td>Unassigned</td><td><strong>Include</strong></td></tr>
+<tr><td>ENQ-602</td><td>New</td><td>Sales Rep A</td><td>Exclude</td></tr>
+<tr><td>ENQ-603</td><td>In Progress</td><td>Unassigned</td><td>Exclude</td></tr>
+<tr><td>ENQ-604</td><td>New</td><td>Unassigned</td><td><strong>Include</strong></td></tr>
+<tr><td>ENQ-605</td><td>New</td><td>Sales Rep B</td><td>Exclude</td></tr>
+</tbody></table></div>
+<p><strong>Given</strong> the authorised Sales Manager is signed in and these records exist, <strong>when</strong> the Manager opens New Unassigned Enquiries, <strong>then</strong> only ENQ-601 and ENQ-604 are shown. The expected results are proposed criteria, <strong>not evidence of an executed test</strong>.</p>
+<h2>Requirements traceability</h2>
+<div class="table-wrap"><table><thead><tr><th>Objective</th><th>Stakeholder need</th><th>Rule</th><th>Functional requirement</th><th>Acceptance criterion</th></tr></thead><tbody>
+<tr><td>BO-02 / GAP-02</td><td>SR-001</td><td>BR-001</td><td>FR-001</td><td>AC-001</td></tr>
+<tr><td>BO-02 / GAP-02</td><td>SR-002</td><td>BR-002</td><td>FR-002</td><td>AC-002</td></tr>
+<tr><td>BO-02 / GAP-02</td><td>SR-003</td><td>BR-003</td><td>FR-003 / FR-004</td><td>AC-003</td></tr>
+<tr><td>BO-02 / GAP-02</td><td>SR-004</td><td>BR-004</td><td>FR-005</td><td>AC-004</td></tr>
+</tbody></table></div><p class="small">The full <a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/04-requirements-catalogue.md" target="_blank" rel="noopener noreferrer">Markdown catalogue</a> also links supporting data requirements DR-001–DR-003.</p>
+<h2>Completed simulated change analysis — CR-001</h2>
+<p>The original <strong>My Assigned Enquiries</strong> exercise includes Closed records. A hypothetical stakeholder later requested excluding them from that view. The analysis identified that ENQ-504 would change from <strong>included</strong> to <strong>excluded</strong>; FR-002, BR-002, AC-002 and related tests would need review.</p>
+<p>The potential change was assessed for business rationale, view behaviour, history access, outstanding follow-ups, scope, delivery impact and traceability. <strong>It was not adopted into the v1.0 case-study baseline, and no real approval/rejection is claimed.</strong> CR-001 is complete as a documented training analysis, not an active change awaiting a decision.</p>
+<h2>Validation-question register: documented dispositions</h2>
+<p>Session 4 identified twelve questions a real BA would investigate. All twelve have explicit dispositions for this limited fictional case study; none is presented as completed real stakeholder validation.</p>
+<div class="table-wrap"><table><thead><tr><th>Questions</th><th>Case-study disposition</th></tr></thead><tbody>
+<tr><td>Lifecycle statuses, assignment rights and permissions (OQ-01, 02, 05)</td><td>Bounded by stated assumptions; full policy and workflow modelling excluded.</td></tr>
+<tr><td>In Progress unassigned exceptions; Closed enquiries with follow-ups (OQ-03, 04)</td><td>Analysed as training cases; no additional feature adopted.</td></tr>
+<tr><td>Mandatory data fields, duplicates and follow-up definitions (OQ-06–08)</td><td>Minimum necessary fields included; deeper data and activity modelling assigned to later phases.</td></tr>
+<tr><td>KPIs, Sales–Support handoffs, NFRs and solution choice (OQ-09–12)</td><td>Explicitly outside this view-level specification; no unevidenced solution/threshold invented.</td></tr>
+</tbody></table></div>
+<h2>Non-functional considerations &amp; limitations</h2>
+<p>Security, performance, auditability, accessibility, privacy and retention were considered as quality categories, but no unsupported latency targets, full permission matrix or legal compliance assertions were manufactured. Later phases may establish measurable criteria with appropriate evidence.</p>
+<div class="notice"><strong>Completion statement:</strong> The bounded Session 4 requirements specification, impact analysis and validation-question dispositions are complete for a fictional portfolio case study. Later customer-data, CRM and testing activities are separate workstreams—not missing Session 4 tasks.</div>
+<p><a class="btn btn-primary" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/04-requirements-catalogue.md" target="_blank" rel="noopener noreferrer">Read complete Artefact 004 ↗</a></p>
+<p><a class="btn btn-outline" href="index.html#roadmap">View project roadmap →</a></p>
+</main><footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · v0.2</span><span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></span></div></footer></body></html>

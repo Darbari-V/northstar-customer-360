@@ -13,6 +13,8 @@ The project follows a structured business analysis and technology transformation
 
 **Northstar Services is a fictional organisation.** This project is a simulated professional case study developed for practical learning and portfolio demonstration, not a real client engagement or completed production implementation.
 
+**[View the published case study](https://darbari-v.github.io/northstar-customer-360/)**
+
 ## The Business Challenge
 
 Northstar Services receives customer enquiries through multiple channels, including website forms, WhatsApp, telephone calls, referrals and marketing campaigns.
@@ -41,31 +43,35 @@ These objectives are provisional and have not been formally approved by real sta
 
 ## Project Progress
 
-| Phase | Key Deliverables | Status |
+| Phase | Key deliverables | Status |
 |---|---|---|
-| 1. Business Discovery & Process Analysis | Business problem, stakeholder investigation plan, As-Is/To-Be analysis and gap analysis | Initial working drafts prepared |
-| 2. Requirements Engineering | Requirements catalogue, user stories, acceptance criteria, business rules and traceability | Next |
+| 1. Business Discovery & Process Analysis | Business problem, stakeholder investigation plan, As-Is/To-Be and gap analysis | Initial working drafts prepared |
+| 2. Requirements Engineering | Bounded candidate requirements catalogue, business rules, user stories, acceptance criteria, traceability, simulated change analysis and validation-question dispositions | **Completed for Session 4 case-study scope** |
 | 3. Customer Data & SQL | Data modelling, SQL analysis, data quality and validation | Planned |
 | 4. CRM & Integration | Salesforce configuration, API analysis, Postman and data mapping | Planned |
 | 5. Testing & Analytics | UAT, reconciliation and Power BI reporting | Planned |
 
-The project will be updated progressively as new practical exercises and supporting artefacts are completed and reviewed.
+New learning phases will be documented as their corresponding artefacts are developed and reviewed.
 
-## Initial Business Analysis Deliverables
+## Business Analysis Deliverables
 
-### Artefact 001 — Business Problem & Project Context
+### [Artefact 001 — Business Problem & Project Context](docs/01-business-context.md)
 
 Documents the fictional business scenario, reported challenges, preliminary business needs, objectives, scope and root-cause hypotheses.
 
-### Artefact 002 — Stakeholder & Investigation Plan
+### [Artefact 002 — Stakeholder & Investigation Plan](docs/02-stakeholder-investigation-plan.md)
 
-Identifies relevant stakeholder groups and proposes investigation techniques for understanding the current business processes, reporting needs and technology constraints.
+Identifies relevant stakeholder groups and proposes investigation techniques for understanding business processes, reporting needs and technology constraints.
 
-### Artefact 003 — Process Analysis & Gap Analysis
+### [Artefact 003 — Process Analysis & Gap Analysis](docs/03-process-gap-analysis.md)
 
 Documents a preliminary As-Is process, reported and potential pain points, candidate business gaps and a proposed To-Be process.
 
-Supporting documents and process diagrams will be added to this repository.
+### [Artefact 004 — Requirements Catalogue & Traceability](docs/04-requirements-catalogue.md)
+
+A completed **fictional case-study specification** for a bounded Sales-enquiry ownership and visibility scope, with candidate requirements, business rules, user stories, synthetic Given–When–Then acceptance criteria, traceability, a **completed simulated CR-001 impact analysis**, and a register documenting how twelve validation questions were bounded or explicitly excluded from this case-study version.
+
+The selected baseline is an **author-defined learning assumption**, not real stakeholder sign-off. The change exercise did not alter the scoped baseline and no test execution is claimed.
 
 ## Techniques Applied So Far
 
@@ -73,20 +79,25 @@ Supporting documents and process diagrams will be added to this repository.
 - Stakeholder Identification and Analysis
 - Investigation Planning
 - As-Is / To-Be Process Modelling
-- Pain Point Analysis
-- Gap Analysis
+- Pain Point and Gap Analysis
+- Requirements Classification and Specification
+- Business Rules and User Stories
+- Acceptance Criteria (Given–When–Then)
+- Requirements Traceability and Simulated Change Impact Analysis
+- Assumptions, Scope and Validation-Question Management
 
 ## Project Integrity
 
-This case study clearly distinguishes between:
+This case study distinguishes between:
 
 - **Scenario facts:** Information provided in the fictional business scenario.
 - **Reported problems:** Challenges described by fictional management.
 - **Hypotheses:** Potential causes requiring further investigation.
-- **Proposed improvements:** Recommendations that have not yet been implemented.
-- **Completed deliverables:** Documents, diagrams, configurations and tests actually produced during the project.
+- **Selected exercise assumptions:** Illustrative rules chosen to create an internally consistent case-study specification.
+- **Proposed improvements:** Future-state ideas, not implemented features.
+- **Completed deliverables:** Documents and diagrams actually prepared and reviewed.
 
-No real stakeholder interviews, production deployments or measured business improvements are claimed.
+No real stakeholder interviews, production deployments, executed UAT or measured business improvements are claimed.
 
 ## About the Author
 
@@ -97,4 +108,4 @@ IT Business Analyst | CRM & Customer Data Systems | SaaS Implementation
 
 ---
 
-*This repository will evolve as the Customer 360 project progresses through Business Analysis, requirements, data, CRM implementation and testing.*
+*This repository will evolve as the Customer 360 project progresses through further data analysis, CRM solution design, integration and testing.*
