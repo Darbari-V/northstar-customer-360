@@ -3,7 +3,7 @@
 **Project:** Customer 360 — CRM Transformation & Customer Data Integration  
 **Organisation:** Northstar Services (Fictional)  
 **Document type:** IT Business Analysis — Logical Data Model, Data Dictionary & Quality Assessment  
-**Version:** 1.0 — Prepared Case-Study Draft (pre-publication review)  
+**Version:** 1.0 — Final Case-Study Edition (synthetic analysis)  
 **Status:** Analysed with synthetic records; not stakeholder-approved or implemented  
 **Prepared by:** Varun Kumar Darbari  
 **Date:** 3 November 2026
