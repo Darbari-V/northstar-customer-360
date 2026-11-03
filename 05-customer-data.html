@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#138342">
+<meta name="description" content="Northstar Customer 360 fictional case-study artefact: logical customer data model, SQL investigation, synthetic data quality findings and validation proposals.">
+<title>Customer Data &amp; SQL | Customer 360 Case Study</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .code-sample{background:#f4f7f8;border:1px solid #d9e2e8;border-radius:11px;padding:18px;overflow-x:auto;color:#152034;font:14px/1.55 ui-monospace,SFMono-Regular,Consolas,Monaco,monospace;white-space:pre}
+  .data-relationship{font:700 13px Arial,sans-serif;color:#0d642f;padding:12px 0;text-align:center}
+  .data-relationship span{display:inline-block;border-radius:999px;padding:5px 12px;background:#edf7ef;border:1px solid #cfe4d6}
+  .result-inline{font:700 13px Arial,sans-serif;color:#0d642f}
+  @media(max-width:760px){.code-sample{font-size:12px;padding:12px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+ <div class="container inner">
+  <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
+  <nav class="top-nav" aria-label="Project navigation">
+   <a href="index.html">Overview</a>
+   <a href="01-business-context.html">Business Context</a>
+   <a href="02-stakeholder-plan.html">Discovery</a>
+   <a href="03-process-gap-analysis.html">Process Analysis</a>
+   <a href="04-requirements-catalogue.html">Requirements</a>
+   <a href="05-customer-data.html" aria-current="page">Customer Data</a>
+   <a href="https://darbari-v.github.io/#projects">← Portfolio</a>
+  </nav>
+ </div>
+</header>
+<main class="container paper">
+ <a class="back" href="index.html#artefacts">← Back to project artefacts</a>
+ <div class="eyebrow" style="margin-top:28px">Artefact 005 · Prepared case-study draft · Customer Data &amp; SQL</div>
+ <h1>Customer Data Model &amp; Data Quality Analysis</h1>
+ <p class="lead">From enquiry records to a simple customer–enquiry model: documenting data, investigating broken references with SQL, reconciling submission lists and proposing sensible validation rules.</p>
+ <div class="status-row"><span class="pill">Session 5 analysis prepared</span><span class="pill neutral">Synthetic SQLite evidence</span><span class="pill neutral">No production implementation</span></div>
+ <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. All records, names, identifiers, findings and controls are invented for this independent case study. The SQL was checked against synthetic local fixtures only; this is not live client data, a deployed database, real stakeholder approval or CRM implementation.</div>
+
+ <h2>Why this analysis matters</h2>
+ <p>Northstar's earlier scenario raised concerns about fragmented customer information and inconsistent enquiry handling. This artefact responds to <strong>BO-01</strong> (consistent enquiry/customer-data capture) and <strong>GAP-01</strong> (customer-information consistency), while respecting the enquiry ownership baseline defined in <a href="04-requirements-catalogue.html">Artefact 004</a>.</p>
+ <div class="grid-2">
+  <article class="card"><span class="label-note">Problem to investigate</span><h3>Missing or inconsistent information</h3><p>A customer may lack a relevant contact field, or an enquiry may refer to a customer that cannot be found.</p></article>
+  <article class="card"><span class="label-note">Approach</span><h3>Define → query → compare → investigate</h3><p>Describe the data, run checks, document synthetic exceptions and propose controls without guessing the root cause.</p></article>
+ </div>
+
+ <h2>Proposed logical data model</h2>
+ <div class="grid-2">
+  <article class="card"><span class="label-note">Entity 1</span><h3>Customers</h3><p><code>customer_id</code> — unique customer identifier</p><p><code>name</code> — customer name</p><p><code>phone</code> — contact telephone number</p></article>
+  <article class="card"><span class="label-note">Entity 2</span><h3>Enquiries</h3><p><code>enquiry_id</code> — unique enquiry identifier</p><p><code>customer_id</code> — link to customer</p><p><code>status</code> — enquiry stage</p><p><code>assigned_owner_id</code> — Sales owner, nullable</p></article>
+ </div>
+ <p class="data-relationship"><span>1 customer → many enquiries · linked by customer_id</span></p>
+ <p><strong>Critical distinction:</strong> an enquiry can reference a valid customer and still be <em>unassigned</em> to a Sales Representative. Artefact 004 explicitly allows a missing <code>assigned_owner_id</code> in some cases; this document does not relabel those cases as data-quality failures.</p>
+
+ <h2>Minimum data dictionary</h2>
+ <div class="table-wrap"><table>
+  <thead><tr><th>Table</th><th>Field</th><th>Meaning</th><th>Scope / rule</th></tr></thead>
+  <tbody>
+   <tr><td>Customers</td><td><code>customer_id</code></td><td>Stable customer identifier</td><td>Proposed unique, required identifier</td></tr>
+   <tr><td>Customers</td><td><code>name</code></td><td>Display name</td><td>Requiredness to confirm</td></tr>
+   <tr><td>Customers</td><td><code>phone</code></td><td>Phone number stored as text</td><td>Can be NULL in the synthetic diagnostic data; mandatory rule unconfirmed</td></tr>
+   <tr><td>Enquiries</td><td><code>enquiry_id</code></td><td>Unique enquiry identifier</td><td>Existing <strong>DR-001</strong></td></tr>
+   <tr><td>Enquiries</td><td><code>customer_id</code></td><td>Customer reference</td><td>Candidate mandatory/matching rule <strong>VAL-01</strong></td></tr>
+   <tr><td>Enquiries</td><td><code>status</code></td><td>Enquiry stage</td><td>Existing <strong>DR-002</strong>; examples not full lifecycle</td></tr>
+   <tr><td>Enquiries</td><td><code>assigned_owner_id</code></td><td>Sales Representative reference</td><td>Nullable per <strong>DR-003 / AS-02</strong></td></tr>
+  </tbody></table></div>
+
+ <h2>Synthetic example records</h2>
+ <div class="grid-2">
+  <div><h3>Customers</h3><div class="table-wrap"><table><thead><tr><th>customer_id</th><th>name</th><th>phone</th></tr></thead><tbody><tr><td>C-101</td><td>Asha</td><td>9876500011</td></tr><tr><td>C-102</td><td>Rahul</td><td><code>NULL</code></td></tr><tr><td>C-103</td><td>Priya</td><td>9876500033</td></tr></tbody></table></div></div>
+  <div><h3>Enquiries</h3><div class="table-wrap"><table><thead><tr><th>enquiry_id</th><th>customer_id</th><th>status</th><th>owner</th></tr></thead><tbody><tr><td>ENQ-201</td><td>C-101</td><td>New</td><td><code>NULL</code></td></tr><tr><td>ENQ-202</td><td>C-102</td><td>Contacted</td><td>REP-01</td></tr><tr><td>ENQ-203</td><td>C-999</td><td>New</td><td><code>NULL</code></td></tr><tr><td>ENQ-204</td><td><code>NULL</code></td><td>New</td><td><code>NULL</code></td></tr></tbody></table></div></div>
+ </div>
+ <p class="small">All records are fabricated. ENQ-202 has an illustrative assigned owner so its Contacted status is consistent with the prior ownership prerequisite; no complete status-change history is claimed.</p>
+
+ <h2>SQL: identify the differences</h2>
+ <h3>Q-01 · Missing phone values</h3>
+ <pre class="code-sample"><code>SELECT Customers.customer_id, Customers.name
+FROM Customers
+WHERE phone IS NULL;</code></pre>
+ <p class="result-inline">Expected: C-102 | Rahul</p>
+ <h3>Q-02 · Enquiries without a matching customer</h3>
+ <pre class="code-sample"><code>SELECT Enquiries.enquiry_id
+FROM Enquiries
+LEFT JOIN Customers
+  ON Enquiries.customer_id = Customers.customer_id
+WHERE Customers.customer_id IS NULL;</code></pre>
+ <p class="result-inline">Expected: ENQ-203, ENQ-204</p>
+ <h3>Q-03 · Recorded Customer ID, but no customer match</h3>
+ <pre class="code-sample"><code>SELECT Enquiries.enquiry_id
+FROM Enquiries
+LEFT JOIN Customers
+  ON Enquiries.customer_id = Customers.customer_id
+WHERE Customers.customer_id IS NULL
+  AND Enquiries.customer_id IS NOT NULL;</code></pre>
+ <p class="result-inline">Expected: ENQ-203 only</p>
+ <p>The second condition excludes ENQ-204, because that enquiry has no Customer ID stored at all. The full document includes separate missing-reference, matching-record and duplicate-signal queries.</p>
+
+ <h2>Reconciliation: website vs Sales</h2>
+ <p>A separate synthetic dataset compares website submission IDs with IDs recorded in Sales for the <strong>same assumed period</strong>. This is not represented as a verified operational feed or integration.</p>
+ <div class="grid-2">
+  <article class="card"><span class="label-note">Source A</span><h3>Website submissions</h3><p>WEB-301 · WEB-302 · <strong>WEB-303</strong> · WEB-304 · <strong>WEB-305</strong></p><p class="small">5 source IDs</p></article>
+  <article class="card"><span class="label-note">Source B</span><h3>Sales register</h3><p>WEB-301 · WEB-302 · WEB-304</p><p class="small">3 destination IDs</p></article>
+ </div>
+ <p><strong>Reconciliation result:</strong> <code>WEB-303</code> and <code>WEB-305</code> are absent from the sample Sales register. That is a data discrepancy, <em>not proof</em> that software transfer failed. The next BA action is to check period/filter definitions, source evidence, rejection rules and any available processing logs.</p>
+ <pre class="code-sample"><code>SELECT WebsiteSubmissions.submission_id
+FROM WebsiteSubmissions
+LEFT JOIN SalesEnquiryRegister
+  ON WebsiteSubmissions.submission_id = SalesEnquiryRegister.submission_id
+WHERE SalesEnquiryRegister.submission_id IS NULL
+ORDER BY WebsiteSubmissions.submission_id;</code></pre>
+ <p class="result-inline">Expected: WEB-303, WEB-305</p>
+
+ <h2>Data-quality findings</h2>
+ <div class="table-wrap"><table><thead><tr><th>ID</th><th>Synthetic exception</th><th>Interpretation</th><th>Recommended BA action</th></tr></thead><tbody>
+  <tr><td>DQ-01</td><td>C-102 phone is NULL</td><td>Potential completeness issue, depending on channel rules</td><td>Confirm required contact details and inspect source</td></tr>
+  <tr><td>DQ-02</td><td>ENQ-203 refers to C-999</td><td>Recorded but unmatched customer reference</td><td>Trace entry, import and matching rules</td></tr>
+  <tr><td>DQ-03</td><td>ENQ-204 has NULL customer_id</td><td>Missing stored customer reference</td><td>Review new-customer and incomplete-entry workflows</td></tr>
+  <tr><td>DQ-04</td><td>WEB-303 and WEB-305 absent in Sales</td><td>Cross-source difference</td><td>Investigate period, filtering and rejects</td></tr>
+ </tbody></table></div>
+ <p class="small">Accuracy, timeliness, privacy compliance and confirmed customer duplication cannot be assessed from these records. A phone-number match is at most a duplicate-review signal, not grounds for automatic merging.</p>
+
+ <h2>Candidate validation and review controls</h2>
+ <div class="table-wrap"><table><thead><tr><th>ID</th><th>Proposed approach</th><th>Question before approval</th></tr></thead><tbody>
+ <tr><td>VAL-01</td><td>New enquiries reference an existing Customer ID</td><td>How do first-time customers get registered before their enquiry is accepted?</td></tr>
+ <tr><td>VAL-02</td><td>Check required contact fields for the chosen channel</td><td>Is phone required, or can another contact method be valid?</td></tr>
+ <tr><td>VAL-03</td><td>Ensure unique Enquiry IDs</td><td>How are source-system IDs generated or reconciled?</td></tr>
+ <tr><td>REC-01</td><td>Compare submission IDs for an agreed period</td><td>Who owns exception reviews and how are delays handled?</td></tr>
+ <tr><td>REV-01</td><td>Review possible duplicates before merging</td><td>Which matching criteria and approvals are appropriate?</td></tr>
+ </tbody></table></div>
+ <div class="notice"><strong>Important workflow exception:</strong> A strict rule requiring an already-existing customer can inadvertently block a new customer's first enquiry. A customer-creation or provisional-capture process must be designed before VAL-01 can be approved. These rules are proposals, not additions to an approved production baseline.</div>
+
+ <h2>Completion boundaries and next work</h2>
+ <p>Session 5 has produced a reviewable <strong>logical model, data dictionary, synthetic SQL investigation, two-source reconciliation, data-quality findings and candidate controls</strong>. The underlying fixtures were checked locally with SQLite. No Salesforce implementation, live integration, stakeholder sign-off, UAT or measurable business benefit is claimed.</p>
+ <p><a class="btn btn-primary" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/05-customer-data-model-and-quality-analysis.md" target="_blank" rel="noopener noreferrer">Read complete Artefact 005 ↗</a></p>
+ <p><a class="btn btn-outline" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/data/05-synthetic-data-and-checks.sql" target="_blank" rel="noopener noreferrer">View reproducible SQL ↗</a></p>
+ <p class="small">Related work: <a href="01-business-context.html">Business Context</a> · <a href="03-process-gap-analysis.html">Process Analysis</a> · <a href="04-requirements-catalogue.html">Requirements &amp; Traceability</a> · <a href="index.html#roadmap">Project roadmap</a>.</p>
+</main>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · v0.3 prepared for review</span><span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></span></div></footer>
+</body>
+</html>
