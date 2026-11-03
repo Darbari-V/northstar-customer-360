@@ -47,7 +47,7 @@ These objectives are provisional and have not been formally approved by real sta
 |---|---|---|
 | 1. Business Discovery & Process Analysis | Business problem, stakeholder investigation plan, As-Is/To-Be and gap analysis | Initial working drafts prepared |
 | 2. Requirements Engineering | Bounded candidate requirements catalogue, business rules, user stories, acceptance criteria, traceability, simulated change analysis and validation-question dispositions | **Completed for Session 4 case-study scope** |
-| 3. Customer Data & SQL | Data modelling, SQL analysis, data quality and validation | Planned |
+| 3. Customer Data & SQL | Logical data model, data dictionary, synthetic SQL investigations, data quality analysis, reconciliation and proposed validation controls | **Completed for Session 5 case-study scope** |
 | 4. CRM & Integration | Salesforce configuration, API analysis, Postman and data mapping | Planned |
 | 5. Testing & Analytics | UAT, reconciliation and Power BI reporting | Planned |
 
@@ -73,6 +73,12 @@ A completed **fictional case-study specification** for a bounded Sales-enquiry o
 
 The selected baseline is an **author-defined learning assumption**, not real stakeholder sign-off. The change exercise did not alter the scoped baseline and no test execution is claimed.
 
+### [Artefact 005 — Customer Data Model & Data Quality Analysis](docs/05-customer-data-model-and-quality-analysis.md)
+
+A completed fictional customer-data analysis comprising a proposed logical data model, data dictionary, seven SQL investigations using synthetic records, data-quality findings, source reconciliation and proposed validation controls. The analysis distinguishes missing Customer IDs from unmatched customer references and preserves the separate Sales ownership rules defined in Artefact 004.
+
+[View portfolio presentation](05-customer-data.html) | [View SQL practice file](data/05-synthetic-data-and-checks.sql)
+
 ## Techniques Applied So Far
 
 - Business Problem Analysis
@@ -85,6 +91,10 @@ The selected baseline is an **author-defined learning assumption**, not real sta
 - Acceptance Criteria (Given–When–Then)
 - Requirements Traceability and Simulated Change Impact Analysis
 - Assumptions, Scope and Validation-Question Management
+- Logical Data Modelling and Data Dictionary
+- SQL Data Investigation (JOINs and NULL Checks)
+- Data Quality Assessment and Reconciliation
+- Proposed Data Validation Rules
 
 ## Project Integrity
 
