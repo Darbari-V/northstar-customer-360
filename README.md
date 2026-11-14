@@ -48,8 +48,9 @@ These objectives are provisional and have not been formally approved by real sta
 | 1. Business Discovery & Process Analysis | Business problem, stakeholder investigation plan, As-Is/To-Be and gap analysis | Initial working drafts prepared |
 | 2. Requirements Engineering | Bounded candidate requirements catalogue, business rules, user stories, acceptance criteria, traceability, simulated change analysis and validation-question dispositions | **Completed for Session 4 case-study scope** |
 | 3. Customer Data & SQL | Logical data model, data dictionary, synthetic SQL investigations, data quality analysis, reconciliation and proposed validation controls | **Completed for Session 5 case-study scope** |
-| 4. CRM & Integration | Salesforce configuration, API analysis, Postman and data mapping | Planned |
-| 5. Testing & Analytics | UAT, reconciliation and Power BI reporting | Planned |
+| 4. CRM Data & Solution Design | Proposed CRM objects, fields, relationships, validation and MVP design | **Session 6 proposed design prepared; implementation decisions pending** |
+| 5. CRM Build & Integration | Hands-on Salesforce configuration, API analysis and data mapping | Planned |
+| 6. Testing & Analytics | UAT, reconciliation and reporting | Planned |
 
 New learning phases will be documented as their corresponding artefacts are developed and reviewed.
 
@@ -78,6 +79,12 @@ The selected baseline is an **author-defined learning assumption**, not real sta
 A completed fictional customer-data analysis comprising a proposed logical data model, data dictionary, seven SQL investigations using synthetic records, data-quality findings, source reconciliation and proposed validation controls. The analysis distinguishes missing Customer IDs from unmatched customer references and preserves the separate Sales ownership rules defined in Artefact 004.
 
 [View portfolio presentation](05-customer-data.html) | [View SQL practice file](data/05-synthetic-data-and-checks.sql)
+
+### [Artefact 006 — Proposed CRM Data & Solution Design](docs/06-crm-data-and-solution-design.md)
+
+A proposed CRM design for the limited Northstar MVP V1 demonstration, covering logical entities, candidate Salesforce object mappings, field types, optional Customer–Enquiry relationships, Sales ownership rules, validation logic, manager views and proposed verification scenarios.
+
+The design preserves the existing requirements baseline and identifies decisions requiring resolution before implementation. No Salesforce configuration or application testing has been performed.
 
 ## Techniques Applied So Far
 
