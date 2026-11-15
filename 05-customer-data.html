@@ -1,144 +1,772 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#138342">
-<meta name="description" content="Northstar Customer 360 fictional case-study artefact: logical customer data model, SQL investigation, synthetic data quality findings and validation proposals.">
-<title>Customer Data &amp; SQL | Customer 360 Case Study</title>
-<link rel="stylesheet" href="assets/style.css"><script src="assets/navigation.js" defer></script>
-<style>
-  .code-sample{background:#f4f7f8;border:1px solid #d9e2e8;border-radius:11px;padding:18px;overflow-x:auto;color:#152034;font:14px/1.55 ui-monospace,SFMono-Regular,Consolas,Monaco,monospace;white-space:pre}
-  .data-relationship{font:700 13px Arial,sans-serif;color:#0d642f;padding:12px 0;text-align:center}
-  .data-relationship span{display:inline-block;border-radius:999px;padding:5px 12px;background:#edf7ef;border:1px solid #cfe4d6}
-  .result-inline{font:700 13px Arial,sans-serif;color:#0d642f}
-  @media(max-width:760px){.code-sample{font-size:12px;padding:12px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="The next question is whether the information can support the process: can we identify customers, connect enquiries to them and explain differences between records?">
+  <meta name="theme-color" content="#138342">
+  <title>Data &amp; SQL | Northstar Customer 360</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script src="assets/navigation.js" defer></script>
 </head>
 <body>
-<header class="site-header">
- <div class="container inner">
+<a class="reader-skip" href="#main-content">Skip to the project document</a>
+<header class="site-header"><div class="container inner">
   <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
-  <nav class="top-nav" aria-label="Project navigation">
-   <a href="index.html">Overview</a>
-   <a href="01-business-context.html">Business Context</a>
-   <a href="02-stakeholder-plan.html">Discovery</a>
-   <a href="03-process-gap-analysis.html">Process Analysis</a>
-   <a href="04-requirements-catalogue.html">Requirements</a>
-   <a href="05-customer-data.html" aria-current="page">Data &amp; SQL</a>
-   <a href="06-crm-design.html">CRM Design</a>
-   <a href="https://darbari-v.github.io/#projects">← Portfolio</a>
-  </nav>
- </div>
-</header>
-<main class="container paper">
- <a class="back" href="index.html#artefacts">← Back to project artefacts</a>
- <div class="eyebrow" style="margin-top:28px">Artefact 005 · 	Finalised case-study analysis · Customer Data &amp; SQL</div>
- <h1>Customer Data Model &amp; Data Quality Analysis</h1>
- <p class="lead">From enquiry records to a simple customer–enquiry model: documenting data, investigating broken references with SQL, reconciling submission lists and proposing sensible validation rules.</p>
- <div class="status-row"><span class="pill">Session 5 analysis completed</span><span class="pill neutral">Synthetic SQLite evidence</span><span class="pill neutral">No production implementation</span></div>
- <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. All records, names, identifiers, findings and controls are invented for this independent case study. The SQL was checked against synthetic local fixtures only; this is not live client data, a deployed database, real stakeholder approval or CRM implementation.</div>
+  <nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html">Requirements</a><a href="05-customer-data.html" aria-current="page">Data &amp; SQL</a><a href="06-crm-design.html">CRM Design</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav>
+</div></header>
+<main id="main-content" class="container paper reader-paper">
+  <a class="back" href="index.html#artefacts">← Project overview and all artefacts</a>
+  <div class="reader-intro">
+    <p class="eyebrow">Step 5 of 6 · Completed synthetic data analysis</p>
+    <h1>Artefact 005 — Customer Data Model, SQL Investigation &amp; Data Quality Analysis</h1>
+    <p class="lead">The next question is whether the information can support the process: can we identify customers, connect enquiries to them and explain differences between records?</p>
+    <p>A data model describes how information is organised and connected. SQL is a language for asking questions of that information. This document uses invented Customers, Enquiries and website/Sales records to demonstrate checks. A missing value and an identifier that points to no matching record are different problems; finding either does not prove its cause.</p>
+    <p class="reader-connection"><strong>Where this fits:</strong> The earlier requirements established enquiry identifiers, status and Sales ownership. This stage adds a proposed customer-data model and diagnostic checks, keeping customer identity separate from the Sales representative responsible for an enquiry.</p>
+    <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. The original document's scope, assumptions and limitations are retained below. Reader explanations are labelled “In plain English”; they do not represent new findings, approvals or implementation evidence.</div>
+    <div class="actions"><a class="btn btn-primary" href="#full-artefact">Read full artefact ↓</a><a class="btn btn-outline" href="#on-this-page">Browse this document</a></div>
+  </div>
+  <nav class="reader-journey" aria-label="Read the Northstar story in order"><a href="01-business-context.html"><span class="reader-step-number">01</span><span>Understand the problem</span></a><a href="02-stakeholder-plan.html"><span class="reader-step-number">02</span><span>Find the people and evidence</span></a><a href="03-process-gap-analysis.html"><span class="reader-step-number">03</span><span>Understand how work flows</span></a><a href="04-requirements-catalogue.html"><span class="reader-step-number">04</span><span>Specify what must happen</span></a><a href="05-customer-data.html" aria-current="step"><span class="reader-step-number">05</span><span>Check the information</span></a><a href="06-crm-design.html"><span class="reader-step-number">06</span><span>Propose the CRM design</span></a></nav>
+  <details class="reader-glossary">
+    <summary>New to business analysis or CRM? Open the plain-English glossary</summary>
+    <dl><dt>Artefact</dt><dd>A work product, such as a requirements document, process map or data analysis.</dd><dt>Business analyst (BA)</dt><dd>A person who investigates a business situation, clarifies needs and helps define and evaluate changes.</dd><dt>CRM</dt><dd>Customer relationship management: the processes and systems used to organise customer relationships and related information.</dd><dt>Customer 360</dt><dd>The idea of bringing relevant customer information together into a more consistent view; it is the project&#x27;s theme, rather than a completed product claim.</dd><dt>Enquiry / lead / prospect</dt><dd>An enquiry is an incoming request or expression of interest. A lead or prospect is a potential customer; the exact business definitions need agreement.</dd><dt>Stakeholder</dt><dd>Someone who affects the work, makes relevant decisions, or is affected by the proposed change.</dd><dt>Discovery / elicitation</dt><dd>Learning about the situation and drawing out needs through questions, observation, workshops or records.</dd><dt>Scenario fact / hypothesis</dt><dd>A scenario fact is supplied by the fictional brief. A hypothesis is a possible explanation still requiring evidence.</dd><dt>As-Is / To-Be</dt><dd>As-Is describes current working arrangements. To-Be describes a proposed future way of working.</dd><dt>Gap analysis</dt><dd>Comparing the current situation with the capability that would be needed, then identifying what must change.</dd><dt>Scope / baseline</dt><dd>Scope defines the boundaries of the work. A baseline is the selected reference version against which later changes are assessed.</dd><dt>Requirement</dt><dd>A statement of a capability, behaviour or quality needed to address a business or user need.</dd><dt>Business rule / functional requirement</dt><dd>A business rule sets a condition or restriction. A functional requirement describes system behaviour that supports the need or rule.</dd><dt>User story</dt><dd>A short explanation of who needs something, what they want and why it matters.</dd><dt>Acceptance criterion</dt><dd>A specific condition or example describing what an acceptable result would look like.</dd><dt>Traceability</dt><dd>Following a requirement back to its reason and forward to related design or verification work.</dd><dt>BO / GAP / SR / BR / FR / DR</dt><dd>Reference labels for business objective, gap, stakeholder requirement, business rule, functional requirement and data requirement.</dd><dt>BN / H / PP / NFR</dt><dd>Reference labels for business need, hypothesis, pain point and non-functional requirement. A non-functional requirement describes a quality the solution must meet, rather than a particular action.</dd><dt>REC / REV / REQ</dt><dd>REC-01 identifies a proposed reconciliation control; REV-01 identifies a proposed duplicate-review control. REQ references identify earlier learning exercises and do not add system features by themselves.</dd><dt>AS / AC / US / CR / OQ</dt><dd>Reference labels for assumption, acceptance criterion, user story, change request and open question.</dd><dt>DQ / VAL / D / T / Q</dt><dd>Reference labels for a data-quality finding, validation proposal, design decision, test scenario and SQL query.</dd><dt>Data model / entity / field</dt><dd>A data model describes information and relationships. An entity is a kind of record; a field is one piece of information stored about it.</dd><dt>Data dictionary</dt><dd>A reference explaining each field&#x27;s meaning, form and applicable rules.</dd><dt>Schema / type / mandatory</dt><dd>A schema is the organised structure of a database. A type describes the kind of value stored. Mandatory means a value is required under an agreed rule.</dd><dt>Data completeness / accuracy / consistency</dt><dd>Completeness asks whether required values are present; accuracy asks whether values are correct; consistency asks whether related information agrees.</dd><dt>Normalisation / deduplication / identity resolution</dt><dd>Here, normalisation can mean bringing values into a comparable form. Deduplication reviews and resolves duplicate records; identity resolution determines which records refer to the same real customer. None is claimed as implemented.</dd><dt>Identifier / reference / foreign key</dt><dd>An identifier distinguishes a record. A reference points to another record. A foreign-key constraint can enforce valid references; the diagnostic fixture deliberately omits that constraint.</dd><dt>NULL / nullable</dt><dd>NULL means no value is stored in the illustrated database field. Nullable means the field can have no stored value.</dd><dt>Customer ID / assigned owner</dt><dd>Customer ID identifies the customer linked to an enquiry. The assigned owner identifies the Sales representative responsible for it; these are different relationships.</dd><dt>SQL / SQLite</dt><dd>SQL is a language for asking questions of structured data. SQLite is the database engine used for the synthetic exercise.</dd><dt>SELECT / FROM / WHERE</dt><dd>SELECT chooses what a query returns, FROM names its starting table, and WHERE applies conditions to individual rows.</dd><dt>LEFT JOIN / INNER JOIN</dt><dd>LEFT JOIN keeps every row from the starting table while looking for matches. INNER JOIN keeps only matching rows.</dd><dt>COUNT / GROUP BY / HAVING / ORDER BY</dt><dd>COUNT counts rows; GROUP BY groups matching values; HAVING filters groups; ORDER BY sorts results.</dd><dt>CREATE / INSERT / DROP</dt><dd>In the practice SQL file, CREATE defines a table, INSERT adds sample records, and DROP removes an existing practice table before recreating it. The fixture is a repeatable synthetic exercise, not a production setup.</dd><dt>IF / AND / THEN / ELSE</dt><dd>IF introduces a condition; AND requires both conditions to hold; THEN states the result if they hold; ELSE states what happens otherwise.</dd><dt>Synthetic data / fixture / staging</dt><dd>Synthetic data is invented for practice. A fixture sets up a repeatable example. Staging data is an intermediate set of records being checked before use.</dd><dt>Reconciliation / duplicate signal</dt><dd>Reconciliation compares sources record by record. A duplicate signal flags possible repetition for review, without proving that records should be merged or deleted.</dd><dt>KPI / baseline measure / ROI</dt><dd>A KPI is a key performance indicator. A baseline measure describes the starting position. ROI means return on investment; no achieved ROI is claimed here.</dd><dt>MVP / UAT</dt><dd>MVP means minimum viable product, a limited useful demonstration. UAT means user acceptance testing, checking the solution against agreed user needs.</dd><dt>Salesforce object / mapping</dt><dd>An object is a platform structure for a type of record. Mapping decides how a business concept or field corresponds to that structure.</dd><dt>Lead / Account / Contact / Opportunity</dt><dd>Salesforce record types for a potential buyer, an organisation or account, a person, and a qualified sales deal. Their suitability for Northstar is still being evaluated.</dd><dt>Picklist / Lookup / Auto Number</dt><dd>A picklist offers a defined set of values. A Lookup links a record to another record. Auto Number can generate a record reference automatically.</dd><dt>Validation / automation / pseudocode</dt><dd>Validation checks whether an action or value is allowed. Automation performs an action. Pseudocode expresses intended logic in readable steps without being a deployed program.</dd><dt>API / integration / migration</dt><dd>An API is an interface through which systems exchange requests or data. Integration connects systems; migration moves information between them.</dd><dt>SOP / handoff / escalation</dt><dd>An SOP is a standard operating procedure, a documented way to carry out work. A handoff transfers work or information to another person or team. An escalation raises an unresolved issue for further attention.</dd><dt>Permission / least privilege / audit</dt><dd>A permission controls who may view or change something. Least privilege gives people only the access needed for their work. An audit record helps trace relevant actions or changes.</dd><dt>Assumption / dependency / decision gate</dt><dd>An assumption is provisionally taken as true; a dependency is something the work relies on; a decision gate is a point where a choice must be resolved before moving forward.</dd><dt>B2B / B2C / session</dt><dd>B2B serves businesses; B2C serves individual consumers. Session in these documents refers to a learning stage, not a claimed client meeting.</dd></dl>
+  </details>
+  <details id="on-this-page" class="reader-contents" open>
+    <summary>On this page — jump to any section</summary>
+    <nav aria-label="Document contents"><div class="toc">
+<ul>
+<li><a href="#1-executive-summary">1. Executive Summary</a></li>
+<li><a href="#2-context-scope-and-traceability">2. Context, Scope and Traceability</a></li>
+<li><a href="#3-proposed-logical-data-model">3. Proposed Logical Data Model</a><ul>
+<li><a href="#31-data-dictionary-customers">3.1 Data Dictionary — Customers</a></li>
+<li><a href="#32-data-dictionary-enquiries">3.2 Data Dictionary — Enquiries</a></li>
+<li><a href="#33-reconciliation-sources">3.3 Reconciliation Sources</a></li>
+</ul>
+</li>
+<li><a href="#4-synthetic-test-records">4. Synthetic Test Records</a><ul>
+<li><a href="#41-customers">4.1 Customers</a></li>
+<li><a href="#42-enquiries">4.2 Enquiries</a></li>
+<li><a href="#43-website-to-sales-reconciliation-records">4.3 Website-to-Sales Reconciliation Records</a></li>
+</ul>
+</li>
+<li><a href="#5-sql-investigation-and-results">5. SQL Investigation and Results</a><ul>
+<li><a href="#q-01-find-customers-with-no-phone-value">Q-01 — Find customers with no phone value</a></li>
+<li><a href="#q-02-find-all-enquiries-without-a-matching-customer">Q-02 — Find all enquiries without a matching customer</a></li>
+<li><a href="#q-03-isolate-recorded-but-unmatched-customer-ids">Q-03 — Isolate recorded but unmatched Customer IDs</a></li>
+<li><a href="#q-04-find-enquiries-with-a-missing-stored-customer-id">Q-04 — Find enquiries with a missing stored Customer ID</a></li>
+<li><a href="#q-05-show-matching-customerenquiry-links">Q-05 — Show matching customer–enquiry links</a></li>
+<li><a href="#q-06-reconcile-website-submissions-to-the-sales-register">Q-06 — Reconcile website submissions to the Sales register</a></li>
+<li><a href="#q-07-candidate-duplicate-signal-not-a-duplicate-determination">Q-07 — Candidate duplicate signal (not a duplicate determination)</a></li>
+</ul>
+</li>
+<li><a href="#6-data-quality-findings-and-business-implications">6. Data Quality Findings and Business Implications</a></li>
+<li><a href="#7-proposed-validation-and-investigation-controls">7. Proposed Validation and Investigation Controls</a></li>
+<li><a href="#8-traceability-and-requirements-impact">8. Traceability and Requirements Impact</a></li>
+<li><a href="#9-verification-assumptions-and-limits">9. Verification, Assumptions and Limits</a></li>
+<li><a href="#10-completed-case-study-disposition-and-next-steps">10. Completed Case-Study Disposition and Next Steps</a></li>
+</ul>
+</div>
+</nav>
+  </details>
+  <section id="full-artefact" class="full-artefact" aria-labelledby="full-artefact-heading">
+    <h2 id="full-artefact-heading">Full artefact</h2>
+    <p class="reader-provenance">Read from top to bottom, or use the contents above. All original document sections, tables, examples and qualifications are included in their original order.</p>
+    <article class="document-content" data-source="docs/05-customer-data-model-and-quality-analysis.md" data-source-sha256="09a245a941a527648204409f63b3e7930c144b25e1c75b11462a16e8620d3a65">
+<p><strong>Project:</strong> Customer 360 — CRM Transformation &amp; Customer Data Integration<br/>
+<strong>Organisation:</strong> Northstar Services (Fictional)<br/>
+<strong>Document type:</strong> IT Business Analysis — Logical Data Model, Data Dictionary &amp; Quality Assessment<br/>
+<strong>Version:</strong> 1.0 — Final Case-Study Edition (synthetic analysis)<br/>
+<strong>Status:</strong> Analysed with synthetic records; not stakeholder-approved or implemented<br/>
+<strong>Prepared by:</strong> Varun Kumar Darbari<br/>
+<strong>Date:</strong> 3 November 2026</p>
+<blockquote>
+<p><strong>Project integrity:</strong> Northstar is a fictional organisation. All customer names, phone numbers, IDs, scenarios, data findings and proposed controls below are invented for an independent learning exercise. This document does not claim access to client records, stakeholder interviews, a production database, CRM deployment, real business outcomes or stakeholder approval. SQL examples have been checked against synthetic SQLite fixtures only.</p>
+</blockquote>
+<hr/>
+<h2 id="1-executive-summary">1. Executive Summary</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This summarises the deliberately planted data exceptions and the main analytical conclusion: finding a difference in sample records is not the same as proving a real operational failure.</p></aside>
+<p>Earlier Northstar artefacts described fragmented customer information and concerns about enquiry capture, ownership and reporting. This artefact examines a <strong>limited customer–enquiry data structure</strong> and demonstrates how an IT Business Analyst can use SQL to identify missing values, invalid links and differences between sources, then propose controls without asserting an unverified root cause.</p>
+<p><strong>Worked synthetic findings:</strong> one customer with no phone value (<code>C-102</code>), one enquiry referring to a nonexistent customer (<code>ENQ-203</code>), one enquiry with no Customer ID (<code>ENQ-204</code>), and two website submission IDs absent from a matching-period Sales register (<code>WEB-303</code>, <code>WEB-305</code>). These are <strong>deliberately planted examples</strong>, not observed Northstar defects.</p>
+<p><strong>Key BA conclusion:</strong> A detected anomaly is evidence of a <em>difference or exception within the example dataset</em>, not proof of its cause. Proposed validation, investigation and reconciliation steps would require business confirmation before implementation.</p>
+<h2 id="2-context-scope-and-traceability">2. Context, Scope and Traceability</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The references connect this analysis to earlier objectives and requirements. The scope also explains which customer-data questions are being explored and which implementation tasks are excluded.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Existing anchor</th>
+<th>Relevance to this artefact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01-business-context.html">Artefact 001 — Business Context</a>: <strong>BO-01</strong></td>
+<td>Improve consistency of enquiry and customer-data capture.</td>
+</tr>
+<tr>
+<td><a href="03-process-gap-analysis.html">Artefact 003 — Process &amp; Gap Analysis</a>: <strong>GAP-01</strong></td>
+<td>Candidate gap involving customer-information consistency and visibility.</td>
+</tr>
+<tr>
+<td><a href="03-process-gap-analysis.html">Artefact 003</a>: <strong>GAP-02</strong></td>
+<td>Related enquiry capture, ownership and follow-up considerations.</td>
+</tr>
+<tr>
+<td><a href="04-requirements-catalogue.html">Artefact 004 — Requirements Catalogue</a>: <strong>DR-001</strong></td>
+<td>Every Sales enquiry has a unique <code>enquiry_id</code>.</td>
+</tr>
+<tr>
+<td><a href="04-requirements-catalogue.html">Artefact 004</a>: <strong>DR-002 / DR-003</strong></td>
+<td>Enquiry <code>status</code> and nullable <code>assigned_owner_id</code> remain part of the earlier bounded specification.</td>
+</tr>
+<tr>
+<td><a href="04-requirements-catalogue.html">Artefact 004</a>: <strong>OQ-06 / OQ-07</strong></td>
+<td>Detailed data fields, mandatory-field rules and duplicate handling were deferred to later data work.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>In scope:</strong> a proposed Customer–Enquiry logical relationship; minimum data dictionary; synthetic data profiling; introductory SQL joins and missing-reference detection; a two-source reconciliation; candidate validation rules; business-impact reasoning; review questions.</p>
+<p><strong>Out of scope:</strong> production database design; complete CRM schema; Salesforce configuration; integration or migration execution; actual deduplication; approved validation policy; live system reconciliation; contactability confirmation; privacy/retention decisions; production metrics or impact measurement.</p>
+<p><strong>Compatibility with Artefact 004:</strong> <code>assigned_owner_id</code> can remain <code>NULL</code> for an unassigned enquiry (AS-02). A <strong>missing customer reference</strong> and an <strong>unassigned Sales owner</strong> are separate issues. Proposed Customer ID validation in this document does not silently alter existing BR-001–BR-004, FR-001–FR-005, or the CR-001 baseline.</p>
+<h2 id="3-proposed-logical-data-model">3. Proposed Logical Data Model</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The model describes the proposed relationships, while the data dictionary explains each field. A customer identifier links an enquiry to a customer; the owner identifier refers to the responsible Sales representative.</p></aside>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-text">CUSTOMERS                                  ENQUIRIES
+---------                                  ---------
+customer_id  (unique identifier)    1 ──&lt;  customer_id (customer reference)
+name                                       enquiry_id  (unique identifier)
+phone                                      status
+                                           assigned_owner_id (may be NULL)
 
- <h2>Why this analysis matters</h2>
- <p>Northstar's earlier scenario raised concerns about fragmented customer information and inconsistent enquiry handling. This artefact responds to <strong>BO-01</strong> (consistent enquiry/customer-data capture) and <strong>GAP-01</strong> (customer-information consistency), while respecting the enquiry ownership baseline defined in <a href="04-requirements-catalogue.html">Artefact 004</a>.</p>
- <div class="grid-2">
-  <article class="card"><span class="label-note">Problem to investigate</span><h3>Missing or inconsistent information</h3><p>A customer may lack a relevant contact field, or an enquiry may refer to a customer that cannot be found.</p></article>
-  <article class="card"><span class="label-note">Approach</span><h3>Define → query → compare → investigate</h3><p>Describe the data, run checks, document synthetic exceptions and propose controls without guessing the root cause.</p></article>
- </div>
+One customer may have many enquiries; each valid linked enquiry points to one customer.
+</code></pre>
+<p>This is a <strong>proposed logical structure</strong>, not an implemented database schema. For valid, linked records, a single Customers row can be referenced by multiple Enquiries rows. Unmatched records are intentionally present in the synthetic <em>diagnostic</em> dataset to illustrate data-quality checks.</p>
+<p><strong>Design boundary:</strong> <code>assigned_owner_id</code> refers conceptually to a Sales Representative, not to the customer. No Sales Representative table or full permissions model is built here. Source-channel and timestamp fields remain future design considerations, not invented existing data.</p>
+<h3 id="31-data-dictionary-customers">3.1 Data Dictionary — Customers</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Illustrative type</th>
+<th>Nullability / business treatment</th>
+<th>Key / check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>customer_id</code></td>
+<td>Stable identifier for a customer</td>
+<td>Text such as <code>C-101</code></td>
+<td>Required in the <em>proposed</em> model</td>
+<td>Unique customer identifier</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Customer display name</td>
+<td>Text</td>
+<td>Requiredness to be agreed</td>
+<td>Completeness and accuracy review</td>
+</tr>
+<tr>
+<td><code>phone</code></td>
+<td>Contact telephone number</td>
+<td>Text</td>
+<td>Nullable in the diagnostic fixture; whether mandatory is <strong>unconfirmed</strong></td>
+<td>Check presence if required; format/verification policy to be defined</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telephone numbers are stored as <strong>text</strong>, not integers, to preserve leading zeros and symbols if applicable. The example numbers are fictional and are <strong>not</strong> verified contact information.</p>
+<h3 id="32-data-dictionary-enquiries">3.2 Data Dictionary — Enquiries</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Illustrative type</th>
+<th>Nullability / business treatment</th>
+<th>Key / check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enquiry_id</code></td>
+<td>Unique enquiry identifier</td>
+<td>Text such as <code>ENQ-201</code></td>
+<td>Required</td>
+<td><strong>DR-001</strong>; uniqueness</td>
+</tr>
+<tr>
+<td><code>customer_id</code></td>
+<td>Reference to the relevant customer</td>
+<td>Text such as <code>C-101</code></td>
+<td><strong>Candidate</strong> required field for new enquiries, pending workflow decision</td>
+<td>Proposed matching rule, <strong>VAL-01</strong></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Current enquiry stage</td>
+<td>Text such as <code>New</code></td>
+<td>Maintained per <strong>DR-002</strong></td>
+<td>Sample labels are not a complete lifecycle</td>
+</tr>
+<tr>
+<td><code>assigned_owner_id</code></td>
+<td>Sales Representative responsible for enquiry</td>
+<td>Text or <code>NULL</code></td>
+<td><strong>May be NULL</strong>, as already permitted in <strong>DR-003 / AS-02</strong></td>
+<td>Do not confuse unassigned ownership with invalid customer linkage</td>
+</tr>
+</tbody>
+</table></div>
+<p>In this document, <code>NULL</code> means the diagnostic record has no stored value in that field. Other real-life cases such as blank strings and placeholder values would need separate profiling rules.</p>
+<h3 id="33-reconciliation-sources">3.3 Reconciliation Sources</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Illustrative dataset</th>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WebsiteSubmissions</code></td>
+<td><code>submission_id</code></td>
+<td>Website intake IDs in an agreed period</td>
+</tr>
+<tr>
+<td><code>SalesEnquiryRegister</code></td>
+<td><code>submission_id</code></td>
+<td>Website submission IDs recorded in Sales for that <em>same</em> period</td>
+</tr>
+</tbody>
+</table></div>
+<p>The reconciliation dataset is separate from the <code>Enquiries</code> example. We do not claim that <code>WEB-301</code> maps to <code>ENQ-201</code> or that the fictional organisation currently has automated data transfer.</p>
+<h2 id="4-synthetic-test-records">4. Synthetic Test Records</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>These invented records are the evidence for the worked examples. Compare identifiers carefully: C-999 is recorded but unmatched, whereas NULL means no value is stored.</p></aside>
+<h3 id="41-customers">4.1 Customers</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>name</th>
+<th>phone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-101</td>
+<td>Asha</td>
+<td>9876500011</td>
+</tr>
+<tr>
+<td>C-102</td>
+<td>Rahul</td>
+<td><code>NULL</code></td>
+</tr>
+<tr>
+<td>C-103</td>
+<td>Priya</td>
+<td>9876500033</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="42-enquiries">4.2 Enquiries</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>enquiry_id</th>
+<th>customer_id</th>
+<th>status</th>
+<th>assigned_owner_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENQ-201</td>
+<td>C-101</td>
+<td>New</td>
+<td><code>NULL</code></td>
+</tr>
+<tr>
+<td>ENQ-202</td>
+<td>C-102</td>
+<td>Contacted</td>
+<td>REP-01</td>
+</tr>
+<tr>
+<td>ENQ-203</td>
+<td>C-999</td>
+<td>New</td>
+<td><code>NULL</code></td>
+</tr>
+<tr>
+<td>ENQ-204</td>
+<td><code>NULL</code></td>
+<td>New</td>
+<td><code>NULL</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><code>ENQ-202</code> has a recorded owner in this illustrative extension so that its <code>Contacted</code> status does not imply a violation of the previously defined ownership prerequisite (BR-004). No complete status-transition history is claimed.</p>
+<h3 id="43-website-to-sales-reconciliation-records">4.3 Website-to-Sales Reconciliation Records</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>WebsiteSubmissions</th>
+<th>SalesEnquiryRegister</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WEB-301</td>
+<td>WEB-301</td>
+</tr>
+<tr>
+<td>WEB-302</td>
+<td>WEB-302</td>
+</tr>
+<tr>
+<td>WEB-303</td>
+<td>—</td>
+</tr>
+<tr>
+<td>WEB-304</td>
+<td>WEB-304</td>
+</tr>
+<tr>
+<td>WEB-305</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>These two lists are assumed to cover the <strong>same reporting period</strong> and to use comparable submission identifiers solely for the exercise. Missing IDs establish a discrepancy in the sample, not a confirmed delivery failure.</p>
+<h2 id="5-sql-investigation-and-results">5. SQL Investigation and Results</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Each SQL query asks one specific question of the sample data. SELECT chooses the output, FROM chooses the starting table, JOIN connects tables and WHERE filters rows. Open the line-by-line explanation beneath any query for a slower walkthrough.</p></aside>
+<p>The following queries use SQLite-compatible SQL. For reproducibility, a standalone <a href="data/05-synthetic-data-and-checks.sql">synthetic fixture and query script</a> creates the four diagnostic tables and reproduces the sample results. <strong>The fixture deliberately does not enforce a foreign key</strong>, because the purpose is to <em>detect</em> unmatched references in imported or staged example records; it must not be mistaken for a recommended production schema.</p>
+<h3 id="q-01-find-customers-with-no-phone-value">Q-01 — Find customers with no phone value</h3>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-sql">SELECT Customers.customer_id, Customers.name
+FROM Customers
+WHERE phone IS NULL;
+</code></pre><details class="sql-walkthrough" data-reader-added="sql-help"><summary>Read this query line by line</summary><ol class="sql-line-list"><li><code>SELECT Customers.customer_id, Customers.name</code><p>Return the customer identifier and customer name.</p></li><li><code>FROM Customers</code><p>Start with the Customers table.</p></li><li><code>WHERE phone IS NULL;</code><p>Keep records where no phone value is stored. NULL means the value is missing in this fixture.</p></li></ol></details>
+<p><strong>Expected result:</strong> <code>C-102 | Rahul</code> (one synthetic record). This is a completeness exception <strong>only if</strong> phone numbers are required for the relevant business process; it is not evidence that the phone number is inaccurate.</p>
+<h3 id="q-02-find-all-enquiries-without-a-matching-customer">Q-02 — Find all enquiries without a matching customer</h3>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-sql">SELECT Enquiries.enquiry_id
+FROM Enquiries
+LEFT JOIN Customers
+  ON Enquiries.customer_id = Customers.customer_id
+WHERE Customers.customer_id IS NULL;
+</code></pre><details class="sql-walkthrough" data-reader-added="sql-help"><summary>Read this query line by line</summary><ol class="sql-line-list"><li><code>SELECT Enquiries.enquiry_id</code><p>Return the enquiry identifier, so each result can be traced to a record.</p></li><li><code>FROM Enquiries</code><p>Start with the Enquiries table.</p></li><li><code>LEFT JOIN Customers</code><p>Keep every enquiry while looking for a matching customer record.</p></li><li><code>  ON Enquiries.customer_id = Customers.customer_id</code><p>Look for a match by comparing the customer identifiers stored in the two tables.</p></li><li><code>WHERE Customers.customer_id IS NULL;</code><p>Keep rows where the join found no matching customer. This can happen for an absent identifier or a recorded but unmatched identifier.</p></li></ol></details>
+<p><strong>Expected result:</strong> <code>ENQ-203</code>, <code>ENQ-204</code>. The first has an unmatched non-null ID; the second has no stored ID. With a <code>LEFT JOIN</code> starting from <code>Enquiries</code>, <code>Customers.customer_id IS NULL</code> marks the absence of a joined customer row.</p>
+<h3 id="q-03-isolate-recorded-but-unmatched-customer-ids">Q-03 — Isolate recorded but unmatched Customer IDs</h3>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-sql">SELECT Enquiries.enquiry_id
+FROM Enquiries
+LEFT JOIN Customers
+  ON Enquiries.customer_id = Customers.customer_id
+WHERE Customers.customer_id IS NULL
+  AND Enquiries.customer_id IS NOT NULL;
+</code></pre><details class="sql-walkthrough" data-reader-added="sql-help"><summary>Read this query line by line</summary><ol class="sql-line-list"><li><code>SELECT Enquiries.enquiry_id</code><p>Return the enquiry identifier, so each result can be traced to a record.</p></li><li><code>FROM Enquiries</code><p>Start with the Enquiries table.</p></li><li><code>LEFT JOIN Customers</code><p>Keep every enquiry while looking for a matching customer record.</p></li><li><code>  ON Enquiries.customer_id = Customers.customer_id</code><p>Look for a match by comparing the customer identifiers stored in the two tables.</p></li><li><code>WHERE Customers.customer_id IS NULL</code><p>Keep rows where the join found no matching customer. This can happen for an absent identifier or a recorded but unmatched identifier.</p></li><li><code>  AND Enquiries.customer_id IS NOT NULL;</code><p>Also require the enquiry to contain an identifier. This separates an unmatched recorded ID from an empty ID.</p></li></ol></details>
+<p><strong>Expected result:</strong> <code>ENQ-203</code> only. <code>ENQ-204</code> is excluded because its enquiry-side Customer ID is <code>NULL</code>.</p>
+<h3 id="q-04-find-enquiries-with-a-missing-stored-customer-id">Q-04 — Find enquiries with a missing stored Customer ID</h3>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-sql">SELECT enquiry_id
+FROM Enquiries
+WHERE customer_id IS NULL;
+</code></pre><details class="sql-walkthrough" data-reader-added="sql-help"><summary>Read this query line by line</summary><ol class="sql-line-list"><li><code>SELECT enquiry_id</code><p>Return the enquiry identifier.</p></li><li><code>FROM Enquiries</code><p>Start with the Enquiries table.</p></li><li><code>WHERE customer_id IS NULL;</code><p>Keep enquiries that have no stored customer identifier.</p></li></ol></details>
+<p><strong>Expected result:</strong> <code>ENQ-204</code> only. This is a different problem from having an ID that does not match a customer.</p>
+<h3 id="q-05-show-matching-customerenquiry-links">Q-05 — Show matching customer–enquiry links</h3>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-sql">SELECT Enquiries.enquiry_id, Customers.name
+FROM Enquiries
+INNER JOIN Customers
+  ON Enquiries.customer_id = Customers.customer_id
+ORDER BY Enquiries.enquiry_id;
+</code></pre><details class="sql-walkthrough" data-reader-added="sql-help"><summary>Read this query line by line</summary><ol class="sql-line-list"><li><code>SELECT Enquiries.enquiry_id, Customers.name</code><p>Return each matching enquiry identifier together with the customer name.</p></li><li><code>FROM Enquiries</code><p>Start with the Enquiries table.</p></li><li><code>INNER JOIN Customers</code><p>Keep only enquiries that match a customer record. Unmatched enquiries are excluded.</p></li><li><code>  ON Enquiries.customer_id = Customers.customer_id</code><p>Look for a match by comparing the customer identifiers stored in the two tables.</p></li><li><code>ORDER BY Enquiries.enquiry_id;</code><p>Sort the results by enquiry identifier.</p></li></ol></details>
+<p><strong>Expected result:</strong> <code>ENQ-201 | Asha</code> and <code>ENQ-202 | Rahul</code>. <code>INNER JOIN</code> excludes unmatched records and therefore is <strong>not</strong> suitable by itself for investigating missing links.</p>
+<h3 id="q-06-reconcile-website-submissions-to-the-sales-register">Q-06 — Reconcile website submissions to the Sales register</h3>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-sql">SELECT WebsiteSubmissions.submission_id
+FROM WebsiteSubmissions
+LEFT JOIN SalesEnquiryRegister
+  ON WebsiteSubmissions.submission_id = SalesEnquiryRegister.submission_id
+WHERE SalesEnquiryRegister.submission_id IS NULL
+ORDER BY WebsiteSubmissions.submission_id;
+</code></pre><details class="sql-walkthrough" data-reader-added="sql-help"><summary>Read this query line by line</summary><ol class="sql-line-list"><li><code>SELECT WebsiteSubmissions.submission_id</code><p>Return the identifier of each website submission found by the check.</p></li><li><code>FROM WebsiteSubmissions</code><p>Start with the website submissions for the illustrative reporting period.</p></li><li><code>LEFT JOIN SalesEnquiryRegister</code><p>Keep every website submission while looking for its corresponding entry in the Sales register.</p></li><li><code>  ON WebsiteSubmissions.submission_id = SalesEnquiryRegister.submission_id</code><p>Match the two sources using the same submission identifier.</p></li><li><code>WHERE SalesEnquiryRegister.submission_id IS NULL</code><p>Keep website submissions for which the join found no Sales register entry.</p></li><li><code>ORDER BY WebsiteSubmissions.submission_id;</code><p>Sort the results by website submission identifier.</p></li></ol></details>
+<p><strong>Expected result:</strong> <code>WEB-303</code>, <code>WEB-305</code>.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Reconciliation item</th>
+<th style="text-align: right;">Synthetic result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Website submissions</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>Sales register entries</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Missing website IDs in Sales register</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table></div>
+<p>The count difference agrees with the two IDs in this particular fixture. <strong>Comparing counts alone is insufficient in general</strong>: equal totals may still hide different or duplicate IDs. Identifier-level reconciliation is therefore preferred.</p>
+<h3 id="q-07-candidate-duplicate-signal-not-a-duplicate-determination">Q-07 — Candidate duplicate signal (not a duplicate determination)</h3>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-sql">SELECT phone, COUNT(*) AS number_of_customers
+FROM Customers
+WHERE phone IS NOT NULL
+GROUP BY phone
+HAVING COUNT(*) &gt; 1;
+</code></pre><details class="sql-walkthrough" data-reader-added="sql-help"><summary>Read this query line by line</summary><ol class="sql-line-list"><li><code>SELECT phone, COUNT(*) AS number_of_customers</code><p>Return each phone value and the number of customer records using it. The count column is named number_of_customers.</p></li><li><code>FROM Customers</code><p>Start with the Customers table.</p></li><li><code>WHERE phone IS NOT NULL</code><p>Leave out missing phone values before looking for repeated recorded values.</p></li><li><code>GROUP BY phone</code><p>Put customer records with the same phone value into a group.</p></li><li><code>HAVING COUNT(*) &gt; 1;</code><p>Keep groups containing more than one record. A shared phone value is a review signal, not proof of a duplicate customer.</p></li></ol></details>
+<p><strong>Expected result:</strong> no rows in the current synthetic fixture. Shared phone numbers can be legitimate, so matching phone values would only prompt review, <strong>not automatic deletion or merging</strong>. This check is illustrative and does not establish full duplicate-detection requirements.</p>
+<h2 id="6-data-quality-findings-and-business-implications">6. Data Quality Findings and Business Implications</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>A finding states what the sample check revealed and why it might matter. The possible business consequence still needs context; it is not a measured Northstar outcome.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Synthetic evidence</th>
+<th>Quality dimension</th>
+<th>Possible operational implication</th>
+<th>Appropriate BA response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DQ-01 — Empty customer phone</td>
+<td><code>C-102.phone = NULL</code></td>
+<td>Completeness</td>
+<td>Phone follow-up may be difficult <em>if</em> phone is required</td>
+<td>Confirm channel-specific contact requirements; investigate source value</td>
+</tr>
+<tr>
+<td>DQ-02 — Unmatched reference</td>
+<td><code>ENQ-203 → C-999</code></td>
+<td>Referential consistency / validity</td>
+<td>Enquiry may not display a trusted customer profile</td>
+<td>Trace source ID, matching logic and import/entry history</td>
+</tr>
+<tr>
+<td>DQ-03 — Missing reference</td>
+<td><code>ENQ-204.customer_id = NULL</code></td>
+<td>Completeness</td>
+<td>Enquiry cannot be linked to a customer using the proposed model</td>
+<td>Determine whether it is a new-customer scenario or incomplete capture</td>
+</tr>
+<tr>
+<td>DQ-04 — Source discrepancy</td>
+<td><code>WEB-303</code>, <code>WEB-305</code> absent from Sales register</td>
+<td>Cross-source consistency / reconciliation</td>
+<td>Records may need investigation before reporting or follow-up</td>
+<td>Review reporting period, filters, rejects and transfer logs</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Not demonstrated by these sample records:</strong> actual incorrect phone numbers (accuracy), stale records (timeliness), duplicate customers (uniqueness beyond identifiers), privacy compliance, or an operational cause for a missing submission. Those topics require separate evidence; their absence is not a claim that the real organisation has no such issues.</p>
+<p><strong>Scope guardrail:</strong> <code>ENQ-201</code>, <code>ENQ-203</code> and <code>ENQ-204</code> being unassigned to a Sales representative is <em>not automatically a data-quality failure</em>. The earlier requirements explicitly allow unset owners for some stages; status and ownership rules must be evaluated separately.</p>
+<h2 id="7-proposed-validation-and-investigation-controls">7. Proposed Validation and Investigation Controls</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Validation controls are proposed checks for accepting or reviewing data. Candidate rules remain proposals until the business confirms the intended workflow and exceptions.</p></aside>
+<p>All controls below are <strong>candidates</strong>, not approved specifications or implemented system behaviour.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Candidate control</th>
+<th>Illustration / expected behaviour</th>
+<th>Open decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VAL-01</strong></td>
+<td>New enquiries should carry a non-null Customer ID matching an existing customer record</td>
+<td>Reject or route <code>NULL</code> / <code>C-999</code> references <strong>once a suitable customer-creation workflow exists</strong></td>
+<td>How are first-time customers created, and are provisional enquiries allowed?</td>
+</tr>
+<tr>
+<td><strong>VAL-02</strong></td>
+<td>Apply contact-field completeness rules for channels where phone contact is genuinely necessary</td>
+<td>Flag a missing phone number when telephone follow-up is required</td>
+<td>Is phone always mandatory, or can email/other methods suffice?</td>
+</tr>
+<tr>
+<td><strong>VAL-03</strong></td>
+<td>Enquiry identifiers must be unique</td>
+<td>Prevent duplicate <code>enquiry_id</code> values; follows DR-001</td>
+<td>How are IDs generated/imported across channels?</td>
+</tr>
+<tr>
+<td><strong>REC-01</strong></td>
+<td>Reconcile website submission IDs against Sales records for an agreed period</td>
+<td>Identify <code>WEB-303</code> and <code>WEB-305</code> for investigation, not automatic creation</td>
+<td>Timing, source scope, retry rules, exception ownership and reconciliation frequency?</td>
+</tr>
+<tr>
+<td><strong>REV-01</strong></td>
+<td>Investigate possible duplicate customers with business-approved matching criteria</td>
+<td>Shared phone is a review signal, not proof of duplication</td>
+<td>Which attributes and review/merge permissions are acceptable?</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>New-customer exception:</strong> A rule that requires an <em>existing</em> customer before accepting any enquiry would block first-time customers unless a customer record is created first or an explicit provisional workflow is available. The real process must resolve this before VAL-01 is baselined. <strong>Existing unassigned-owner rules remain unchanged.</strong></p>
+<p><strong>Investigation sequence for DQ-02 / DQ-03:</strong> detect → confirm field definitions and record origin → review source and processing evidence → classify cause → propose correction or workflow change → seek decision → define validation/monitoring. Do not erase or invent customer data to make the example pass.</p>
+<h2 id="8-traceability-and-requirements-impact">8. Traceability and Requirements Impact</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This section shows how the new data work relates to the earlier requirements. Missing customer links and unassigned Sales owners remain separate issues, and the requirements baseline is preserved.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Proposed work</th>
+<th>Relevant prior anchor</th>
+<th>Relationship / change boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Customer identifier and relationship design</td>
+<td>BO-01; GAP-01; OQ-06</td>
+<td>Adds a <em>proposed</em> customer-data model in a new workstream; not retroactive approval of Artefact 004</td>
+</tr>
+<tr>
+<td>Enquiry ID uniqueness</td>
+<td>DR-001</td>
+<td>Restates the existing requirement; VAL-03 is a candidate enforcement approach</td>
+</tr>
+<tr>
+<td>Enquiry status and ownership</td>
+<td>DR-002; DR-003; AS-02; BR-004</td>
+<td>Retained; unassigned ownership is distinct from missing customer linkage</td>
+</tr>
+<tr>
+<td>Cross-source reconciliation</td>
+<td>GAP-01; reporting concerns in Artefacts 001/003</td>
+<td>Diagnostic method; no actual transfer defect or production integration asserted</td>
+</tr>
+<tr>
+<td>Duplicate review</td>
+<td>OQ-07; GAP-01</td>
+<td>Remains a proposed future method, not a completed deduplication exercise</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>No automatic modification to the requirements baseline:</strong> VAL-01/02/03 are draft proposals in Artefact 005. If the team selected them in a real project, the BA would update requirements, exceptions, acceptance criteria and traceability through the normal review process.</p>
+<h2 id="9-verification-assumptions-and-limits">9. Verification, Assumptions and Limits</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Verification describes how the synthetic exercise was checked and which assumptions limit the result. It does not turn sample records into production evidence.</p></aside>
+<p><strong>Reproducibility:</strong> The included SQL fixture uses deliberately simplified SQLite-compatible tables, loads exactly the synthetic records shown above, and runs Q-01–Q-07. The queries and expected outputs were locally checked against that fixture during preparation. This demonstrates SQL reasoning on fabricated data only; <strong>it is not application UAT, database deployment, production reconciliation or real-world acceptance testing</strong>.</p>
+<p><strong>Key assumptions:</strong> ID matching is exact text equality; the two submission lists refer to the same period; <code>NULL</code> is an absent stored value; sample status labels are illustrative; there are no unstated customer matches. Production identity resolution could require normalisation, deduplication, source-system keys and exceptions, none of which are implemented here.</p>
+<p><strong>Quality limitations:</strong> The dataset is intentionally tiny and cannot support statistical claims, business KPIs, error-rate estimates, contactability conclusions, or decisions about retention/security policy. The root causes of its planted exceptions are unspecified on purpose.</p>
+<h2 id="10-completed-case-study-disposition-and-next-steps">10. Completed Case-Study Disposition and Next Steps</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The conclusion records what this data-analysis exercise completed and identifies the work that still lies ahead.</p></aside>
+<p>For this bounded Session 5 analysis, the following are <strong>complete as documentation and synthetic SQL exercises</strong>: a logical Customer–Enquiry model, minimum data dictionary, seven SQL investigations, a two-source reconciliation, identified sample exceptions, candidate validation rules and explicit traceability to the earlier Northstar artefacts.</p>
+<p><strong>Not represented as complete:</strong> real stakeholder agreement; implemented constraints; Salesforce or API integrations; remediation; UAT; real customer-data governance; measured benefits.</p>
+<p><strong>Future separate workstream:</strong> evaluate CRM/customer-data design and integrations after the business process, identity rules and control exceptions have been agreed in an appropriate environment. The fact that these are future activities does not make the Session 5 <em>analysis document</em> unfinished.</p>
+<hr/>
+<p><strong>Related documents:</strong> <a href="01-business-context.html">Artefact 001</a> · <a href="02-stakeholder-plan.html">Artefact 002</a> · <a href="03-process-gap-analysis.html">Artefact 003</a> · <a href="04-requirements-catalogue.html">Artefact 004</a> · <a href="data/05-synthetic-data-and-checks.sql">Synthetic SQL fixture</a></p></article>
+  </section>
+<details class="reader-fixture"><summary>Complete reproducible SQL file — setup, sample records and all seven queries</summary><p>This practice script recreates four synthetic diagnostic tables, adds the invented records and runs the seven investigations. The original script is reproduced in full below.</p><p><a href="data/05-synthetic-data-and-checks.sql" download>Download the SQL practice file</a></p><pre tabindex="0" aria-label="Complete original SQL practice file"><code data-source="data/05-synthetic-data-and-checks.sql">-- Northstar Customer 360 — Artefact 005
+-- Synthetic, SQLite-compatible diagnostic fixture and investigation queries.
+-- This is NOT a production schema; no foreign key is enforced so deliberate
+-- missing/unmatched references can be examined in staged sample data.
+-- No real customer or business data is used.
 
- <h2>Proposed logical data model</h2>
- <div class="grid-2">
-  <article class="card"><span class="label-note">Entity 1</span><h3>Customers</h3><p><code>customer_id</code> — unique customer identifier</p><p><code>name</code> — customer name</p><p><code>phone</code> — contact telephone number</p></article>
-  <article class="card"><span class="label-note">Entity 2</span><h3>Enquiries</h3><p><code>enquiry_id</code> — unique enquiry identifier</p><p><code>customer_id</code> — link to customer</p><p><code>status</code> — enquiry stage</p><p><code>assigned_owner_id</code> — Sales owner, nullable</p></article>
- </div>
- <p class="data-relationship"><span>1 customer → many enquiries · linked by customer_id</span></p>
- <p><strong>Critical distinction:</strong> an enquiry can reference a valid customer and still be <em>unassigned</em> to a Sales Representative. Artefact 004 explicitly allows a missing <code>assigned_owner_id</code> in some cases; this document does not relabel those cases as data-quality failures.</p>
+DROP TABLE IF EXISTS SalesEnquiryRegister;
+DROP TABLE IF EXISTS WebsiteSubmissions;
+DROP TABLE IF EXISTS Enquiries;
+DROP TABLE IF EXISTS Customers;
 
- <h2>Minimum data dictionary</h2>
- <div class="table-wrap"><table>
-  <thead><tr><th>Table</th><th>Field</th><th>Meaning</th><th>Scope / rule</th></tr></thead>
-  <tbody>
-   <tr><td>Customers</td><td><code>customer_id</code></td><td>Stable customer identifier</td><td>Proposed unique, required identifier</td></tr>
-   <tr><td>Customers</td><td><code>name</code></td><td>Display name</td><td>Requiredness to confirm</td></tr>
-   <tr><td>Customers</td><td><code>phone</code></td><td>Phone number stored as text</td><td>Can be NULL in the synthetic diagnostic data; mandatory rule unconfirmed</td></tr>
-   <tr><td>Enquiries</td><td><code>enquiry_id</code></td><td>Unique enquiry identifier</td><td>Existing <strong>DR-001</strong></td></tr>
-   <tr><td>Enquiries</td><td><code>customer_id</code></td><td>Customer reference</td><td>Candidate mandatory/matching rule <strong>VAL-01</strong></td></tr>
-   <tr><td>Enquiries</td><td><code>status</code></td><td>Enquiry stage</td><td>Existing <strong>DR-002</strong>; examples not full lifecycle</td></tr>
-   <tr><td>Enquiries</td><td><code>assigned_owner_id</code></td><td>Sales Representative reference</td><td>Nullable per <strong>DR-003 / AS-02</strong></td></tr>
-  </tbody></table></div>
+CREATE TABLE Customers (
+    customer_id TEXT PRIMARY KEY,
+    name TEXT,
+    phone TEXT
+);
 
- <h2>Synthetic example records</h2>
- <div class="grid-2">
-  <div><h3>Customers</h3><div class="table-wrap"><table><thead><tr><th>customer_id</th><th>name</th><th>phone</th></tr></thead><tbody><tr><td>C-101</td><td>Asha</td><td>9876500011</td></tr><tr><td>C-102</td><td>Rahul</td><td><code>NULL</code></td></tr><tr><td>C-103</td><td>Priya</td><td>9876500033</td></tr></tbody></table></div></div>
-  <div><h3>Enquiries</h3><div class="table-wrap"><table><thead><tr><th>enquiry_id</th><th>customer_id</th><th>status</th><th>owner</th></tr></thead><tbody><tr><td>ENQ-201</td><td>C-101</td><td>New</td><td><code>NULL</code></td></tr><tr><td>ENQ-202</td><td>C-102</td><td>Contacted</td><td>REP-01</td></tr><tr><td>ENQ-203</td><td>C-999</td><td>New</td><td><code>NULL</code></td></tr><tr><td>ENQ-204</td><td><code>NULL</code></td><td>New</td><td><code>NULL</code></td></tr></tbody></table></div></div>
- </div>
- <p class="small">All records are fabricated. ENQ-202 has an illustrative assigned owner so its Contacted status is consistent with the prior ownership prerequisite; no complete status-change history is claimed.</p>
+CREATE TABLE Enquiries (
+    enquiry_id TEXT PRIMARY KEY,
+    customer_id TEXT,
+    status TEXT,
+    assigned_owner_id TEXT
+);
 
- <h2>SQL: identify the differences</h2>
- <h3>Q-01 · Missing phone values</h3>
- <pre class="code-sample"><code>SELECT Customers.customer_id, Customers.name
+CREATE TABLE WebsiteSubmissions (
+    submission_id TEXT PRIMARY KEY
+);
+
+CREATE TABLE SalesEnquiryRegister (
+    submission_id TEXT PRIMARY KEY
+);
+
+INSERT INTO Customers (customer_id, name, phone) VALUES
+  (&#x27;C-101&#x27;, &#x27;Asha&#x27;, &#x27;9876500011&#x27;),
+  (&#x27;C-102&#x27;, &#x27;Rahul&#x27;, NULL),
+  (&#x27;C-103&#x27;, &#x27;Priya&#x27;, &#x27;9876500033&#x27;);
+
+INSERT INTO Enquiries (enquiry_id, customer_id, status, assigned_owner_id) VALUES
+  (&#x27;ENQ-201&#x27;, &#x27;C-101&#x27;, &#x27;New&#x27;, NULL),
+  (&#x27;ENQ-202&#x27;, &#x27;C-102&#x27;, &#x27;Contacted&#x27;, &#x27;REP-01&#x27;),
+  (&#x27;ENQ-203&#x27;, &#x27;C-999&#x27;, &#x27;New&#x27;, NULL),
+  (&#x27;ENQ-204&#x27;, NULL, &#x27;New&#x27;, NULL);
+
+INSERT INTO WebsiteSubmissions (submission_id) VALUES
+  (&#x27;WEB-301&#x27;), (&#x27;WEB-302&#x27;), (&#x27;WEB-303&#x27;), (&#x27;WEB-304&#x27;), (&#x27;WEB-305&#x27;);
+
+INSERT INTO SalesEnquiryRegister (submission_id) VALUES
+  (&#x27;WEB-301&#x27;), (&#x27;WEB-302&#x27;), (&#x27;WEB-304&#x27;);
+
+-- Q-01: expected C-102 | Rahul
+SELECT Customers.customer_id, Customers.name
+FROM Customers
+WHERE phone IS NULL;
+
+-- Q-02: expected ENQ-203, ENQ-204
+SELECT Enquiries.enquiry_id
+FROM Enquiries
+LEFT JOIN Customers
+  ON Enquiries.customer_id = Customers.customer_id
+WHERE Customers.customer_id IS NULL
+ORDER BY Enquiries.enquiry_id;
+
+-- Q-03: expected ENQ-203
+SELECT Enquiries.enquiry_id
+FROM Enquiries
+LEFT JOIN Customers
+  ON Enquiries.customer_id = Customers.customer_id
+WHERE Customers.customer_id IS NULL
+  AND Enquiries.customer_id IS NOT NULL;
+
+-- Q-04: expected ENQ-204
+SELECT enquiry_id
+FROM Enquiries
+WHERE customer_id IS NULL;
+
+-- Q-05: expected ENQ-201 | Asha and ENQ-202 | Rahul
+SELECT Enquiries.enquiry_id, Customers.name
+FROM Enquiries
+INNER JOIN Customers
+  ON Enquiries.customer_id = Customers.customer_id
+ORDER BY Enquiries.enquiry_id;
+
+-- Q-06: expected WEB-303, WEB-305
+SELECT WebsiteSubmissions.submission_id
+FROM WebsiteSubmissions
+LEFT JOIN SalesEnquiryRegister
+  ON WebsiteSubmissions.submission_id = SalesEnquiryRegister.submission_id
+WHERE SalesEnquiryRegister.submission_id IS NULL
+ORDER BY WebsiteSubmissions.submission_id;
+
+-- Q-07: expected no rows (no duplicate non-null phones in this fixture)
+SELECT phone, COUNT(*) AS number_of_customers
+FROM Customers
+WHERE phone IS NOT NULL
+GROUP BY phone
+HAVING COUNT(*) &gt; 1;
+</code></pre></details>
+  <section class="reader-continuation" aria-labelledby="next-in-story">
+    <p class="eyebrow">Continue the story</p>
+    <h2 id="next-in-story">Propose the CRM design</h2>
+    <p>Next, connect the requirements and data findings to candidate CRM structures and controls. Artefact 006 presents that proposed design, with platform decisions and actual configuration still pending.</p>
+    <nav class="reader-page-links" aria-label="Previous and next artefacts"><a href="04-requirements-catalogue.html">← Previous: Specify what must happen</a><a href="06-crm-design.html">Next: Propose the CRM design →</a></nav>
+  </section>
+  <section class="reader-source-links" aria-labelledby="supporting-source">
+    <h2 id="supporting-source">Supporting source</h2>
+    <p>The complete document is readable above. The source link provides the Markdown version and its GitHub history.</p>
+    <p><a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/05-customer-data-model-and-quality-analysis.md" target="_blank" rel="noopener noreferrer">View source document on GitHub ↗</a></p>
+  </section>
+  <details id="preserved-overview" class="preserved-overview">
+    <summary>Optional: earlier website overview and worked examples</summary>
+    <p class="reader-provenance">This preserves the earlier web presentation in addition to the full document above. Its document text and examples have been retained.</p>
+    <div class="original-overview">
+<a class="back" href="index.html#artefacts">← Back to project artefacts</a>
+<div class="eyebrow" style="margin-top:28px">Artefact 005 · 	Finalised case-study analysis · Customer Data &amp; SQL</div>
+<h2>Customer Data Model &amp; Data Quality Analysis</h2>
+<p class="lead">From enquiry records to a simple customer–enquiry model: documenting data, investigating broken references with SQL, reconciling submission lists and proposing sensible validation rules.</p>
+<div class="status-row"><span class="pill">Session 5 analysis completed</span><span class="pill neutral">Synthetic SQLite evidence</span><span class="pill neutral">No production implementation</span></div>
+<div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. All records, names, identifiers, findings and controls are invented for this independent case study. The SQL was checked against synthetic local fixtures only; this is not live client data, a deployed database, real stakeholder approval or CRM implementation.</div>
+<h3>Why this analysis matters</h3>
+<p>Northstar's earlier scenario raised concerns about fragmented customer information and inconsistent enquiry handling. This artefact responds to <strong>BO-01</strong> (consistent enquiry/customer-data capture) and <strong>GAP-01</strong> (customer-information consistency), while respecting the enquiry ownership baseline defined in <a href="04-requirements-catalogue.html">Artefact 004</a>.</p>
+<div class="grid-2">
+<article class="card"><span class="label-note">Problem to investigate</span><h4>Missing or inconsistent information</h4><p>A customer may lack a relevant contact field, or an enquiry may refer to a customer that cannot be found.</p></article>
+<article class="card"><span class="label-note">Approach</span><h4>Define → query → compare → investigate</h4><p>Describe the data, run checks, document synthetic exceptions and propose controls without guessing the root cause.</p></article>
+</div>
+<h3>Proposed logical data model</h3>
+<div class="grid-2">
+<article class="card"><span class="label-note">Entity 1</span><h4>Customers</h4><p><code>customer_id</code> — unique customer identifier</p><p><code>name</code> — customer name</p><p><code>phone</code> — contact telephone number</p></article>
+<article class="card"><span class="label-note">Entity 2</span><h4>Enquiries</h4><p><code>enquiry_id</code> — unique enquiry identifier</p><p><code>customer_id</code> — link to customer</p><p><code>status</code> — enquiry stage</p><p><code>assigned_owner_id</code> — Sales owner, nullable</p></article>
+</div>
+<p class="data-relationship"><span>1 customer → many enquiries · linked by customer_id</span></p>
+<p><strong>Critical distinction:</strong> an enquiry can reference a valid customer and still be <em>unassigned</em> to a Sales Representative. Artefact 004 explicitly allows a missing <code>assigned_owner_id</code> in some cases; this document does not relabel those cases as data-quality failures.</p>
+<h3>Minimum data dictionary</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Table</th><th>Field</th><th>Meaning</th><th>Scope / rule</th></tr></thead>
+<tbody>
+<tr><td>Customers</td><td><code>customer_id</code></td><td>Stable customer identifier</td><td>Proposed unique, required identifier</td></tr>
+<tr><td>Customers</td><td><code>name</code></td><td>Display name</td><td>Requiredness to confirm</td></tr>
+<tr><td>Customers</td><td><code>phone</code></td><td>Phone number stored as text</td><td>Can be NULL in the synthetic diagnostic data; mandatory rule unconfirmed</td></tr>
+<tr><td>Enquiries</td><td><code>enquiry_id</code></td><td>Unique enquiry identifier</td><td>Existing <strong>DR-001</strong></td></tr>
+<tr><td>Enquiries</td><td><code>customer_id</code></td><td>Customer reference</td><td>Candidate mandatory/matching rule <strong>VAL-01</strong></td></tr>
+<tr><td>Enquiries</td><td><code>status</code></td><td>Enquiry stage</td><td>Existing <strong>DR-002</strong>; examples not full lifecycle</td></tr>
+<tr><td>Enquiries</td><td><code>assigned_owner_id</code></td><td>Sales Representative reference</td><td>Nullable per <strong>DR-003 / AS-02</strong></td></tr>
+</tbody></table></div>
+<h3>Synthetic example records</h3>
+<div class="grid-2">
+<div><h4>Customers</h4><div class="table-wrap"><table><thead><tr><th>customer_id</th><th>name</th><th>phone</th></tr></thead><tbody><tr><td>C-101</td><td>Asha</td><td>9876500011</td></tr><tr><td>C-102</td><td>Rahul</td><td><code>NULL</code></td></tr><tr><td>C-103</td><td>Priya</td><td>9876500033</td></tr></tbody></table></div></div>
+<div><h4>Enquiries</h4><div class="table-wrap"><table><thead><tr><th>enquiry_id</th><th>customer_id</th><th>status</th><th>owner</th></tr></thead><tbody><tr><td>ENQ-201</td><td>C-101</td><td>New</td><td><code>NULL</code></td></tr><tr><td>ENQ-202</td><td>C-102</td><td>Contacted</td><td>REP-01</td></tr><tr><td>ENQ-203</td><td>C-999</td><td>New</td><td><code>NULL</code></td></tr><tr><td>ENQ-204</td><td><code>NULL</code></td><td>New</td><td><code>NULL</code></td></tr></tbody></table></div></div>
+</div>
+<p class="small">All records are fabricated. ENQ-202 has an illustrative assigned owner so its Contacted status is consistent with the prior ownership prerequisite; no complete status-change history is claimed.</p>
+<h3>SQL: identify the differences</h3>
+<h4>Q-01 · Missing phone values</h4>
+<pre class="code-sample"><code>SELECT Customers.customer_id, Customers.name
 FROM Customers
 WHERE phone IS NULL;</code></pre>
- <p class="result-inline">Expected: C-102 | Rahul</p>
- <h3>Q-02 · Enquiries without a matching customer</h3>
- <pre class="code-sample"><code>SELECT Enquiries.enquiry_id
+<p class="result-inline">Expected: C-102 | Rahul</p>
+<h4>Q-02 · Enquiries without a matching customer</h4>
+<pre class="code-sample"><code>SELECT Enquiries.enquiry_id
 FROM Enquiries
 LEFT JOIN Customers
   ON Enquiries.customer_id = Customers.customer_id
 WHERE Customers.customer_id IS NULL;</code></pre>
- <p class="result-inline">Expected: ENQ-203, ENQ-204</p>
- <h3>Q-03 · Recorded Customer ID, but no customer match</h3>
- <pre class="code-sample"><code>SELECT Enquiries.enquiry_id
+<p class="result-inline">Expected: ENQ-203, ENQ-204</p>
+<h4>Q-03 · Recorded Customer ID, but no customer match</h4>
+<pre class="code-sample"><code>SELECT Enquiries.enquiry_id
 FROM Enquiries
 LEFT JOIN Customers
   ON Enquiries.customer_id = Customers.customer_id
 WHERE Customers.customer_id IS NULL
   AND Enquiries.customer_id IS NOT NULL;</code></pre>
- <p class="result-inline">Expected: ENQ-203 only</p>
- <p>The second condition excludes ENQ-204, because that enquiry has no Customer ID stored at all. The full document includes separate missing-reference, matching-record and duplicate-signal queries.</p>
-
- <h2>Reconciliation: website vs Sales</h2>
- <p>A separate synthetic dataset compares website submission IDs with IDs recorded in Sales for the <strong>same assumed period</strong>. This is not represented as a verified operational feed or integration.</p>
- <div class="grid-2">
-  <article class="card"><span class="label-note">Source A</span><h3>Website submissions</h3><p>WEB-301 · WEB-302 · <strong>WEB-303</strong> · WEB-304 · <strong>WEB-305</strong></p><p class="small">5 source IDs</p></article>
-  <article class="card"><span class="label-note">Source B</span><h3>Sales register</h3><p>WEB-301 · WEB-302 · WEB-304</p><p class="small">3 destination IDs</p></article>
- </div>
- <p><strong>Reconciliation result:</strong> <code>WEB-303</code> and <code>WEB-305</code> are absent from the sample Sales register. That is a data discrepancy, <em>not proof</em> that software transfer failed. The next BA action is to check period/filter definitions, source evidence, rejection rules and any available processing logs.</p>
- <pre class="code-sample"><code>SELECT WebsiteSubmissions.submission_id
+<p class="result-inline">Expected: ENQ-203 only</p>
+<p>The second condition excludes ENQ-204, because that enquiry has no Customer ID stored at all. The full document includes separate missing-reference, matching-record and duplicate-signal queries.</p>
+<h3>Reconciliation: website vs Sales</h3>
+<p>A separate synthetic dataset compares website submission IDs with IDs recorded in Sales for the <strong>same assumed period</strong>. This is not represented as a verified operational feed or integration.</p>
+<div class="grid-2">
+<article class="card"><span class="label-note">Source A</span><h4>Website submissions</h4><p>WEB-301 · WEB-302 · <strong>WEB-303</strong> · WEB-304 · <strong>WEB-305</strong></p><p class="small">5 source IDs</p></article>
+<article class="card"><span class="label-note">Source B</span><h4>Sales register</h4><p>WEB-301 · WEB-302 · WEB-304</p><p class="small">3 destination IDs</p></article>
+</div>
+<p><strong>Reconciliation result:</strong> <code>WEB-303</code> and <code>WEB-305</code> are absent from the sample Sales register. That is a data discrepancy, <em>not proof</em> that software transfer failed. The next BA action is to check period/filter definitions, source evidence, rejection rules and any available processing logs.</p>
+<pre class="code-sample"><code>SELECT WebsiteSubmissions.submission_id
 FROM WebsiteSubmissions
 LEFT JOIN SalesEnquiryRegister
   ON WebsiteSubmissions.submission_id = SalesEnquiryRegister.submission_id
 WHERE SalesEnquiryRegister.submission_id IS NULL
 ORDER BY WebsiteSubmissions.submission_id;</code></pre>
- <p class="result-inline">Expected: WEB-303, WEB-305</p>
-
- <h2>Data-quality findings</h2>
- <div class="table-wrap"><table><thead><tr><th>ID</th><th>Synthetic exception</th><th>Interpretation</th><th>Recommended BA action</th></tr></thead><tbody>
-  <tr><td>DQ-01</td><td>C-102 phone is NULL</td><td>Potential completeness issue, depending on channel rules</td><td>Confirm required contact details and inspect source</td></tr>
-  <tr><td>DQ-02</td><td>ENQ-203 refers to C-999</td><td>Recorded but unmatched customer reference</td><td>Trace entry, import and matching rules</td></tr>
-  <tr><td>DQ-03</td><td>ENQ-204 has NULL customer_id</td><td>Missing stored customer reference</td><td>Review new-customer and incomplete-entry workflows</td></tr>
-  <tr><td>DQ-04</td><td>WEB-303 and WEB-305 absent in Sales</td><td>Cross-source difference</td><td>Investigate period, filtering and rejects</td></tr>
- </tbody></table></div>
- <p class="small">Accuracy, timeliness, privacy compliance and confirmed customer duplication cannot be assessed from these records. A phone-number match is at most a duplicate-review signal, not grounds for automatic merging.</p>
-
- <h2>Candidate validation and review controls</h2>
- <div class="table-wrap"><table><thead><tr><th>ID</th><th>Proposed approach</th><th>Question before approval</th></tr></thead><tbody>
- <tr><td>VAL-01</td><td>New enquiries reference an existing Customer ID</td><td>How do first-time customers get registered before their enquiry is accepted?</td></tr>
- <tr><td>VAL-02</td><td>Check required contact fields for the chosen channel</td><td>Is phone required, or can another contact method be valid?</td></tr>
- <tr><td>VAL-03</td><td>Ensure unique Enquiry IDs</td><td>How are source-system IDs generated or reconciled?</td></tr>
- <tr><td>REC-01</td><td>Compare submission IDs for an agreed period</td><td>Who owns exception reviews and how are delays handled?</td></tr>
- <tr><td>REV-01</td><td>Review possible duplicates before merging</td><td>Which matching criteria and approvals are appropriate?</td></tr>
- </tbody></table></div>
- <div class="notice"><strong>Important workflow exception:</strong> A strict rule requiring an already-existing customer can inadvertently block a new customer's first enquiry. A customer-creation or provisional-capture process must be designed before VAL-01 can be approved. These rules are proposals, not additions to an approved production baseline.</div>
-
- <h2>Completion boundaries and next work</h2>
- <p>Session 5 has produced a reviewable <strong>logical model, data dictionary, synthetic SQL investigation, two-source reconciliation, data-quality findings and candidate controls</strong>. The underlying fixtures were checked locally with SQLite. No Salesforce implementation, live integration, stakeholder sign-off, UAT or measurable business benefit is claimed.</p>
- <p><a class="btn btn-primary" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/05-customer-data-model-and-quality-analysis.md" target="_blank" rel="noopener noreferrer">Read complete Artefact 005 ↗</a></p>
- <p><a class="btn btn-outline" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/data/05-synthetic-data-and-checks.sql" target="_blank" rel="noopener noreferrer">View reproducible SQL ↗</a></p>
- <p class="small">Related work: <a href="01-business-context.html">Business Context</a> · <a href="03-process-gap-analysis.html">Process Analysis</a> · <a href="04-requirements-catalogue.html">Requirements &amp; Traceability</a> · <a href="index.html#roadmap">Project roadmap</a>.</p>
+<p class="result-inline">Expected: WEB-303, WEB-305</p>
+<h3>Data-quality findings</h3>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Synthetic exception</th><th>Interpretation</th><th>Recommended BA action</th></tr></thead><tbody>
+<tr><td>DQ-01</td><td>C-102 phone is NULL</td><td>Potential completeness issue, depending on channel rules</td><td>Confirm required contact details and inspect source</td></tr>
+<tr><td>DQ-02</td><td>ENQ-203 refers to C-999</td><td>Recorded but unmatched customer reference</td><td>Trace entry, import and matching rules</td></tr>
+<tr><td>DQ-03</td><td>ENQ-204 has NULL customer_id</td><td>Missing stored customer reference</td><td>Review new-customer and incomplete-entry workflows</td></tr>
+<tr><td>DQ-04</td><td>WEB-303 and WEB-305 absent in Sales</td><td>Cross-source difference</td><td>Investigate period, filtering and rejects</td></tr>
+</tbody></table></div>
+<p class="small">Accuracy, timeliness, privacy compliance and confirmed customer duplication cannot be assessed from these records. A phone-number match is at most a duplicate-review signal, not grounds for automatic merging.</p>
+<h3>Candidate validation and review controls</h3>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Proposed approach</th><th>Question before approval</th></tr></thead><tbody>
+<tr><td>VAL-01</td><td>New enquiries reference an existing Customer ID</td><td>How do first-time customers get registered before their enquiry is accepted?</td></tr>
+<tr><td>VAL-02</td><td>Check required contact fields for the chosen channel</td><td>Is phone required, or can another contact method be valid?</td></tr>
+<tr><td>VAL-03</td><td>Ensure unique Enquiry IDs</td><td>How are source-system IDs generated or reconciled?</td></tr>
+<tr><td>REC-01</td><td>Compare submission IDs for an agreed period</td><td>Who owns exception reviews and how are delays handled?</td></tr>
+<tr><td>REV-01</td><td>Review possible duplicates before merging</td><td>Which matching criteria and approvals are appropriate?</td></tr>
+</tbody></table></div>
+<div class="notice"><strong>Important workflow exception:</strong> A strict rule requiring an already-existing customer can inadvertently block a new customer's first enquiry. A customer-creation or provisional-capture process must be designed before VAL-01 can be approved. These rules are proposals, not additions to an approved production baseline.</div>
+<h3>Completion boundaries and next work</h3>
+<p>Session 5 has produced a reviewable <strong>logical model, data dictionary, synthetic SQL investigation, two-source reconciliation, data-quality findings and candidate controls</strong>. The underlying fixtures were checked locally with SQLite. No Salesforce implementation, live integration, stakeholder sign-off, UAT or measurable business benefit is claimed.</p>
+<p><a class="btn btn-primary" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/05-customer-data-model-and-quality-analysis.md" rel="noopener noreferrer" target="_blank">Read complete Artefact 005 ↗</a></p>
+<p><a class="btn btn-outline" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/data/05-synthetic-data-and-checks.sql" rel="noopener noreferrer" target="_blank">View reproducible SQL ↗</a></p>
+<p class="small">Related work: <a href="01-business-context.html">Business Context</a> · <a href="03-process-gap-analysis.html">Process Analysis</a> · <a href="04-requirements-catalogue.html">Requirements &amp; Traceability</a> · <a href="index.html#roadmap">Project roadmap</a>.</p>
+</div>
+  </details>
 </main>
-<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></span></div></footer>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></div></footer>
 </body>
 </html>
-

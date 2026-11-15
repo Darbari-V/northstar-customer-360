@@ -2,146 +2,545 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="The final published stage asks how the agreed exercise rules and proposed data structures could be represented in a small CRM demonstration.">
   <meta name="theme-color" content="#138342">
-  <meta name="description" content="Northstar Customer 360, Artefact 006: a proposed CRM data and solution design, with candidate objects, fields, relationships, requirements traceability, decision gates and unexecuted test scenarios.">
-  <title>CRM Design | Customer 360 Case Study</title>
-  <link rel="stylesheet" href="assets/style.css"><script src="assets/navigation.js" defer></script>
-  <style>
-    .rule{background:#f4f7f8;border:1px solid #d9e2e8;border-radius:11px;padding:17px;overflow-x:auto;color:#152034;font:14px/1.6 ui-monospace,SFMono-Regular,Consolas,Monaco,monospace;white-space:pre-wrap}
-    .model-arrow{color:#0d642f;text-align:center;font:700 13px Arial,sans-serif;padding:9px}
-    .model-arrow span{display:inline-block;padding:5px 11px;border-radius:999px;border:1px solid #cfe4d6;background:#edf7ef}
-    @media(max-width:760px){.rule{font-size:12px;padding:12px}}
-  </style>
+  <title>CRM Design | Northstar Customer 360</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script src="assets/navigation.js" defer></script>
 </head>
 <body>
-<header class="site-header">
-  <div class="container inner">
-    <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
-    <nav class="top-nav" aria-label="Project navigation">
-      <a href="index.html">Overview</a>
-      <a href="01-business-context.html">Business Context</a>
-      <a href="02-stakeholder-plan.html">Discovery</a>
-      <a href="03-process-gap-analysis.html">Process Analysis</a>
-      <a href="04-requirements-catalogue.html">Requirements</a>
-      <a href="05-customer-data.html">Data &amp; SQL</a>
-      <a href="06-crm-design.html" aria-current="page">CRM Design</a>
-      <a href="https://darbari-v.github.io/#projects">← Portfolio</a>
-    </nav>
+<a class="reader-skip" href="#main-content">Skip to the project document</a>
+<header class="site-header"><div class="container inner">
+  <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
+  <nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html">Requirements</a><a href="05-customer-data.html">Data &amp; SQL</a><a href="06-crm-design.html" aria-current="page">CRM Design</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav>
+</div></header>
+<main id="main-content" class="container paper reader-paper">
+  <a class="back" href="index.html#artefacts">← Project overview and all artefacts</a>
+  <div class="reader-intro">
+    <p class="eyebrow">Step 6 of 6 · Proposed design; build pending</p>
+    <h1>Artefact 006 — Proposed CRM Data &amp; Solution Design (MVP V1)</h1>
+    <p class="lead">The final published stage asks how the agreed exercise rules and proposed data structures could be represented in a small CRM demonstration.</p>
+    <p>CRM means customer relationship management. Here, the design considers records, fields, relationships, views and validation rules that could support the earlier enquiry requirements. Salesforce is a candidate platform for the future demonstration. The document compares options and records open decisions; it does not claim that those options have been configured or tested.</p>
+    <p class="reader-connection"><strong>Where this fits:</strong> Artefact 004 supplies the ownership and visibility requirements, and Artefact 005 supplies the exploratory customer-data work. This stage links them to a proposed minimum viable product: the smallest useful demonstration for the selected scope.</p>
+    <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. The original document's scope, assumptions and limitations are retained below. Reader explanations are labelled “In plain English”; they do not represent new findings, approvals or implementation evidence.</div>
+    <div class="actions"><a class="btn btn-primary" href="#full-artefact">Read full artefact ↓</a><a class="btn btn-outline" href="#on-this-page">Browse this document</a></div>
   </div>
-</header>
-<main class="container paper">
-  <a class="back" href="index.html#artefacts">← Back to project artefacts</a>
-  <div class="eyebrow" style="margin-top:28px">Artefact 006 · Proposed case-study design · CRM MVP V1</div>
-  <h1>Proposed CRM Data &amp; Solution Design</h1>
-  <p class="lead">Translating Northstar's scoped enquiry-management requirements into a practical, limited CRM demonstration plan — without claiming that any Salesforce configuration has been performed.</p>
-  <div class="status-row">
-    <span class="pill">Session 6 design prepared</span>
-    <span class="pill neutral">Design decisions still open</span>
-    <span class="pill neutral">No CRM build or UAT</span>
-  </div>
-  <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. Artefact 006 is an independent proposed solution design based on simulated requirements and synthetic examples. No real customer, stakeholder approval, Salesforce deployment, configured validation rule, executed UAT or measured outcome is claimed.</div>
+  <nav class="reader-journey" aria-label="Read the Northstar story in order"><a href="01-business-context.html"><span class="reader-step-number">01</span><span>Understand the problem</span></a><a href="02-stakeholder-plan.html"><span class="reader-step-number">02</span><span>Find the people and evidence</span></a><a href="03-process-gap-analysis.html"><span class="reader-step-number">03</span><span>Understand how work flows</span></a><a href="04-requirements-catalogue.html"><span class="reader-step-number">04</span><span>Specify what must happen</span></a><a href="05-customer-data.html"><span class="reader-step-number">05</span><span>Check the information</span></a><a href="06-crm-design.html" aria-current="step"><span class="reader-step-number">06</span><span>Propose the CRM design</span></a></nav>
+  <details class="reader-glossary">
+    <summary>New to business analysis or CRM? Open the plain-English glossary</summary>
+    <dl><dt>Artefact</dt><dd>A work product, such as a requirements document, process map or data analysis.</dd><dt>Business analyst (BA)</dt><dd>A person who investigates a business situation, clarifies needs and helps define and evaluate changes.</dd><dt>CRM</dt><dd>Customer relationship management: the processes and systems used to organise customer relationships and related information.</dd><dt>Customer 360</dt><dd>The idea of bringing relevant customer information together into a more consistent view; it is the project&#x27;s theme, rather than a completed product claim.</dd><dt>Enquiry / lead / prospect</dt><dd>An enquiry is an incoming request or expression of interest. A lead or prospect is a potential customer; the exact business definitions need agreement.</dd><dt>Stakeholder</dt><dd>Someone who affects the work, makes relevant decisions, or is affected by the proposed change.</dd><dt>Discovery / elicitation</dt><dd>Learning about the situation and drawing out needs through questions, observation, workshops or records.</dd><dt>Scenario fact / hypothesis</dt><dd>A scenario fact is supplied by the fictional brief. A hypothesis is a possible explanation still requiring evidence.</dd><dt>As-Is / To-Be</dt><dd>As-Is describes current working arrangements. To-Be describes a proposed future way of working.</dd><dt>Gap analysis</dt><dd>Comparing the current situation with the capability that would be needed, then identifying what must change.</dd><dt>Scope / baseline</dt><dd>Scope defines the boundaries of the work. A baseline is the selected reference version against which later changes are assessed.</dd><dt>Requirement</dt><dd>A statement of a capability, behaviour or quality needed to address a business or user need.</dd><dt>Business rule / functional requirement</dt><dd>A business rule sets a condition or restriction. A functional requirement describes system behaviour that supports the need or rule.</dd><dt>User story</dt><dd>A short explanation of who needs something, what they want and why it matters.</dd><dt>Acceptance criterion</dt><dd>A specific condition or example describing what an acceptable result would look like.</dd><dt>Traceability</dt><dd>Following a requirement back to its reason and forward to related design or verification work.</dd><dt>BO / GAP / SR / BR / FR / DR</dt><dd>Reference labels for business objective, gap, stakeholder requirement, business rule, functional requirement and data requirement.</dd><dt>BN / H / PP / NFR</dt><dd>Reference labels for business need, hypothesis, pain point and non-functional requirement. A non-functional requirement describes a quality the solution must meet, rather than a particular action.</dd><dt>REC / REV / REQ</dt><dd>REC-01 identifies a proposed reconciliation control; REV-01 identifies a proposed duplicate-review control. REQ references identify earlier learning exercises and do not add system features by themselves.</dd><dt>AS / AC / US / CR / OQ</dt><dd>Reference labels for assumption, acceptance criterion, user story, change request and open question.</dd><dt>DQ / VAL / D / T / Q</dt><dd>Reference labels for a data-quality finding, validation proposal, design decision, test scenario and SQL query.</dd><dt>Data model / entity / field</dt><dd>A data model describes information and relationships. An entity is a kind of record; a field is one piece of information stored about it.</dd><dt>Data dictionary</dt><dd>A reference explaining each field&#x27;s meaning, form and applicable rules.</dd><dt>Schema / type / mandatory</dt><dd>A schema is the organised structure of a database. A type describes the kind of value stored. Mandatory means a value is required under an agreed rule.</dd><dt>Data completeness / accuracy / consistency</dt><dd>Completeness asks whether required values are present; accuracy asks whether values are correct; consistency asks whether related information agrees.</dd><dt>Normalisation / deduplication / identity resolution</dt><dd>Here, normalisation can mean bringing values into a comparable form. Deduplication reviews and resolves duplicate records; identity resolution determines which records refer to the same real customer. None is claimed as implemented.</dd><dt>Identifier / reference / foreign key</dt><dd>An identifier distinguishes a record. A reference points to another record. A foreign-key constraint can enforce valid references; the diagnostic fixture deliberately omits that constraint.</dd><dt>NULL / nullable</dt><dd>NULL means no value is stored in the illustrated database field. Nullable means the field can have no stored value.</dd><dt>Customer ID / assigned owner</dt><dd>Customer ID identifies the customer linked to an enquiry. The assigned owner identifies the Sales representative responsible for it; these are different relationships.</dd><dt>SQL / SQLite</dt><dd>SQL is a language for asking questions of structured data. SQLite is the database engine used for the synthetic exercise.</dd><dt>SELECT / FROM / WHERE</dt><dd>SELECT chooses what a query returns, FROM names its starting table, and WHERE applies conditions to individual rows.</dd><dt>LEFT JOIN / INNER JOIN</dt><dd>LEFT JOIN keeps every row from the starting table while looking for matches. INNER JOIN keeps only matching rows.</dd><dt>COUNT / GROUP BY / HAVING / ORDER BY</dt><dd>COUNT counts rows; GROUP BY groups matching values; HAVING filters groups; ORDER BY sorts results.</dd><dt>CREATE / INSERT / DROP</dt><dd>In the practice SQL file, CREATE defines a table, INSERT adds sample records, and DROP removes an existing practice table before recreating it. The fixture is a repeatable synthetic exercise, not a production setup.</dd><dt>IF / AND / THEN / ELSE</dt><dd>IF introduces a condition; AND requires both conditions to hold; THEN states the result if they hold; ELSE states what happens otherwise.</dd><dt>Synthetic data / fixture / staging</dt><dd>Synthetic data is invented for practice. A fixture sets up a repeatable example. Staging data is an intermediate set of records being checked before use.</dd><dt>Reconciliation / duplicate signal</dt><dd>Reconciliation compares sources record by record. A duplicate signal flags possible repetition for review, without proving that records should be merged or deleted.</dd><dt>KPI / baseline measure / ROI</dt><dd>A KPI is a key performance indicator. A baseline measure describes the starting position. ROI means return on investment; no achieved ROI is claimed here.</dd><dt>MVP / UAT</dt><dd>MVP means minimum viable product, a limited useful demonstration. UAT means user acceptance testing, checking the solution against agreed user needs.</dd><dt>Salesforce object / mapping</dt><dd>An object is a platform structure for a type of record. Mapping decides how a business concept or field corresponds to that structure.</dd><dt>Lead / Account / Contact / Opportunity</dt><dd>Salesforce record types for a potential buyer, an organisation or account, a person, and a qualified sales deal. Their suitability for Northstar is still being evaluated.</dd><dt>Picklist / Lookup / Auto Number</dt><dd>A picklist offers a defined set of values. A Lookup links a record to another record. Auto Number can generate a record reference automatically.</dd><dt>Validation / automation / pseudocode</dt><dd>Validation checks whether an action or value is allowed. Automation performs an action. Pseudocode expresses intended logic in readable steps without being a deployed program.</dd><dt>API / integration / migration</dt><dd>An API is an interface through which systems exchange requests or data. Integration connects systems; migration moves information between them.</dd><dt>SOP / handoff / escalation</dt><dd>An SOP is a standard operating procedure, a documented way to carry out work. A handoff transfers work or information to another person or team. An escalation raises an unresolved issue for further attention.</dd><dt>Permission / least privilege / audit</dt><dd>A permission controls who may view or change something. Least privilege gives people only the access needed for their work. An audit record helps trace relevant actions or changes.</dd><dt>Assumption / dependency / decision gate</dt><dd>An assumption is provisionally taken as true; a dependency is something the work relies on; a decision gate is a point where a choice must be resolved before moving forward.</dd><dt>B2B / B2C / session</dt><dd>B2B serves businesses; B2C serves individual consumers. Session in these documents refers to a learning stage, not a claimed client meeting.</dd></dl>
+  </details>
+  <details id="on-this-page" class="reader-contents" open>
+    <summary>On this page — jump to any section</summary>
+    <nav aria-label="Document contents"><div class="toc">
+<ul>
+<li><a href="#1-executive-summary">1. Executive summary</a></li>
+<li><a href="#2-source-and-traceability-boundaries">2. Source and traceability boundaries</a></li>
+<li><a href="#3-logical-crm-model-deliberately-platform-neutral">3. Logical CRM model — deliberately platform-neutral</a><ul>
+<li><a href="#31-candidate-salesforce-object-mapping-not-selected-yet">3.1 Candidate Salesforce object mapping — not selected yet</a></li>
+</ul>
+</li>
+<li><a href="#4-field-design-candidate-dictionary">4. Field design — candidate dictionary</a></li>
+<li><a href="#5-existing-business-rules-proposed-behaviour">5. Existing business rules → proposed behaviour</a><ul>
+<li><a href="#51-br-004-rule-logic-not-a-configured-formula">5.1 BR-004 — rule logic, not a configured formula</a></li>
+</ul>
+</li>
+<li><a href="#6-design-decisions-conflicts-and-open-questions">6. Design decisions, conflicts and open questions</a></li>
+<li><a href="#7-proposed-verification-scenarios-not-executed">7. Proposed verification scenarios — NOT executed</a></li>
+<li><a href="#8-practical-mvp-build-order-and-evidence-plan">8. Practical MVP build order and evidence plan</a></li>
+<li><a href="#9-case-study-disposition">9. Case-study disposition</a></li>
+</ul>
+</div>
+</nav>
+  </details>
+  <section id="full-artefact" class="full-artefact" aria-labelledby="full-artefact-heading">
+    <h2 id="full-artefact-heading">Full artefact</h2>
+    <p class="reader-provenance">Read from top to bottom, or use the contents above. All original document sections, tables, examples and qualifications are included in their original order.</p>
+    <article class="document-content" data-source="docs/06-crm-data-and-solution-design.md" data-source-sha256="7b3cb12e62d2e60bdfb9216b51dbc64aa8b782cf3e6947a1445cec85ff7885e5">
+<p><strong>Project:</strong> Customer 360 — CRM Transformation &amp; Customer Data Integration<br/>
+<strong>Organisation:</strong> Northstar Services (Fictional)<br/>
+<strong>Document type:</strong> IT Business Analysis — CRM Design Options &amp; MVP Specification<br/>
+<strong>Version:</strong> 1.0 — Proposed Case-Study Design (platform decisions pending)<br/>
+<strong>Status:</strong> Proposed design artefact prepared; Salesforce object mapping, controls and workflow require further decisions; not configured or tested<br/>
+<strong>Prepared by:</strong> Varun Kumar Darbari<br/>
+<strong>Date:</strong> 15 November 2026</p>
+<blockquote>
+<p><strong>Project integrity:</strong> This is an independent <strong>fictional</strong> BA case study. No client engagement, stakeholder approval, Salesforce configuration, production records, implemented validation, executed UAT or realised business outcome is claimed. The exercises and decisions below are proposed design choices for a future demonstration, not evidence that a CRM has been built.</p>
+</blockquote>
+<hr/>
+<h2 id="1-executive-summary">1. Executive summary</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This is the proposed design in brief. MVP means minimum viable product: a limited demonstration focused on the selected enquiry behaviours, rather than a full enterprise CRM.</p></aside>
+<p>Northstar's simulated management concerns involve fragmented customer information, inconsistent enquiry follow-ups and reporting challenges. Artefacts 001–003 frame the problem and possible process gaps. Artefact 004 defines a <strong>bounded, author-selected fictional requirements baseline</strong> for Sales enquiry ownership and visibility. Artefact 005 investigates a limited Customer–Enquiry data model and data-quality exceptions using synthetic SQL records.</p>
+<p>This document translates those existing requirements into a <strong>proposed CRM design for a limited MVP V1 demonstration</strong>. It identifies logical entities, candidate Salesforce object mappings, field choices, relationships, validations, manager views, design decisions still open and a test plan. The objective is not to create a full enterprise CRM architecture or rewrite prior requirements.</p>
+<p><strong>Recommended MVP boundary:</strong> capture and view synthetic Sales enquiries; optionally associate a customer record while identity is being confirmed (subject to decision D-01); maintain business-assigned Sales ownership; show the three scoped enquiry lists; and demonstrate BR-004's status-transition restriction. CRM configuration is the next workstream, <strong>not a completed output of Session 6</strong>.</p>
+<h2 id="2-source-and-traceability-boundaries">2. Source and traceability boundaries</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>These links identify which earlier requirements and findings the design must respect. Reusing an identifier does not turn a proposed rule into an approved or implemented one.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Existing anchor</th>
+<th>Relevance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01-business-context.html">Artefact 001</a></td>
+<td>BO-01, BO-02</td>
+<td>Customer-data consistency; ownership and follow-up visibility</td>
+</tr>
+<tr>
+<td><a href="03-process-gap-analysis.html">Artefact 003</a></td>
+<td>GAP-01, GAP-02</td>
+<td>Candidate information and enquiry-management gaps</td>
+</tr>
+<tr>
+<td><a href="04-requirements-catalogue.html">Artefact 004</a></td>
+<td>AS-01–AS-06; BR-001–BR-004; FR-001–FR-005; DR-001–DR-003</td>
+<td>Existing <strong>simulated</strong> baseline; do not silently change it</td>
+</tr>
+<tr>
+<td><a href="05-customer-data.html">Artefact 005</a></td>
+<td>Customer–Enquiry logical model; VAL-01–VAL-03; DQ-01–DQ-04</td>
+<td>Earlier exploratory data model and <strong>candidate</strong> controls; not approved</td>
+</tr>
+<tr>
+<td>Session 6 design assessment</td>
+<td>6.10A and 6.11</td>
+<td>Learner's initial design recommendations; treated as analysis, not approvals</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Not in this phase:</strong> actual customer interviews, sign-off, APIs/Postman, production integrations, data migration, dashboards, full customer identity resolution, automated notifications, service/support configuration, completed user-access security model, executed UAT or live benefits.</p>
+<h2 id="3-logical-crm-model-deliberately-platform-neutral">3. Logical CRM model — deliberately platform-neutral</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>An entity is a kind of thing the business records, such as a customer or enquiry. A Salesforce object is a platform representation of records. The mapping between those ideas is still a design decision.</p></aside>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-text">CUSTOMER (illustrative logical entity)
+  customer_id (logical unique key)
+  name
+  phone (mandatory? not decided)
+       1
+       | optional association for an unconfirmed enquiry [D-01 pending]
+       | 0..many enquiries per customer
+       v
+SALES ENQUIRY (logical entity)
+  enquiry_id (unique; DR-001)
+  customer_id (possibly NULL under proposed MVP option; D-01)
+  status (maintained; DR-002)
+  assigned_owner_id (may be NULL; DR-003 / AS-02)
+  description (candidate)
+  next_follow_up_date (candidate)
+       |
+       | business assignment (not customer identification)
+       v
+SALES REPRESENTATIVE / USER (mapping to be selected)
+</code></pre>
+<p>A valid customer may be linked to many enquiries. An enquiry has <strong>at most one customer</strong> in the proposed logical model. The optional customer link is a <strong>new MVP candidate</strong>, not an approved replacement for Artefact 005's candidate VAL-01. The Sales representative relationship is logically separate. This sketch does <strong>not</strong> assert that a Customer custom object, Enquiry custom object, or any Salesforce relationship has been built.</p>
+<h3 id="31-candidate-salesforce-object-mapping-not-selected-yet">3.1 Candidate Salesforce object mapping — not selected yet</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Business concept</th>
+<th>Candidate Salesforce mapping</th>
+<th>Analysis needed before selection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unqualified potential buyer</td>
+<td><strong>Lead</strong> standard object</td>
+<td>Does a website enquiry describe a prospect, a service request, or another type of record?</td>
+</tr>
+<tr>
+<td>Organisational customer and individual</td>
+<td><strong>Account</strong> and <strong>Contact</strong> standard objects, as appropriate</td>
+<td>B2B/B2C model, first-time customers, matching and relationships</td>
+</tr>
+<tr>
+<td>Qualified sales deal</td>
+<td><strong>Opportunity</strong> standard object</td>
+<td>What qualification event creates a deal? Not every enquiry warrants an Opportunity</td>
+</tr>
+<tr>
+<td>Sales enquiry with scoped owner/status rules</td>
+<td>Evaluate <strong>Lead</strong> versus a dedicated <strong>Enquiry custom object</strong> (and appropriate customer reference)</td>
+<td>Can standard features support FR-001–FR-005 without an unnecessary custom object? Are there support or non-sales enquiries?</td>
+</tr>
+<tr>
+<td>Sales representative responsible for an enquiry</td>
+<td>Appropriate <strong>User/representative reference</strong>, potentially a separate business assignment field</td>
+<td>Do not assume Salesforce's built-in <code>OwnerId</code> is identical to the case-study's <strong>nullable</strong> <code>assigned_owner_id</code>; access/ownership behaviour must be analysed</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Decision gate before build:</strong> select one concrete Salesforce object model and document any deviation from the logical model, including the implications for nullable assignment. Salesforce standard-object mappings are <strong>candidates</strong>, not implementation claims.</p>
+<h2 id="4-field-design-candidate-dictionary">4. Field design — candidate dictionary</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The dictionary proposes how each piece of information might be stored. A field type describes the form of the value, such as a date or picklist; the qualifications explain what still needs agreement.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Logical field</th>
+<th>Suggested Salesforce representation</th>
+<th>Rule / qualification</th>
+<th>Traceability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enquiry_id</code></td>
+<td>Unique identifier, e.g., Auto Number or a uniquely constrained external reference as appropriate</td>
+<td>Required and unique; decide how imported identifiers map</td>
+<td>DR-001; VAL-03 candidate</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Picklist with reviewed status values</td>
+<td>Need definitions and allowed transitions; <code>New</code>, <code>Contacted</code>, <code>Closed</code>, <code>Open</code>, <code>In Progress</code> appear in synthetic examples, not an approved production lifecycle</td>
+<td>DR-002; BR-001, BR-003, BR-004</td>
+</tr>
+<tr>
+<td><code>assigned_owner_id</code></td>
+<td>Reference to selected Sales rep / user, allowing unset value in the <strong>logical business field</strong></td>
+<td>May be NULL at initial stage. Separate from Salesforce's platform record ownership until mapping is confirmed</td>
+<td>DR-003; AS-02; BR-001, BR-002, BR-004</td>
+</tr>
+<tr>
+<td><code>customer_id</code></td>
+<td>Candidate optional Lookup to chosen customer entity</td>
+<td>Permits identity-pending enquiry <strong>only if D-01 is adopted</strong>. Referring to a nonexistent record is a different issue from NULL</td>
+<td>Artefact 005; D-01</td>
+</tr>
+<tr>
+<td><code>next_follow_up_date</code></td>
+<td>Date; consider Date/Time if precise time is required</td>
+<td>New candidate, not part of Artefact 004 baseline or a reminder-automation commitment</td>
+<td>Session 6 design exercise</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Text Area or Long Text Area depending on expected content length</td>
+<td>New candidate, length/format/privacy requirements unconfirmed</td>
+<td>Session 6 design exercise</td>
+</tr>
+<tr>
+<td>Customer contact details</td>
+<td>Suitable Salesforce contact fields, subject to mapping</td>
+<td>Do not assume phone is mandatory; check channel and privacy rules</td>
+<td>Artefact 005 VAL-02 candidate</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note:</strong> Salesforce-specific API field names, object IDs, field permissions and configurations will be chosen during Session 7. No actual picklist, Lookup or validation rule has been created here.</p>
+<h2 id="5-existing-business-rules-proposed-behaviour">5. Existing business rules → proposed behaviour</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Each row translates an existing requirement into intended CRM behaviour. Assigning an owner does not automatically change enquiry status. The rule sketch is pseudocode: readable decision logic, not a configured Salesforce formula.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Intended CRM behaviour / design check</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BR-001 / FR-001</td>
+<td><strong>New Unassigned Enquiries:</strong> status exactly <code>New</code> <strong>AND</strong> business owner unset</td>
+<td>Both conditions required; manager-authorised view</td>
+</tr>
+<tr>
+<td>BR-002 / FR-002</td>
+<td><strong>My Assigned Enquiries:</strong> for signed-in rep, all enquiries with matching business owner, <strong>including <code>Closed</code></strong></td>
+<td>Do not accidentally filter out Closed from this view</td>
+</tr>
+<tr>
+<td>BR-003 / FR-003</td>
+<td><strong>Active Enquiry List:</strong> omit enquiries with status <code>Closed</code></td>
+<td><code>Open</code> is not the only eligible status</td>
+</tr>
+<tr>
+<td>FR-004</td>
+<td>Show owner's identity or the display text <code>Unassigned</code> when business owner missing</td>
+<td>Display label is not an actual rep or stored ID</td>
+</tr>
+<tr>
+<td>BR-004 / FR-005</td>
+<td>Prevent <code>New</code> → <code>Contacted</code> <strong>when assigned owner is unset</strong></td>
+<td>Must check the <strong>requested transition</strong>; assigning an owner does <strong>not</strong> automatically change status</td>
+</tr>
+<tr>
+<td>DR-001</td>
+<td>Maintain a unique enquiry identifier</td>
+<td>Map synthetic IDs separately from Salesforce record IDs</td>
+</tr>
+<tr>
+<td>AS-06</td>
+<td>Permit manager views and rep's own assigned view only under documented role assumptions</td>
+<td>Full access model and least-privilege verification are deferred</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="51-br-004-rule-logic-not-a-configured-formula">5.1 BR-004 — rule logic, not a configured formula</h3>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-text">IF current_status = "New"
+   AND requested_status = "Contacted"
+   AND assigned_owner_id is unset
+THEN reject the requested status transition
+     with an actionable message:
+     "Assign a Sales representative before changing this enquiry to Contacted."
+ELSE BR-004 alone does not block the action.
+</code></pre>
+<p><strong>No automatic status update:</strong> assigning REP-01 satisfies one prerequisite only. A separate authorised status-change action must still occur, and other defined rules (if any) may apply. This is pseudocode for business analysis, not a verified Salesforce validation formula. Exact platform logic and behaviour on record creation, imports and bulk operations will be tested after mapping.</p>
+<h2 id="6-design-decisions-conflicts-and-open-questions">6. Design decisions, conflicts and open questions</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Open decisions identify choices that must be resolved before build. D-01 considers temporarily missing customer identity; this is a new option and does not rewrite the earlier candidate Customer ID rule.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Question / tension</th>
+<th>Proposed disposition for MVP planning</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-01</td>
+<td>Artefact 005 proposed VAL-01: valid Customer ID for new enquiries. Session 6 exercise wants enquiries <strong>temporarily without</strong> an identified customer.</td>
+<td>Evaluate allowing <strong>NULL customer link</strong> during an identity-pending stage. A non-null ID that points to no customer remains an unmatched-reference problem. If selected, record the deliberate exception and update the data rule and acceptance criteria in a new workstream; <strong>do not retroactively change VAL-01 or Artefact 004</strong>.</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr>
+<td>D-02</td>
+<td>Which Salesforce object actually represents Sales Enquiry?</td>
+<td>Compare Lead and custom Enquiry object against current FR-001–FR-005 and future requirements; select one after environment review.</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr>
+<td>D-03</td>
+<td>How is nullable <em>business-assigned</em> representative represented when Salesforce itself has a mandatory platform Owner?</td>
+<td>Keep a separate logical assignment from technical record ownership unless a defensible mapping is demonstrated.</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr>
+<td>D-04</td>
+<td>Should status picklist contain all synthetic statuses or fewer?</td>
+<td>Confirm lifecycle, transition conditions and reporting meanings.</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr>
+<td>D-05</td>
+<td>What happens to enquiries when customer links are removed, accounts merged, or customers deleted?</td>
+<td>Determine retention, privacy, lookup deletion behaviour and audit treatment before configuring.</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr>
+<td>D-06</td>
+<td>Are next follow-up date and description required now?</td>
+<td>Treat as candidate fields; avoid quietly adding reminders or automation to FR-001–FR-005.</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr>
+<td>D-07</td>
+<td>Who may assign owners and edit status?</td>
+<td>Clarify permissions and workflow separately from BR-004; do not infer a full security model from AS-06.</td>
+<td><strong>Open</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7-proposed-verification-scenarios-not-executed">7. Proposed verification scenarios — NOT executed</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>These scenarios state inputs and expected outcomes for future checks. Expected results are test specifications; there are no executed CRM or UAT results in this document.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Test ID</th>
+<th>Input / action</th>
+<th>Expected result under <em>existing</em> requirements</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-01</td>
+<td>Manager opens New Unassigned view; include <code>New</code> + no owner and also a non-<code>New</code> unassigned record</td>
+<td>Only records satisfying <strong>both</strong> <code>New</code> and no owner appear</td>
+<td>FR-001 / BR-001</td>
+</tr>
+<tr>
+<td>T-02</td>
+<td>Rep A opens My Assigned; has one <code>Open</code> and one <code>Closed</code> enquiry</td>
+<td>Both owned records appear; another rep's enquiries do not</td>
+<td>FR-002 / BR-002</td>
+</tr>
+<tr>
+<td>T-03</td>
+<td>Manager opens Active Enquiry List containing <code>Open</code>, <code>In Progress</code>, and <code>Closed</code></td>
+<td><code>Closed</code> excluded; non-Closed entries included; missing owners displayed <code>Unassigned</code></td>
+<td>FR-003 / FR-004 / BR-003</td>
+</tr>
+<tr>
+<td>T-04</td>
+<td><code>New</code>, no assigned owner: user requests <code>Contacted</code></td>
+<td>Reject transition with actionable message; keep previous status</td>
+<td>FR-005 / BR-004</td>
+</tr>
+<tr>
+<td>T-05</td>
+<td><code>New</code>, no assigned owner: manager assigns REP-01 without requesting a status change</td>
+<td>Owner populated; status remains <code>New</code></td>
+<td>AS-05</td>
+</tr>
+<tr>
+<td>T-06</td>
+<td><code>New</code>, REP-01 assigned: user requests <code>Contacted</code></td>
+<td>BR-004 <strong>alone</strong> does not block; other rules/permissions remain to be determined</td>
+<td>BR-004</td>
+</tr>
+<tr>
+<td>T-07</td>
+<td>Synthetic staging enquiry has <code>customer_id = C-999</code> with no matching customer</td>
+<td>Detect/review unmatched reference; do not assert a Salesforce Lookup permits an invalid linked record</td>
+<td>Artefact 005 DQ-02</td>
+</tr>
+<tr>
+<td>T-08</td>
+<td>Synthetic identity-pending enquiry has no Customer ID</td>
+<td>If <strong>D-01</strong> chosen, retain as a documented provisional workflow; otherwise treat as a deferred exception</td>
+<td>D-01 / Artefact 005 VAL-01</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are <strong>test specifications only</strong>. They are not screenshots, executed test evidence or UAT results. Use Artefact 004's authoritative sample expectations when building the views and status transition checks.</p>
+<h2 id="8-practical-mvp-build-order-and-evidence-plan">8. Practical MVP build order and evidence plan</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The build order explains how a future demonstration could proceed and what evidence would count as done. The definition of done has not yet been met.</p></aside>
+<ol>
+<li><strong>Decide object and ownership mappings</strong> (D-02/D-03); review free Salesforce environment and supported configuration.</li>
+<li><strong>Create/configure a limited data structure</strong> (object(s), unique enquiry key, status values, business-owner reference, optional customer link if D-01 adopted).</li>
+<li><strong>Load synthetic examples</strong>, clearly distinguishing allowed CRM records from deliberately invalid <em>staging</em> data used in Artefact 005.</li>
+<li><strong>Implement three scoped views</strong> consistent with FR-001 to FR-004.</li>
+<li><strong>Implement BR-004</strong> precisely; verify it does not create automatic status changes.</li>
+<li><strong>Run and record tests T-01–T-06</strong> (and data-exception tests once D-01 is resolved); capture reproducible steps and actual pass/fail evidence.</li>
+<li><strong>Publish demonstration evidence and a retrospective</strong> with explicit limits and any deviations from the proposed model.</li>
+</ol>
+<p><strong>Definition of done for the future MVP:</strong> a configured demonstration with synthetic records, reproducible evidence for the selected scope, documented actual test results, screenshots or equivalent proof, and published limitations. This definition of done is <strong>not yet met</strong>.</p>
+<h2 id="9-case-study-disposition">9. Case-study disposition</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This closing note records the document's status when written. Making the analysis available on the website does not complete the CRM configuration, decisions or tests listed here.</p></aside>
+<p><strong>Completed in Session 6:</strong> introductory CRM design learning; the user's final 6.11 assessment; preparation of this proposed design artefact linking requirements to candidate objects, field types, relationship design and verification scenarios.</p>
+<p><strong>Not yet complete:</strong> final object mapping, decisions D-01–D-07, Salesforce setup or configuration, functional tests, live publication, stakeholder approval or any measurable business result.</p>
+<p><strong>Next activity:</strong> publish this proposed design with its open decisions clearly identified, then resolve the build-blocking decisions for the MVP before configuration. The project's CV/LinkedIn description should not claim CRM implementation until configuration evidence is produced.</p>
+<hr/>
+<p><strong>Related sources:</strong> <a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/README.md" rel="noopener noreferrer" target="_blank">README</a> · <a href="04-requirements-catalogue.html">Artefact 004</a> · <a href="05-customer-data.html">Artefact 005</a><br/>
+<strong>Salesforce platform references:</strong> <a href="https://trailhead.salesforce.com/content/learn/modules/custom-fields-quick-look/create-a-custom-field" rel="noopener noreferrer" target="_blank">Salesforce Trailhead — Create a Custom Field</a> · <a href="https://help.salesforce.com/s/articleView?id=fields_validation_considerations.htm&amp;language=en_US&amp;type=0" rel="noopener noreferrer" target="_blank">Salesforce Help — Validation Rule Considerations</a></p></article>
+  </section>
 
-  <h2>Purpose and MVP boundary</h2>
-  <p>Earlier <a href="04-requirements-catalogue.html">requirements work</a> defined a deliberately bounded scope for enquiry ownership and visibility; the <a href="05-customer-data.html">data analysis</a> examined synthetic customer–enquiry records. This design connects those findings to candidate CRM objects, fields, relationships, views, validations and future test scenarios.</p>
-  <div class="grid-2">
-    <article class="card"><span class="label-note">Proposed MVP V1</span><h3>What we plan to demonstrate</h3><p>Capture synthetic Sales enquiries, maintain business-assigned owners, support scoped manager/representative views and enforce the New → Contacted ownership prerequisite.</p></article>
-    <article class="card"><span class="label-note">Not part of this evidence</span><h3>What has not been built</h3><p>No Salesforce object configuration, integrations, API calls, reminders, dashboards, executed tests, live customer records or production environment.</p></article>
-  </div>
-
-  <h2>Logical entities and relationships</h2>
-  <div class="grid-2">
-    <article class="card"><span class="label-note">Logical entity 1</span><h3>Customer</h3><p><code>customer_id</code> — stable unique reference</p><p><code>name</code> — customer label</p><p><code>phone</code> — contact number; mandatory rule unresolved</p></article>
-    <article class="card"><span class="label-note">Logical entity 2</span><h3>Sales Enquiry</h3><p><code>enquiry_id</code> — unique reference</p><p><code>customer_id</code> — proposed optional customer association</p><p><code>status</code> — enquiry lifecycle value</p><p><code>assigned_owner_id</code> — potentially unset business assignment</p></article>
-  </div>
-  <p class="model-arrow"><span>One Customer → Zero or many linked Enquiries</span></p>
-  <p>Each enquiry can reference <strong>at most one</strong> customer in this logical model. An <strong>optional Lookup</strong> is a candidate Salesforce relationship if Northstar explicitly adopts an identity-pending enquiry workflow. This remains an open decision (<strong>D-01</strong>), not a silently approved change to Artefact 005's candidate <strong>VAL-01</strong>.</p>
-  <div class="notice"><strong>Two different relationships:</strong> <code>customer_id</code> identifies the associated customer; <code>assigned_owner_id</code> identifies the responsible Sales representative. Missing ownership does not automatically break a valid customer link. Salesforce platform record ownership also must not be assumed equivalent to the nullable <em>business assignment</em> field.</div>
-
-  <h2>Candidate Salesforce object mapping</h2>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Business concept</th><th>Possible Salesforce object</th><th>Decision to investigate</th></tr></thead>
-    <tbody>
-      <tr><td>Unqualified potential buyer</td><td>Lead</td><td>Are website submissions prospects, support requests or another kind of enquiry?</td></tr>
-      <tr><td>Company and individual contact</td><td>Account and Contact</td><td>What customer model and identification process are needed?</td></tr>
-      <tr><td>Qualified potential sale</td><td>Opportunity</td><td>What qualification criteria create an actual sales deal?</td></tr>
-      <tr><td>Sales Enquiry</td><td>Evaluate Lead vs custom Enquiry</td><td>Which mapping meets FR-001–FR-005 with appropriate ownership and status behaviour?</td></tr>
-      <tr><td>Assigned Sales representative</td><td>User or separate representative reference</td><td>How can nullable business assignment coexist with Salesforce platform record ownership?</td></tr>
-    </tbody>
-  </table></div>
-  <p class="small">Object mappings are alternatives under investigation. This document does not claim a custom Enquiry object was selected or created.</p>
-
-  <h2>Candidate field dictionary</h2>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Logical field</th><th>Possible representation</th><th>Business treatment</th></tr></thead>
-    <tbody>
-      <tr><td><code>enquiry_id</code></td><td>Unique identifier</td><td>Required, unique per DR-001; Salesforce ID mapping to decide</td></tr>
-      <tr><td><code>status</code></td><td>Picklist</td><td>Values and permitted transitions require lifecycle definition</td></tr>
-      <tr><td><code>assigned_owner_id</code></td><td>Nullable business-assignment reference</td><td>Can be unassigned under AS-02; not necessarily Salesforce OwnerId</td></tr>
-      <tr><td><code>customer_id</code></td><td>Candidate optional Lookup</td><td>Identity-pending exceptions require decision D-01</td></tr>
-      <tr><td><code>next_follow_up_date</code></td><td>Date; consider Date/Time</td><td>Candidate additional field, not a reminder automation commitment</td></tr>
-      <tr><td><code>description</code></td><td>Text Area or Long Text Area</td><td>Length, content and privacy requirements unconfirmed</td></tr>
-    </tbody>
-  </table></div>
-
-  <h2>Business rules mapped to proposed CRM behaviour</h2>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Requirement</th><th>Proposed behaviour</th></tr></thead>
-    <tbody>
-      <tr><td>BR-001 / FR-001</td><td>New Unassigned view shows enquiries with <strong>status = New AND business owner unset</strong>.</td></tr>
-      <tr><td>BR-002 / FR-002</td><td>My Assigned Enquiries includes all records assigned to the signed-in representative, <strong>including Closed</strong>.</td></tr>
-      <tr><td>BR-003 / FR-003</td><td>Active Enquiry List excludes <strong>Closed</strong> records; Open is not the only eligible non-Closed status.</td></tr>
-      <tr><td>FR-004</td><td>Show owner identity or the display label <strong>Unassigned</strong>.</td></tr>
-      <tr><td>BR-004 / FR-005</td><td>Reject a requested <strong>New → Contacted</strong> transition when business owner is unset.</td></tr>
-    </tbody>
-  </table></div>
-  <h3>BR-004 — business-rule pseudocode</h3>
-  <pre class="rule"><code>IF current_status = "New"
+  <section class="reader-continuation" aria-labelledby="next-in-story">
+    <p class="eyebrow">Continue the story</p>
+    <h2 id="next-in-story">What remains to be built and verified</h2>
+    <p>The story currently ends at proposed design. The next work is to resolve the open object, ownership and workflow decisions, then configure a demonstration and record actual test evidence. Integrations and reporting remain later work where applicable.</p>
+    <nav class="reader-page-links" aria-label="Previous and next artefacts"><a href="05-customer-data.html">← Previous: Check the information</a><a href="index.html#roadmap">View the development roadmap →</a></nav>
+  </section>
+  <section class="reader-source-links" aria-labelledby="supporting-source">
+    <h2 id="supporting-source">Supporting source</h2>
+    <p>The complete document is readable above. The source link provides the Markdown version and its GitHub history.</p>
+    <p><a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/06-crm-data-and-solution-design.md" target="_blank" rel="noopener noreferrer">View source document on GitHub ↗</a></p>
+  </section>
+  <details id="preserved-overview" class="preserved-overview">
+    <summary>Optional: earlier website overview and worked examples</summary>
+    <p class="reader-provenance">This preserves the earlier web presentation in addition to the full document above. Its document text and examples have been retained.</p>
+    <div class="original-overview">
+<a class="back" href="index.html#artefacts">← Back to project artefacts</a>
+<div class="eyebrow" style="margin-top:28px">Artefact 006 · Proposed case-study design · CRM MVP V1</div>
+<h2>Proposed CRM Data &amp; Solution Design</h2>
+<p class="lead">Translating Northstar's scoped enquiry-management requirements into a practical, limited CRM demonstration plan — without claiming that any Salesforce configuration has been performed.</p>
+<div class="status-row">
+<span class="pill">Session 6 design prepared</span>
+<span class="pill neutral">Design decisions still open</span>
+<span class="pill neutral">No CRM build or UAT</span>
+</div>
+<div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. Artefact 006 is an independent proposed solution design based on simulated requirements and synthetic examples. No real customer, stakeholder approval, Salesforce deployment, configured validation rule, executed UAT or measured outcome is claimed.</div>
+<h3>Purpose and MVP boundary</h3>
+<p>Earlier <a href="04-requirements-catalogue.html">requirements work</a> defined a deliberately bounded scope for enquiry ownership and visibility; the <a href="05-customer-data.html">data analysis</a> examined synthetic customer–enquiry records. This design connects those findings to candidate CRM objects, fields, relationships, views, validations and future test scenarios.</p>
+<div class="grid-2">
+<article class="card"><span class="label-note">Proposed MVP V1</span><h4>What we plan to demonstrate</h4><p>Capture synthetic Sales enquiries, maintain business-assigned owners, support scoped manager/representative views and enforce the New → Contacted ownership prerequisite.</p></article>
+<article class="card"><span class="label-note">Not part of this evidence</span><h4>What has not been built</h4><p>No Salesforce object configuration, integrations, API calls, reminders, dashboards, executed tests, live customer records or production environment.</p></article>
+</div>
+<h3>Logical entities and relationships</h3>
+<div class="grid-2">
+<article class="card"><span class="label-note">Logical entity 1</span><h4>Customer</h4><p><code>customer_id</code> — stable unique reference</p><p><code>name</code> — customer label</p><p><code>phone</code> — contact number; mandatory rule unresolved</p></article>
+<article class="card"><span class="label-note">Logical entity 2</span><h4>Sales Enquiry</h4><p><code>enquiry_id</code> — unique reference</p><p><code>customer_id</code> — proposed optional customer association</p><p><code>status</code> — enquiry lifecycle value</p><p><code>assigned_owner_id</code> — potentially unset business assignment</p></article>
+</div>
+<p class="model-arrow"><span>One Customer → Zero or many linked Enquiries</span></p>
+<p>Each enquiry can reference <strong>at most one</strong> customer in this logical model. An <strong>optional Lookup</strong> is a candidate Salesforce relationship if Northstar explicitly adopts an identity-pending enquiry workflow. This remains an open decision (<strong>D-01</strong>), not a silently approved change to Artefact 005's candidate <strong>VAL-01</strong>.</p>
+<div class="notice"><strong>Two different relationships:</strong> <code>customer_id</code> identifies the associated customer; <code>assigned_owner_id</code> identifies the responsible Sales representative. Missing ownership does not automatically break a valid customer link. Salesforce platform record ownership also must not be assumed equivalent to the nullable <em>business assignment</em> field.</div>
+<h3>Candidate Salesforce object mapping</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Business concept</th><th>Possible Salesforce object</th><th>Decision to investigate</th></tr></thead>
+<tbody>
+<tr><td>Unqualified potential buyer</td><td>Lead</td><td>Are website submissions prospects, support requests or another kind of enquiry?</td></tr>
+<tr><td>Company and individual contact</td><td>Account and Contact</td><td>What customer model and identification process are needed?</td></tr>
+<tr><td>Qualified potential sale</td><td>Opportunity</td><td>What qualification criteria create an actual sales deal?</td></tr>
+<tr><td>Sales Enquiry</td><td>Evaluate Lead vs custom Enquiry</td><td>Which mapping meets FR-001–FR-005 with appropriate ownership and status behaviour?</td></tr>
+<tr><td>Assigned Sales representative</td><td>User or separate representative reference</td><td>How can nullable business assignment coexist with Salesforce platform record ownership?</td></tr>
+</tbody>
+</table></div>
+<p class="small">Object mappings are alternatives under investigation. This document does not claim a custom Enquiry object was selected or created.</p>
+<h3>Candidate field dictionary</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Logical field</th><th>Possible representation</th><th>Business treatment</th></tr></thead>
+<tbody>
+<tr><td><code>enquiry_id</code></td><td>Unique identifier</td><td>Required, unique per DR-001; Salesforce ID mapping to decide</td></tr>
+<tr><td><code>status</code></td><td>Picklist</td><td>Values and permitted transitions require lifecycle definition</td></tr>
+<tr><td><code>assigned_owner_id</code></td><td>Nullable business-assignment reference</td><td>Can be unassigned under AS-02; not necessarily Salesforce OwnerId</td></tr>
+<tr><td><code>customer_id</code></td><td>Candidate optional Lookup</td><td>Identity-pending exceptions require decision D-01</td></tr>
+<tr><td><code>next_follow_up_date</code></td><td>Date; consider Date/Time</td><td>Candidate additional field, not a reminder automation commitment</td></tr>
+<tr><td><code>description</code></td><td>Text Area or Long Text Area</td><td>Length, content and privacy requirements unconfirmed</td></tr>
+</tbody>
+</table></div>
+<h3>Business rules mapped to proposed CRM behaviour</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Requirement</th><th>Proposed behaviour</th></tr></thead>
+<tbody>
+<tr><td>BR-001 / FR-001</td><td>New Unassigned view shows enquiries with <strong>status = New AND business owner unset</strong>.</td></tr>
+<tr><td>BR-002 / FR-002</td><td>My Assigned Enquiries includes all records assigned to the signed-in representative, <strong>including Closed</strong>.</td></tr>
+<tr><td>BR-003 / FR-003</td><td>Active Enquiry List excludes <strong>Closed</strong> records; Open is not the only eligible non-Closed status.</td></tr>
+<tr><td>FR-004</td><td>Show owner identity or the display label <strong>Unassigned</strong>.</td></tr>
+<tr><td>BR-004 / FR-005</td><td>Reject a requested <strong>New → Contacted</strong> transition when business owner is unset.</td></tr>
+</tbody>
+</table></div>
+<h4>BR-004 — business-rule pseudocode</h4>
+<pre class="rule"><code>IF current_status = "New"
    AND requested_status = "Contacted"
    AND assigned_owner_id is unset
 THEN reject the requested transition;
      prompt: "Assign a Sales representative before changing
               this enquiry to Contacted."
 ELSE BR-004 alone does not block the action.</code></pre>
-  <p><strong>Validation is not automation.</strong> Assigning a Sales representative does not automatically change an enquiry's status. A separate authorised action must request that status change. This logic is <em>not</em> a deployed or tested Salesforce formula.</p>
-
-  <h2>Design decisions before configuration</h2>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Decision</th><th>Open question</th></tr></thead>
-    <tbody>
-      <tr><td>D-01</td><td>Should a new enquiry be temporarily allowed without a confirmed Customer ID, despite candidate VAL-01?</td></tr>
-      <tr><td>D-02</td><td>Should Sales Enquiry use the Lead object or a dedicated custom object?</td></tr>
-      <tr><td>D-03</td><td>How is nullable business-assigned ownership represented separately from Salesforce platform ownership?</td></tr>
-      <tr><td>D-04</td><td>Which status values, meanings and transitions are in scope?</td></tr>
-      <tr><td>D-05</td><td>What should happen if a customer record is deleted, merged or unlinked?</td></tr>
-      <tr><td>D-06</td><td>Which additional fields are required for the MVP?</td></tr>
-      <tr><td>D-07</td><td>Who can assign owners, edit statuses and access particular views?</td></tr>
-    </tbody>
-  </table></div>
-  <p>No open item is represented as approved. Earlier requirements remain unchanged; any selected changes must be recorded explicitly.</p>
-
-  <h2>Future verification plan — not executed</h2>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Scenario</th><th>Expected result</th></tr></thead>
-    <tbody>
-      <tr><td>T-01 · New Unassigned</td><td>Show only New enquiries with no business-assigned owner.</td></tr>
-      <tr><td>T-02 · My Assigned</td><td>Show the signed-in representative's enquiries, including Closed.</td></tr>
-      <tr><td>T-03 · Active Enquiry List</td><td>Exclude Closed; show Unassigned where relevant.</td></tr>
-      <tr><td>T-04 · New → Contacted with no owner</td><td>Block the requested change with an actionable message.</td></tr>
-      <tr><td>T-05 · Assign owner only</td><td>Store owner; keep status New.</td></tr>
-      <tr><td>T-06 · New → Contacted with owner</td><td>BR-004 alone does not block; other controls still apply.</td></tr>
-      <tr><td>T-07 / T-08 · Customer-link exceptions</td><td>Investigate invalid staged references and provisional identity-pending enquiries; behaviour depends on D-01.</td></tr>
-    </tbody>
-  </table></div>
-  <p class="small">These are test specifications, not actual test results, Salesforce screenshots or evidence of executed UAT.</p>
-
-  <h2>Completion boundary and next work</h2>
-  <p><strong>Completed for Session 6:</strong> a proposed, traceable CRM design and bounded MVP verification plan. <strong>Still pending:</strong> selecting object mappings, resolving D-01–D-07, hands-on configuration and recording actual outcomes of the tests.</p>
-  <p><a class="btn btn-primary" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/06-crm-data-and-solution-design.md" target="_blank" rel="noopener noreferrer">Read complete Artefact 006 ↗</a></p>
-  <p class="small">Related work: <a href="04-requirements-catalogue.html">Requirements</a> · <a href="05-customer-data.html">Customer Data &amp; SQL</a> · <a href="index.html#roadmap">Project roadmap</a>.</p>
+<p><strong>Validation is not automation.</strong> Assigning a Sales representative does not automatically change an enquiry's status. A separate authorised action must request that status change. This logic is <em>not</em> a deployed or tested Salesforce formula.</p>
+<h3>Design decisions before configuration</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Decision</th><th>Open question</th></tr></thead>
+<tbody>
+<tr><td>D-01</td><td>Should a new enquiry be temporarily allowed without a confirmed Customer ID, despite candidate VAL-01?</td></tr>
+<tr><td>D-02</td><td>Should Sales Enquiry use the Lead object or a dedicated custom object?</td></tr>
+<tr><td>D-03</td><td>How is nullable business-assigned ownership represented separately from Salesforce platform ownership?</td></tr>
+<tr><td>D-04</td><td>Which status values, meanings and transitions are in scope?</td></tr>
+<tr><td>D-05</td><td>What should happen if a customer record is deleted, merged or unlinked?</td></tr>
+<tr><td>D-06</td><td>Which additional fields are required for the MVP?</td></tr>
+<tr><td>D-07</td><td>Who can assign owners, edit statuses and access particular views?</td></tr>
+</tbody>
+</table></div>
+<p>No open item is represented as approved. Earlier requirements remain unchanged; any selected changes must be recorded explicitly.</p>
+<h3>Future verification plan — not executed</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Scenario</th><th>Expected result</th></tr></thead>
+<tbody>
+<tr><td>T-01 · New Unassigned</td><td>Show only New enquiries with no business-assigned owner.</td></tr>
+<tr><td>T-02 · My Assigned</td><td>Show the signed-in representative's enquiries, including Closed.</td></tr>
+<tr><td>T-03 · Active Enquiry List</td><td>Exclude Closed; show Unassigned where relevant.</td></tr>
+<tr><td>T-04 · New → Contacted with no owner</td><td>Block the requested change with an actionable message.</td></tr>
+<tr><td>T-05 · Assign owner only</td><td>Store owner; keep status New.</td></tr>
+<tr><td>T-06 · New → Contacted with owner</td><td>BR-004 alone does not block; other controls still apply.</td></tr>
+<tr><td>T-07 / T-08 · Customer-link exceptions</td><td>Investigate invalid staged references and provisional identity-pending enquiries; behaviour depends on D-01.</td></tr>
+</tbody>
+</table></div>
+<p class="small">These are test specifications, not actual test results, Salesforce screenshots or evidence of executed UAT.</p>
+<h3>Completion boundary and next work</h3>
+<p><strong>Completed for Session 6:</strong> a proposed, traceable CRM design and bounded MVP verification plan. <strong>Still pending:</strong> selecting object mappings, resolving D-01–D-07, hands-on configuration and recording actual outcomes of the tests.</p>
+<p><a class="btn btn-primary" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/06-crm-data-and-solution-design.md" rel="noopener noreferrer" target="_blank">Read complete Artefact 006 ↗</a></p>
+<p class="small">Related work: <a href="04-requirements-catalogue.html">Requirements</a> · <a href="05-customer-data.html">Customer Data &amp; SQL</a> · <a href="index.html#roadmap">Project roadmap</a>.</p>
+</div>
+  </details>
 </main>
-<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></span></div></footer>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></div></footer>
 </body>
 </html>
-

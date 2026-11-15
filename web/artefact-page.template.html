@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="$description">
+  <meta name="theme-color" content="#138342">
+  <title>$browser_title | Northstar Customer 360</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script src="assets/navigation.js" defer></script>
+</head>
+<body>
+<a class="reader-skip" href="#main-content">Skip to the project document</a>
+<header class="site-header"><div class="container inner">
+  <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
+  <nav class="top-nav" aria-label="Project navigation">$project_navigation</nav>
+</div></header>
+<main id="main-content" class="container paper reader-paper">
+  <a class="back" href="index.html#artefacts">← Project overview and all artefacts</a>
+  <div class="reader-intro">
+    <p class="eyebrow">Step $step_number of $step_count · $status</p>
+    <h1>$title</h1>
+    <p class="lead">$lead</p>
+    <p>$story</p>
+    <p class="reader-connection"><strong>Where this fits:</strong> $connection</p>
+    <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. The original document's scope, assumptions and limitations are retained below. Reader explanations are labelled “In plain English”; they do not represent new findings, approvals or implementation evidence.</div>
+    <div class="actions"><a class="btn btn-primary" href="#full-artefact">Read full artefact ↓</a><a class="btn btn-outline" href="#on-this-page">Browse this document</a></div>
+  </div>
+  <nav class="reader-journey" aria-label="Read the Northstar story in order">$journey_navigation</nav>
+  <details class="reader-glossary">
+    <summary>New to business analysis or CRM? Open the plain-English glossary</summary>
+    <dl>$glossary</dl>
+  </details>
+  <details id="on-this-page" class="reader-contents" open>
+    <summary>On this page — jump to any section</summary>
+    <nav aria-label="Document contents">$contents</nav>
+  </details>
+  <section id="full-artefact" class="full-artefact" aria-labelledby="full-artefact-heading">
+    <h2 id="full-artefact-heading">Full artefact</h2>
+    <p class="reader-provenance">Read from top to bottom, or use the contents above. All original document sections, tables, examples and qualifications are included in their original order.</p>
+    <article class="document-content" data-source="$source" data-source-sha256="$source_hash">$document</article>
+  </section>
+$reproducible_sql
+  <section class="reader-continuation" aria-labelledby="next-in-story">
+    <p class="eyebrow">Continue the story</p>
+    <h2 id="next-in-story">$next_title</h2>
+    <p>$next_explanation</p>
+    <nav class="reader-page-links" aria-label="Previous and next artefacts">$previous_next</nav>
+  </section>
+  <section class="reader-source-links" aria-labelledby="supporting-source">
+    <h2 id="supporting-source">Supporting source</h2>
+    <p>The complete document is readable above. The source link provides the Markdown version and its GitHub history.</p>
+    <p><a href="$source_url" target="_blank" rel="noopener noreferrer">View source document on GitHub ↗</a></p>
+  </section>
+  <details id="preserved-overview" class="preserved-overview">
+    <summary>Optional: earlier website overview and worked examples</summary>
+    <p class="reader-provenance">This preserves the earlier web presentation in addition to the full document above. Its document text and examples have been retained.</p>
+    <div class="original-overview">$original_overview</div>
+  </details>
+</main>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></div></footer>
+</body>
+</html>

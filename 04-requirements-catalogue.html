@@ -1,21 +1,708 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#138342"><meta name="description" content="Northstar Customer 360: simulated requirements catalogue, business rules, user stories, acceptance criteria, traceability and change impact analysis.">
-<title>Requirements &amp; Traceability | Customer 360 Case Study</title><link rel="stylesheet" href="assets/style.css"><script src="assets/navigation.js" defer></script></head>
-<body><header class="site-header"><div class="container inner"><a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a><nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html" aria-current="page">Requirements</a><a href="05-customer-data.html">Data &amp; SQL</a> <a href="06-crm-design.html">CRM Design</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav></div></header>
-<main class="container paper"><a class="back" href="index.html">← Case study overview</a>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="This stage turns a selected improvement area into precise statements: what should users be able to see, which rules apply, and how would we check the result?">
+  <meta name="theme-color" content="#138342">
+  <title>Requirements | Northstar Customer 360</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script src="assets/navigation.js" defer></script>
+</head>
+<body>
+<a class="reader-skip" href="#main-content">Skip to the project document</a>
+<header class="site-header"><div class="container inner">
+  <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
+  <nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html" aria-current="page">Requirements</a><a href="05-customer-data.html">Data &amp; SQL</a><a href="06-crm-design.html">CRM Design</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav>
+</div></header>
+<main id="main-content" class="container paper reader-paper">
+  <a class="back" href="index.html#artefacts">← Project overview and all artefacts</a>
+  <div class="reader-intro">
+    <p class="eyebrow">Step 4 of 6 · Completed simulated specification</p>
+    <h1>Artefact 004 — Requirements Catalogue &amp; Traceability</h1>
+    <p class="lead">This stage turns a selected improvement area into precise statements: what should users be able to see, which rules apply, and how would we check the result?</p>
+    <p>The scope is deliberately limited to Sales enquiry ownership and visibility. A business rule states a condition the business wants enforced. A functional requirement describes the system behaviour that supports it. An acceptance criterion describes an example that could later be used to check that behaviour. The requirements below are a completed fictional specification, rather than a deployed system.</p>
+    <p class="reader-connection"><strong>Where this fits:</strong> This document follows the ownership and follow-up gap identified in Artefact 003. It chooses explicit assumptions for the simulation so the requirements can be consistent and testable.</p>
+    <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. The original document's scope, assumptions and limitations are retained below. Reader explanations are labelled “In plain English”; they do not represent new findings, approvals or implementation evidence.</div>
+    <div class="actions"><a class="btn btn-primary" href="#full-artefact">Read full artefact ↓</a><a class="btn btn-outline" href="#on-this-page">Browse this document</a></div>
+  </div>
+  <nav class="reader-journey" aria-label="Read the Northstar story in order"><a href="01-business-context.html"><span class="reader-step-number">01</span><span>Understand the problem</span></a><a href="02-stakeholder-plan.html"><span class="reader-step-number">02</span><span>Find the people and evidence</span></a><a href="03-process-gap-analysis.html"><span class="reader-step-number">03</span><span>Understand how work flows</span></a><a href="04-requirements-catalogue.html" aria-current="step"><span class="reader-step-number">04</span><span>Specify what must happen</span></a><a href="05-customer-data.html"><span class="reader-step-number">05</span><span>Check the information</span></a><a href="06-crm-design.html"><span class="reader-step-number">06</span><span>Propose the CRM design</span></a></nav>
+  <details class="reader-glossary">
+    <summary>New to business analysis or CRM? Open the plain-English glossary</summary>
+    <dl><dt>Artefact</dt><dd>A work product, such as a requirements document, process map or data analysis.</dd><dt>Business analyst (BA)</dt><dd>A person who investigates a business situation, clarifies needs and helps define and evaluate changes.</dd><dt>CRM</dt><dd>Customer relationship management: the processes and systems used to organise customer relationships and related information.</dd><dt>Customer 360</dt><dd>The idea of bringing relevant customer information together into a more consistent view; it is the project&#x27;s theme, rather than a completed product claim.</dd><dt>Enquiry / lead / prospect</dt><dd>An enquiry is an incoming request or expression of interest. A lead or prospect is a potential customer; the exact business definitions need agreement.</dd><dt>Stakeholder</dt><dd>Someone who affects the work, makes relevant decisions, or is affected by the proposed change.</dd><dt>Discovery / elicitation</dt><dd>Learning about the situation and drawing out needs through questions, observation, workshops or records.</dd><dt>Scenario fact / hypothesis</dt><dd>A scenario fact is supplied by the fictional brief. A hypothesis is a possible explanation still requiring evidence.</dd><dt>As-Is / To-Be</dt><dd>As-Is describes current working arrangements. To-Be describes a proposed future way of working.</dd><dt>Gap analysis</dt><dd>Comparing the current situation with the capability that would be needed, then identifying what must change.</dd><dt>Scope / baseline</dt><dd>Scope defines the boundaries of the work. A baseline is the selected reference version against which later changes are assessed.</dd><dt>Requirement</dt><dd>A statement of a capability, behaviour or quality needed to address a business or user need.</dd><dt>Business rule / functional requirement</dt><dd>A business rule sets a condition or restriction. A functional requirement describes system behaviour that supports the need or rule.</dd><dt>User story</dt><dd>A short explanation of who needs something, what they want and why it matters.</dd><dt>Acceptance criterion</dt><dd>A specific condition or example describing what an acceptable result would look like.</dd><dt>Traceability</dt><dd>Following a requirement back to its reason and forward to related design or verification work.</dd><dt>BO / GAP / SR / BR / FR / DR</dt><dd>Reference labels for business objective, gap, stakeholder requirement, business rule, functional requirement and data requirement.</dd><dt>BN / H / PP / NFR</dt><dd>Reference labels for business need, hypothesis, pain point and non-functional requirement. A non-functional requirement describes a quality the solution must meet, rather than a particular action.</dd><dt>REC / REV / REQ</dt><dd>REC-01 identifies a proposed reconciliation control; REV-01 identifies a proposed duplicate-review control. REQ references identify earlier learning exercises and do not add system features by themselves.</dd><dt>AS / AC / US / CR / OQ</dt><dd>Reference labels for assumption, acceptance criterion, user story, change request and open question.</dd><dt>DQ / VAL / D / T / Q</dt><dd>Reference labels for a data-quality finding, validation proposal, design decision, test scenario and SQL query.</dd><dt>Data model / entity / field</dt><dd>A data model describes information and relationships. An entity is a kind of record; a field is one piece of information stored about it.</dd><dt>Data dictionary</dt><dd>A reference explaining each field&#x27;s meaning, form and applicable rules.</dd><dt>Schema / type / mandatory</dt><dd>A schema is the organised structure of a database. A type describes the kind of value stored. Mandatory means a value is required under an agreed rule.</dd><dt>Data completeness / accuracy / consistency</dt><dd>Completeness asks whether required values are present; accuracy asks whether values are correct; consistency asks whether related information agrees.</dd><dt>Normalisation / deduplication / identity resolution</dt><dd>Here, normalisation can mean bringing values into a comparable form. Deduplication reviews and resolves duplicate records; identity resolution determines which records refer to the same real customer. None is claimed as implemented.</dd><dt>Identifier / reference / foreign key</dt><dd>An identifier distinguishes a record. A reference points to another record. A foreign-key constraint can enforce valid references; the diagnostic fixture deliberately omits that constraint.</dd><dt>NULL / nullable</dt><dd>NULL means no value is stored in the illustrated database field. Nullable means the field can have no stored value.</dd><dt>Customer ID / assigned owner</dt><dd>Customer ID identifies the customer linked to an enquiry. The assigned owner identifies the Sales representative responsible for it; these are different relationships.</dd><dt>SQL / SQLite</dt><dd>SQL is a language for asking questions of structured data. SQLite is the database engine used for the synthetic exercise.</dd><dt>SELECT / FROM / WHERE</dt><dd>SELECT chooses what a query returns, FROM names its starting table, and WHERE applies conditions to individual rows.</dd><dt>LEFT JOIN / INNER JOIN</dt><dd>LEFT JOIN keeps every row from the starting table while looking for matches. INNER JOIN keeps only matching rows.</dd><dt>COUNT / GROUP BY / HAVING / ORDER BY</dt><dd>COUNT counts rows; GROUP BY groups matching values; HAVING filters groups; ORDER BY sorts results.</dd><dt>CREATE / INSERT / DROP</dt><dd>In the practice SQL file, CREATE defines a table, INSERT adds sample records, and DROP removes an existing practice table before recreating it. The fixture is a repeatable synthetic exercise, not a production setup.</dd><dt>IF / AND / THEN / ELSE</dt><dd>IF introduces a condition; AND requires both conditions to hold; THEN states the result if they hold; ELSE states what happens otherwise.</dd><dt>Synthetic data / fixture / staging</dt><dd>Synthetic data is invented for practice. A fixture sets up a repeatable example. Staging data is an intermediate set of records being checked before use.</dd><dt>Reconciliation / duplicate signal</dt><dd>Reconciliation compares sources record by record. A duplicate signal flags possible repetition for review, without proving that records should be merged or deleted.</dd><dt>KPI / baseline measure / ROI</dt><dd>A KPI is a key performance indicator. A baseline measure describes the starting position. ROI means return on investment; no achieved ROI is claimed here.</dd><dt>MVP / UAT</dt><dd>MVP means minimum viable product, a limited useful demonstration. UAT means user acceptance testing, checking the solution against agreed user needs.</dd><dt>Salesforce object / mapping</dt><dd>An object is a platform structure for a type of record. Mapping decides how a business concept or field corresponds to that structure.</dd><dt>Lead / Account / Contact / Opportunity</dt><dd>Salesforce record types for a potential buyer, an organisation or account, a person, and a qualified sales deal. Their suitability for Northstar is still being evaluated.</dd><dt>Picklist / Lookup / Auto Number</dt><dd>A picklist offers a defined set of values. A Lookup links a record to another record. Auto Number can generate a record reference automatically.</dd><dt>Validation / automation / pseudocode</dt><dd>Validation checks whether an action or value is allowed. Automation performs an action. Pseudocode expresses intended logic in readable steps without being a deployed program.</dd><dt>API / integration / migration</dt><dd>An API is an interface through which systems exchange requests or data. Integration connects systems; migration moves information between them.</dd><dt>SOP / handoff / escalation</dt><dd>An SOP is a standard operating procedure, a documented way to carry out work. A handoff transfers work or information to another person or team. An escalation raises an unresolved issue for further attention.</dd><dt>Permission / least privilege / audit</dt><dd>A permission controls who may view or change something. Least privilege gives people only the access needed for their work. An audit record helps trace relevant actions or changes.</dd><dt>Assumption / dependency / decision gate</dt><dd>An assumption is provisionally taken as true; a dependency is something the work relies on; a decision gate is a point where a choice must be resolved before moving forward.</dd><dt>B2B / B2C / session</dt><dd>B2B serves businesses; B2C serves individual consumers. Session in these documents refers to a learning stage, not a claimed client meeting.</dd></dl>
+  </details>
+  <details id="on-this-page" class="reader-contents" open>
+    <summary>On this page — jump to any section</summary>
+    <nav aria-label="Document contents"><div class="toc">
+<ul>
+<li><a href="#1-executive-summary">1. Executive Summary</a></li>
+<li><a href="#2-source-context-and-traceability-anchors">2. Source Context and Traceability Anchors</a></li>
+<li><a href="#3-finalised-scope-for-this-case-study-edition">3. Finalised Scope for This Case-Study Edition</a><ul>
+<li><a href="#in-scope">In scope</a></li>
+<li><a href="#out-of-scope-for-session-4">Out of scope for Session 4</a></li>
+</ul>
+</li>
+<li><a href="#4-case-study-assumptions-and-definitions">4. Case-Study Assumptions and Definitions</a></li>
+<li><a href="#5-business-need-and-stakeholder-requirements">5. Business Need and Stakeholder Requirements</a></li>
+<li><a href="#6-business-rules">6. Business Rules</a></li>
+<li><a href="#7-functional-requirements">7. Functional Requirements</a></li>
+<li><a href="#8-data-requirements">8. Data Requirements</a></li>
+<li><a href="#9-user-stories">9. User Stories</a></li>
+<li><a href="#10-proposed-acceptance-criteria-synthetic-verification-examples">10. Proposed Acceptance Criteria — Synthetic Verification Examples</a><ul>
+<li><a href="#ac-001-view-new-unassigned-enquiries-us-001-fr-001">AC-001 — View New Unassigned Enquiries (US-001 / FR-001)</a></li>
+<li><a href="#ac-002-view-my-assigned-enquiries-us-002-fr-002">AC-002 — View My Assigned Enquiries (US-002 / FR-002)</a></li>
+<li><a href="#ac-003-active-enquiry-list-and-owner-display-us-003-fr-003-fr-004">AC-003 — Active Enquiry List and Owner Display (US-003 / FR-003 / FR-004)</a></li>
+<li><a href="#ac-004-ownership-prerequisite-us-004-fr-005">AC-004 — Ownership Prerequisite (US-004 / FR-005)</a></li>
+</ul>
+</li>
+<li><a href="#11-requirements-traceability-matrix">11. Requirements Traceability Matrix</a></li>
+<li><a href="#12-non-functional-requirements-and-quality-considerations">12. Non-Functional Requirements and Quality Considerations</a></li>
+<li><a href="#13-completed-change-impact-analysis-cr-001-simulation-only">13. Completed Change Impact Analysis — CR-001 (Simulation Only)</a><ul>
+<li><a href="#131-baseline-and-requested-change">13.1 Baseline and requested change</a></li>
+<li><a href="#132-beforeafter-comparison">13.2 Before/after comparison</a></li>
+<li><a href="#133-impact-assessment">13.3 Impact assessment</a></li>
+<li><a href="#134-change-control-conclusion">13.4 Change-control conclusion</a></li>
+</ul>
+</li>
+<li><a href="#14-assumptions-stakeholder-validation-register-completed-analytical-dispositions">14. Assumptions &amp; Stakeholder Validation Register — Completed Analytical Dispositions</a></li>
+<li><a href="#15-requirements-quality-and-session-closure">15. Requirements Quality and Session Closure</a></li>
+</ul>
+</div>
+</nav>
+  </details>
+  <section id="full-artefact" class="full-artefact" aria-labelledby="full-artefact-heading">
+    <h2 id="full-artefact-heading">Full artefact</h2>
+    <p class="reader-provenance">Read from top to bottom, or use the contents above. All original document sections, tables, examples and qualifications are included in their original order.</p>
+    <article class="document-content" data-source="docs/04-requirements-catalogue.md" data-source-sha256="0af70ebe0e5b8974c2bba38524577d33f10b5c9ee2f5cd439159a29c17691dbc">
+<p><strong>Project:</strong> Customer 360 — CRM Transformation &amp; Customer Data Integration<br/>
+<strong>Organisation:</strong> Northstar Services (Fictional)<br/>
+<strong>Document type:</strong> IT Business Analysis — Requirements Specification &amp; Traceability<br/>
+<strong>Version:</strong> 1.0 — Final Case-Study Edition (with completed analysis appendices)<br/>
+<strong>Status:</strong> Finalised for the defined case-study scope; simulated, not stakeholder-approved<br/>
+<strong>Prepared by:</strong> Varun Kumar Darbari<br/>
+<strong>Date:</strong> 1 November 2026</p>
+<blockquote>
+<p><strong>Project integrity:</strong> Northstar is a fictional organisation. This is a <em>completed analysis artefact for a deliberately scoped case study</em>, not a stakeholder-approved client specification. All stakeholder statements, decisions, requirements and synthetic test records are simulated. No real stakeholder interviews, deployment, acceptance-test execution or business improvements are claimed.</p>
+</blockquote>
+<hr/>
+<h2 id="1-executive-summary">1. Executive Summary</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This summarises the bounded requirements exercise. A finished specification is evidence of completed analysis; it is different from stakeholder approval or a working implementation.</p></aside>
+<p>Northstar's fictional management reports inconsistent lead follow-ups, fragmented customer information and difficulty producing reliable reporting. Earlier case-study work identified a candidate improvement area relating to enquiry ownership and follow-up visibility. This document converts a <strong>bounded subset</strong> of that improvement area into coherent requirements, business rules, user stories and proposed acceptance criteria.</p>
+<p>The goal is to demonstrate defensible requirements engineering: distinguish business needs from solution behaviour, maintain traceability, preserve assumptions, and define verifiable outcomes without specifying a particular CRM product.</p>
+<p><strong>Scope decision:</strong> For this final Session 4 case-study edition, the author has selected a consistent set of illustrative business rules. This resolves the ambiguities <em>within the simulation</em>; it does not imply a real stakeholder approved those rules. Real-world discovery and agreement would be required before any implementation.</p>
+<h2 id="2-source-context-and-traceability-anchors">2. Source Context and Traceability Anchors</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Traceability connects a requirement to its reason for existing. The references below point to earlier concerns, objectives and process gaps.</p></aside>
+<ul>
+<li><a href="01-business-context.html">Artefact 001 — Business Problem &amp; Project Context</a>: preliminary objectives and reported concerns.</li>
+<li><a href="02-stakeholder-plan.html">Artefact 002 — Stakeholder Identification &amp; Investigation Plan</a>: proposed stakeholders and methods; no interviews executed.</li>
+<li><a href="03-process-gap-analysis.html">Artefact 003 — Process Analysis &amp; Gap Analysis</a>: proposed future-state considerations and candidate gaps.</li>
+</ul>
+<p><strong>Primary business objective — BO-02:</strong> Strengthen lead ownership and follow-up visibility.<br/>
+<strong>Primary gap — GAP-02:</strong> Enquiry Capture, Ownership and Follow-Up.<br/>
+<strong>Related objective — BO-01:</strong> Improve consistency of enquiry and customer-data capture.</p>
+<p>These are the existing <em>candidate</em> objective/gap identifiers, not independently validated findings.</p>
+<h2 id="3-finalised-scope-for-this-case-study-edition">3. Finalised Scope for This Case-Study Edition</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This is the boundary of the requirements catalogue. The excluded items are deliberate scope decisions, rather than features that should be assumed to exist.</p></aside>
+<h3 id="in-scope">In scope</h3>
+<ol>
+<li>The Sales Manager's view of Sales enquiries that are both <code>New</code> and unassigned.</li>
+<li>A Sales Representative's view of enquiries assigned to that signed-in representative.</li>
+<li>An Active Enquiry List that excludes <code>Closed</code> enquiries and displays owner information.</li>
+<li>An ownership prerequisite before a new Sales enquiry can change to <code>Contacted</code>.</li>
+<li>Minimum data fields, traceability links, and illustrative acceptance criteria for these capabilities.</li>
+</ol>
+<h3 id="out-of-scope-for-session-4">Out of scope for Session 4</h3>
+<p>Automatic allocation or self-assignment; an additional <code>In Progress + Unassigned</code> exception view; notifications; follow-up reminders; KPI dashboards; full CRM lifecycle design; integration; data migration; production configuration; performance targets; live testing and benefit measurement.</p>
+<p>The <strong>CR-001</strong> example and the <code>In Progress + Unassigned</code> filtering exercise are retained as completed <strong>analysis examples</strong>, not additional features or open implementation commitments. See Sections 13–14. No change request is represented as approved by real stakeholders.</p>
+<h2 id="4-case-study-assumptions-and-definitions">4. Case-Study Assumptions and Definitions</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>These assumptions make the fictional examples precise. In particular, My Assigned Enquiries includes an owner's Closed records, while the separate Active Enquiry List excludes Closed records.</p></aside>
+<p>The following are <strong>author-selected design assumptions for a completed fictional exercise</strong>, not claims about a real organisation:</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Case-study assumption / definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AS-01</td>
+<td>An enquiry's <code>status</code> is available for evaluating view eligibility; synthetic records use <code>New</code>, <code>Open</code>, <code>In Progress</code>, <code>Contacted</code> and <code>Closed</code>. These sample labels do not constitute a complete production lifecycle.</td>
+</tr>
+<tr>
+<td>AS-02</td>
+<td>The data field <code>assigned_owner_id</code> refers to a Sales Representative and may be unset (<code>NULL</code>) while an enquiry is unassigned. The interface can display the readable label <code>Unassigned</code>.</td>
+</tr>
+<tr>
+<td>AS-03</td>
+<td>The <strong>My Assigned Enquiries</strong> view includes every enquiry owned by the signed-in Sales Representative, <strong>including Closed enquiries</strong>. This is the selected case-study baseline for Session 4.</td>
+</tr>
+<tr>
+<td>AS-04</td>
+<td>The <strong>Active Enquiry List</strong> excludes enquiries with status <code>Closed</code>. No assumption is made that <code>Open</code> is the only other eligible status.</td>
+</tr>
+<tr>
+<td>AS-05</td>
+<td>For new Sales enquiries, an assigned owner is a prerequisite to changing status to <code>Contacted</code>; assigning an owner never automatically performs the status change.</td>
+</tr>
+<tr>
+<td>AS-06</td>
+<td>For these examples, Sales Managers are authorised to open the manager views and Sales Representatives are authenticated before accessing their own assigned view. A full organisation-wide permission model is outside this session's scope.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The two views have different eligibility rules:</strong> A <code>Closed</code> enquiry can be visible in <em>My Assigned Enquiries</em> under AS-03 while being excluded from <em>Active Enquiry List</em> under AS-04. This is deliberate and internally consistent.</p>
+<h2 id="5-business-need-and-stakeholder-requirements">5. Business Need and Stakeholder Requirements</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>A business need explains the desired capability; a stakeholder requirement describes what a particular user group needs. These are the reasons behind the later system behaviours.</p></aside>
+<p><strong>BN-001 — Business need:</strong> Northstar requires more consistent visibility and accountability for incoming Sales enquiries so that unassigned work can be identified and follow-up responsibilities can be organised.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Stakeholder requirement</th>
+<th>Supports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SR-001</td>
+<td>The Sales Manager needs to identify newly received Sales enquiries without assigned owners so appropriate ownership can be arranged.</td>
+<td>BN-001; BO-02</td>
+</tr>
+<tr>
+<td>SR-002</td>
+<td>A Sales Representative needs to identify enquiries assigned to them to organise follow-up work.</td>
+<td>BN-001; BO-02</td>
+</tr>
+<tr>
+<td>SR-003</td>
+<td>The Sales Manager needs visibility of active Sales enquiries and their ownership state.</td>
+<td>BN-001; BO-02</td>
+</tr>
+<tr>
+<td>SR-004</td>
+<td>The Sales Manager needs new Sales enquiries to have an assigned owner before they progress to Contacted.</td>
+<td>BN-001; BO-02</td>
+</tr>
+</tbody>
+</table></div>
+<p>All four statements are simulated stakeholder needs. The system behaviours that support them are defined separately below.</p>
+<h2 id="6-business-rules">6. Business Rules</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Business rules define eligibility or restrictions. BR-001 needs both New status and no owner; BR-004 restricts a requested status change and does not automatically change status when an owner is assigned.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Business rule</th>
+<th>Source/qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BR-001</td>
+<td>An enquiry is eligible for the <strong>New Unassigned Enquiries</strong> view if its status is <code>New</code> <strong>AND</strong> its assigned owner is unset.</td>
+<td>AS-01, AS-02; author-selected case-study rule</td>
+</tr>
+<tr>
+<td>BR-002</td>
+<td><strong>My Assigned Enquiries</strong> includes enquiries whose owner matches the signed-in Sales Representative, irrespective of status.</td>
+<td>AS-03; selected case-study baseline</td>
+</tr>
+<tr>
+<td>BR-003</td>
+<td>An enquiry whose status is <code>Closed</code> is excluded from the <strong>Active Enquiry List</strong>.</td>
+<td>AS-04; selected case-study rule</td>
+</tr>
+<tr>
+<td>BR-004</td>
+<td>A new Sales enquiry with no assigned owner cannot change to status <code>Contacted</code>.</td>
+<td>AS-05; simulated stakeholder rule</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Rule quality notes:</strong> BR-001 requires both conditions; BR-002 and BR-003 apply to different views; BR-004 restricts a transition but does not initiate one.</p>
+<h2 id="7-functional-requirements">7. Functional Requirements</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Functional requirements describe what the system should do. Each FR identifier lets the same behaviour be followed through stories, rules and proposed tests.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Atomic, verifiable requirement</th>
+<th>Linked stakeholder need / rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-001</td>
+<td>The solution shall allow an authorised Sales Manager to view Sales enquiries whose status is <code>New</code> and whose assigned owner is unset.</td>
+<td>SR-001 / BR-001</td>
+</tr>
+<tr>
+<td>FR-002</td>
+<td>The solution shall allow a signed-in Sales Representative to view Sales enquiries assigned to that representative, regardless of enquiry status.</td>
+<td>SR-002 / BR-002</td>
+</tr>
+<tr>
+<td>FR-003</td>
+<td>The solution shall exclude enquiries with status <code>Closed</code> when displaying the Active Enquiry List to an authorised Sales Manager.</td>
+<td>SR-003 / BR-003</td>
+</tr>
+<tr>
+<td>FR-004</td>
+<td>The solution shall display an enquiry's assigned owner, or <code>Unassigned</code> when no owner is recorded, in the Active Enquiry List.</td>
+<td>SR-003 / AS-02</td>
+</tr>
+<tr>
+<td>FR-005</td>
+<td>The solution shall prevent a new Sales enquiry without an assigned owner from changing its status to <code>Contacted</code>.</td>
+<td>SR-004 / BR-004</td>
+</tr>
+</tbody>
+</table></div>
+<p>This catalogue deliberately does <strong>not</strong> require date filters, automated assignment, manager performance reports, or the ability to edit status merely because those features could be useful.</p>
+<h2 id="8-data-requirements">8. Data Requirements</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Data requirements identify information the system must maintain. An unset owner reference is missing assignment information; Unassigned is the readable label shown to the user.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Data requirement</th>
+<th>Supports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DR-001</td>
+<td>Each Sales enquiry shall have a unique <code>enquiry_id</code>.</td>
+<td>Record identification and acceptance tests</td>
+</tr>
+<tr>
+<td>DR-002</td>
+<td>Each Sales enquiry shall maintain a <code>status</code> value for eligibility and transition checks.</td>
+<td>BR-001, BR-003, BR-004; FR-001, FR-003, FR-005</td>
+</tr>
+<tr>
+<td>DR-003</td>
+<td>Each Sales enquiry shall maintain an <code>assigned_owner_id</code> reference that may be unset when no owner is assigned.</td>
+<td>BR-001, BR-002, BR-004; FR-001, FR-002, FR-004, FR-005</td>
+</tr>
+</tbody>
+</table></div>
+<p>A missing owner is represented as an unset reference in the illustrative data model. <code>Unassigned</code> is a display label, not a literal Sales Representative identity. Source-channel metadata, timestamps, customer identifiers and retention rules remain topics for a later <strong>customer-data modelling</strong> workstream. Their omission from the bounded functional baseline is an explicit scope decision, not unfinished Session 4 homework.</p>
+<h2 id="9-user-stories">9. User Stories</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>A user story explains who needs a capability, what they want and why it matters. It gives a user-focused explanation of the more formal requirement.</p></aside>
+<p><strong>US-001 — New Unassigned Enquiries</strong><br/>
+As a Sales Manager, I want to see newly received unassigned Sales enquiries, so that I can arrange appropriate ownership.</p>
+<p><strong>US-002 — My Assigned Enquiries</strong><br/>
+As a Sales Representative, I want to view Sales enquiries assigned to me, so that I can organise and manage my follow-up activities.</p>
+<p><strong>US-003 — Active Enquiry Ownership</strong><br/>
+As a Sales Manager, I want to see active enquiries with their ownership information, so that I can identify ownership gaps in ongoing Sales work.</p>
+<p><strong>US-004 — Contacted Ownership Prerequisite</strong><br/>
+As a Sales Manager, I want new Sales enquiries to require an owner before moving to Contacted, so that accountability is established before progression.</p>
+<h2 id="10-proposed-acceptance-criteria-synthetic-verification-examples">10. Proposed Acceptance Criteria — Synthetic Verification Examples</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Given describes the starting situation, When the action, and Then the expected outcome. The examples below specify future checks using invented records; they are not executed test results.</p></aside>
+<p>These criteria describe <strong>expected behaviour</strong>. They have been reviewed against the synthetic sample records, but <strong>no application or database was built or tested</strong> in Session 4.</p>
+<h3 id="ac-001-view-new-unassigned-enquiries-us-001-fr-001">AC-001 — View New Unassigned Enquiries (US-001 / FR-001)</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Enquiry</th>
+<th>Status</th>
+<th>Owner</th>
+<th>Expected in New Unassigned view</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENQ-601</td>
+<td>New</td>
+<td>Unassigned</td>
+<td>Include</td>
+</tr>
+<tr>
+<td>ENQ-602</td>
+<td>New</td>
+<td>Sales Rep A</td>
+<td>Exclude</td>
+</tr>
+<tr>
+<td>ENQ-603</td>
+<td>In Progress</td>
+<td>Unassigned</td>
+<td>Exclude</td>
+</tr>
+<tr>
+<td>ENQ-604</td>
+<td>New</td>
+<td>Unassigned</td>
+<td>Include</td>
+</tr>
+<tr>
+<td>ENQ-605</td>
+<td>New</td>
+<td>Sales Rep B</td>
+<td>Exclude</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Given</strong> the authorised Sales Manager is signed in and these records exist,<br/>
+<strong>When</strong> the Sales Manager opens New Unassigned Enquiries,<br/>
+<strong>Then</strong> <strong>ENQ-601 and ENQ-604</strong> are shown, and <strong>ENQ-602, ENQ-603 and ENQ-605</strong> are not shown.</p>
+<h3 id="ac-002-view-my-assigned-enquiries-us-002-fr-002">AC-002 — View My Assigned Enquiries (US-002 / FR-002)</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Enquiry</th>
+<th>Status</th>
+<th>Owner</th>
+<th>Expected for Sales Rep A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENQ-501</td>
+<td>Open</td>
+<td>Sales Rep A</td>
+<td>Include</td>
+</tr>
+<tr>
+<td>ENQ-502</td>
+<td>Open</td>
+<td>Sales Rep B</td>
+<td>Exclude</td>
+</tr>
+<tr>
+<td>ENQ-503</td>
+<td>Open</td>
+<td>Unassigned</td>
+<td>Exclude</td>
+</tr>
+<tr>
+<td>ENQ-504</td>
+<td>Closed</td>
+<td>Sales Rep A</td>
+<td>Include</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Given</strong> Sales Rep A is signed in and these records exist,<br/>
+<strong>When</strong> that user opens My Assigned Enquiries,<br/>
+<strong>Then</strong> <strong>ENQ-501 and ENQ-504</strong> are shown, and <strong>ENQ-502 and ENQ-503</strong> are not shown.</p>
+<p>This is based on the deliberately selected AS-03 baseline. Closed records are included in this view but excluded from the separate Active Enquiry List.</p>
+<h3 id="ac-003-active-enquiry-list-and-owner-display-us-003-fr-003-fr-004">AC-003 — Active Enquiry List and Owner Display (US-003 / FR-003 / FR-004)</h3>
+<p><strong>Given</strong> an authorised Sales Manager opens the Active Enquiry List containing synthetic records ENQ-501 (<code>Open</code>, Sales Rep A), ENQ-503 (<code>Open</code>, no owner), ENQ-504 (<code>Closed</code>, Sales Rep A) and ENQ-505 (<code>In Progress</code>, Sales Rep A),<br/>
+<strong>When</strong> the list is displayed,<br/>
+<strong>Then</strong> <strong>ENQ-501, ENQ-503 and ENQ-505</strong> are shown, <strong>ENQ-504</strong> is excluded, and ENQ-503 displays owner <code>Unassigned</code>.</p>
+<h3 id="ac-004-ownership-prerequisite-us-004-fr-005">AC-004 — Ownership Prerequisite (US-004 / FR-005)</h3>
+<p><strong>Given</strong> a new Sales enquiry has no assigned owner and is not already Contacted,<br/>
+<strong>When</strong> an authorised user attempts to change its status to <code>Contacted</code>,<br/>
+<strong>Then</strong> the status change is blocked and the enquiry retains its previous status.</p>
+<p><strong>Additional boundary check:</strong> If the new Sales enquiry has an assigned owner, <strong>BR-004 alone</strong> does not block the transition. This does not imply that assigning the owner automatically changes status or that other lifecycle checks have been defined.</p>
+<h2 id="11-requirements-traceability-matrix">11. Requirements Traceability Matrix</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Read each row from left to right to follow the chain from business objective to user need, business rule, system requirement and acceptance criterion.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Business anchor</th>
+<th>Stakeholder requirement</th>
+<th>Business rule</th>
+<th>Functional requirement</th>
+<th>Data requirement</th>
+<th>User story</th>
+<th>Proposed acceptance criterion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BO-02 / GAP-02 / BN-001</td>
+<td>SR-001</td>
+<td>BR-001</td>
+<td>FR-001</td>
+<td>DR-001, DR-002, DR-003</td>
+<td>US-001</td>
+<td>AC-001</td>
+</tr>
+<tr>
+<td>BO-02 / GAP-02 / BN-001</td>
+<td>SR-002</td>
+<td>BR-002</td>
+<td>FR-002</td>
+<td>DR-001, DR-003</td>
+<td>US-002</td>
+<td>AC-002</td>
+</tr>
+<tr>
+<td>BO-02 / GAP-02 / BN-001</td>
+<td>SR-003</td>
+<td>BR-003</td>
+<td>FR-003, FR-004</td>
+<td>DR-001, DR-002, DR-003</td>
+<td>US-003</td>
+<td>AC-003</td>
+</tr>
+<tr>
+<td>BO-02 / GAP-02 / BN-001</td>
+<td>SR-004</td>
+<td>BR-004</td>
+<td>FR-005</td>
+<td>DR-002, DR-003</td>
+<td>US-004</td>
+<td>AC-004</td>
+</tr>
+</tbody>
+</table></div>
+<p>This matrix documents relationships among proposed artefacts. It is <strong>not</strong> evidence that code, integrations, production tests or business outcomes exist.</p>
+<h2 id="12-non-functional-requirements-and-quality-considerations">12. Non-Functional Requirements and Quality Considerations</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Non-functional considerations describe qualities such as access, usability and reliability. The document preserves the limits of what has actually been specified.</p></aside>
+<p>The Session 4 analysis considered <strong>security, access permissions, performance, auditability, accessibility, privacy and information retention</strong>. These are relevant <em>non-functional requirement categories</em>, but the fictional brief does not contain agreed response-time thresholds, load profiles, data-retention periods or a complete role/permission matrix.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Quality concern</th>
+<th>Candidate question for a real project</th>
+<th>Case-study disposition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Security and permissions</td>
+<td>Which authenticated roles may access each view and perform a status change?</td>
+<td>Limited to role assumptions in AS-06; a complete permission model is outside v1.0.</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>What response time is required under what number of records/concurrent users?</td>
+<td>Not baselined: inventing a measurable target would imply unsupported stakeholder agreement.</td>
+</tr>
+<tr>
+<td>Auditability</td>
+<td>Which assignment, status and follow-up changes need to be traceable?</td>
+<td>Identified for later design, not specified as implemented functionality.</td>
+</tr>
+<tr>
+<td>Privacy and retention</td>
+<td>What personal data may be accessed or retained, and for how long?</td>
+<td>Subject to real-world policy/legal assessment; outside the simulated view-level scope.</td>
+</tr>
+<tr>
+<td>Accessibility</td>
+<td>Which accessibility acceptance standard and supported interfaces apply?</td>
+<td>Requires solution/channel context; not baselined in this exercise.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Requirements-quality distinction:</strong> A quality <em>topic</em> is not yet a measurable, approved NFR. This bounded catalogue does not invent specifications or claim compliance. The ability to identify missing criteria and defer premature commitments is part of the completed analysis.</p>
+<h2 id="13-completed-change-impact-analysis-cr-001-simulation-only">13. Completed Change Impact Analysis — CR-001 (Simulation Only)</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>A change request asks to alter the agreed exercise baseline. This is a completed analysis of a hypothetical change, including its effects; the request was not silently applied to the baseline.</p></aside>
+<p><strong>Change identifier:</strong> CR-001<br/>
+<strong>Change title:</strong> Exclude Closed enquiries from My Assigned Enquiries<br/>
+<strong>Origin:</strong> Session 4 hypothetical stakeholder request (REQ 4.8)<br/>
+<strong>Disposition:</strong> <strong>Impact analysis complete; change not incorporated into the author's v1.0 case-study baseline.</strong> No real decision-maker approved or rejected this change.</p>
+<h3 id="131-baseline-and-requested-change">13.1 Baseline and requested change</h3>
+<ul>
+<li><strong>Selected baseline (AS-03 / BR-002 / FR-002 / AC-002):</strong> My Assigned Enquiries includes all Sales enquiries owned by the signed-in Sales Representative, including records with status <code>Closed</code>.</li>
+<li><strong>Hypothetical change request:</strong> Exclude enquiries with <code>Closed</code> status from that specific view.</li>
+<li><strong>Scope guardrail:</strong> This proposal does not change the separately defined Active Enquiry List, where <code>Closed</code> records are already excluded under BR-003 / FR-003.</li>
+</ul>
+<h3 id="132-beforeafter-comparison">13.2 Before/after comparison</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Synthetic record</th>
+<th>Status</th>
+<th>Owner</th>
+<th>v1.0 baseline for Sales Rep A</th>
+<th>If CR-001 were adopted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENQ-501</td>
+<td>Open</td>
+<td>Sales Rep A</td>
+<td>Include</td>
+<td>Include</td>
+</tr>
+<tr>
+<td>ENQ-502</td>
+<td>Open</td>
+<td>Sales Rep B</td>
+<td>Exclude</td>
+<td>Exclude</td>
+</tr>
+<tr>
+<td>ENQ-503</td>
+<td>Open</td>
+<td>Unassigned</td>
+<td>Exclude</td>
+<td>Exclude</td>
+</tr>
+<tr>
+<td>ENQ-504</td>
+<td>Closed</td>
+<td>Sales Rep A</td>
+<td><strong>Include</strong></td>
+<td><strong>Exclude</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>The change is <strong>"exclude Closed"</strong>, not <strong>"show Open only"</strong>. A status such as <code>In Progress</code> could remain eligible if assigned to Sales Rep A; its treatment would follow the agreed view rule.</p>
+<h3 id="133-impact-assessment">13.3 Impact assessment</h3>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Analysis result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Business rationale</td>
+<td>Determine why historical/Closed enquiries should be hidden from the representative's routine view.</td>
+</tr>
+<tr>
+<td>Business rule and functionality</td>
+<td>BR-002 and FR-002 would require revision if the change were adopted.</td>
+</tr>
+<tr>
+<td>User story</td>
+<td>Review US-002 and any workflow expectations for organising follow-up and accessing history.</td>
+</tr>
+<tr>
+<td>Acceptance criteria and tests</td>
+<td>AC-002 would change: ENQ-504 must be excluded. Related ownership/status test cases would need updating.</td>
+</tr>
+<tr>
+<td>Data and reporting</td>
+<td>The enquiry record need not be deleted; view eligibility changes. Verify whether other uses rely on Closed records.</td>
+</tr>
+<tr>
+<td>Operational exceptions</td>
+<td>Check whether a Closed enquiry can retain an outstanding follow-up and how that task would remain visible.</td>
+</tr>
+<tr>
+<td>Delivery risk / effort</td>
+<td>Actual cost, effort and timing cannot be estimated without a real system, architecture or project plan.</td>
+</tr>
+<tr>
+<td>Traceability and communications</td>
+<td>Update linked requirement/test records and inform relevant delivery and validation roles <em>if</em> the change receives an appropriate decision.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="134-change-control-conclusion">13.4 Change-control conclusion</h3>
+<p>For a real engagement, the BA would <strong>clarify → analyse → seek the appropriate decision → update related artefacts if approved → communicate and verify</strong>. This exercise completes the <em>analysis of the proposed change</em>, not an actual approval workflow or production implementation. To retain a stable, internally consistent simulated baseline, <strong>AS-03, BR-002, FR-002 and AC-002 remain unchanged in v1.0</strong>. CR-001 is therefore <strong>closed as a learning example</strong>, not left as a pending release item.</p>
+<h2 id="14-assumptions-stakeholder-validation-register-completed-analytical-dispositions">14. Assumptions &amp; Stakeholder Validation Register — Completed Analytical Dispositions</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The register records how questions were handled for this bounded simulation. A documented assumption or exclusion resolves the exercise boundary without claiming real stakeholder sign-off.</p></aside>
+<p>The register below preserves the questions surfaced by Session 4 and Artefacts 001–003. In a real engagement, these would require elicitation, evidence and, where appropriate, sign-off. Here, every item has a <strong>documented disposition</strong>: bounded by an explicit simulation assumption or deliberately outside this artefact's scope. This is <em>completed scope analysis</em>, not a list of homework to finish before publication.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Question identified during analysis</th>
+<th>Disposition for v1.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OQ-01</td>
+<td>What are the real enquiry lifecycle statuses and permitted transitions?</td>
+<td><strong>Bounded by AS-01 / AS-05:</strong> sample labels only; no complete lifecycle asserted. Detailed modelling belongs in a later workstream.</td>
+</tr>
+<tr>
+<td>OQ-02</td>
+<td>Who can assign or reassign an enquiry, and may an enquiry be created unassigned?</td>
+<td><strong>Bounded by AS-02 / AS-06:</strong> an unset owner is permitted in examples; assignment workflows and permissions are not specified.</td>
+</tr>
+<tr>
+<td>OQ-03</td>
+<td>Should <code>In Progress</code> enquiries without an owner appear in an exception queue?</td>
+<td><strong>Not adopted:</strong> REQ 4.9A was a completed filtering exercise, not a request to build another view.</td>
+</tr>
+<tr>
+<td>OQ-04</td>
+<td>Should Closed enquiries with outstanding follow-ups remain visible or trigger special handling?</td>
+<td><strong>Analysed in CR-001; not adopted as new behaviour.</strong> The simulated baseline is unchanged; no exception feature added.</td>
+</tr>
+<tr>
+<td>OQ-05</td>
+<td>What access rights govern Sales Manager and Sales Representative views and changes?</td>
+<td><strong>Bounded by AS-06:</strong> role-level illustration only. Full authorisation design belongs to later analysis.</td>
+</tr>
+<tr>
+<td>OQ-06</td>
+<td>Which enquiry fields are mandatory and how are missing values represented?</td>
+<td><strong>Partially represented by DR-001–DR-003 and AS-02:</strong> full data dictionary and validation rules are later data-modelling scope.</td>
+</tr>
+<tr>
+<td>OQ-07</td>
+<td>How should duplicate customer and enquiry records be identified or resolved?</td>
+<td><strong>Outside v1.0:</strong> relates to BO-01 / GAP-01; not falsely claimed as verified or solved.</td>
+</tr>
+<tr>
+<td>OQ-08</td>
+<td>What is a follow-up, and when is it considered outstanding or overdue?</td>
+<td><strong>Outside the bounded view rules:</strong> activity definitions and follow-up-time expectations need separate requirements.</td>
+</tr>
+<tr>
+<td>OQ-09</td>
+<td>Which sales/conversion KPIs and reconciliation rules are required?</td>
+<td><strong>Outside v1.0:</strong> belongs to BO-04 / GAP-03 reporting analysis.</td>
+</tr>
+<tr>
+<td>OQ-10</td>
+<td>When Sales and Support hand off work, what context and access controls are needed?</td>
+<td><strong>Outside v1.0:</strong> GAP-04 remains an exploratory hypothesis, not an established failure.</td>
+</tr>
+<tr>
+<td>OQ-11</td>
+<td>What measurable performance, audit, privacy, retention and accessibility requirements apply?</td>
+<td><strong>Addressed as quality concerns in Section 12; not baselined</strong> without supporting criteria or real context.</td>
+</tr>
+<tr>
+<td>OQ-12</td>
+<td>Which solution options are feasible under business and technical constraints?</td>
+<td><strong>Outside v1.0:</strong> BO-05; no specific CRM platform is selected or justified by this catalogue.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Closure interpretation:</strong> Every question has been either bounded, analysed or excluded by a conscious scope decision. None implies the author has simulated stakeholder sign-off, proved a root cause or completed production delivery. New project phases may develop new work products without reopening Session 4.</p>
+<h2 id="15-requirements-quality-and-session-closure">15. Requirements Quality and Session Closure</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The closure section states what has been completed and checks the consistency and limits of the requirements work.</p></aside>
+<p>The selected case-study requirements have been reviewed for:</p>
+<ul>
+<li><strong>Purpose:</strong> Each feature supports the defined enquiry-ownership business need.</li>
+<li><strong>Scope control:</strong> CR-001 and extra filtering exercises are documented but do not alter or expand the author-selected baseline.</li>
+<li><strong>Atomicity:</strong> Each functional requirement states one testable behaviour.</li>
+<li><strong>Consistency:</strong> Rules for My Assigned Enquiries and Active Enquiry List are explicitly distinct.</li>
+<li><strong>Verifiability:</strong> Proposed Given–When–Then examples contain positive and negative outcomes.</li>
+<li><strong>Traceability:</strong> Each in-scope functional requirement links to a stakeholder need, relevant data and acceptance criteria.</li>
+<li><strong>Integrity:</strong> The simulation and absence of real stakeholder sign-off or implementation are disclosed.</li>
+<li><strong>Change control:</strong> CR-001 records a completed hypothetical impact assessment without inventing an approval.</li>
+<li><strong>Analysis closure:</strong> All twelve validation questions have explicit v1.0 dispositions; they are not unfinished exercises.</li>
+</ul>
+<p><strong>Session 4 learning and this bounded requirements specification are complete for portfolio purposes.</strong> The change example and validation register are complete <em>as documentation</em>; they are not outstanding Session 4 homework or authorised implementation decisions. Independent interview-answer fluency and reading-accuracy practice can continue in later sessions without reopening this published artefact.</p>
+<p>New findings from later project phases may produce <strong>new versioned artefacts</strong> or, if genuinely necessary, transparent corrections; routine retrospective editing of this completed Session 4 edition is not planned.</p>
+<hr/>
+<p><strong>Document status:</strong> v1.0 — Final Case-Study Edition (simulated; not real-world approved)<br/>
+<strong>Previous artefacts:</strong> 001 Business Context · 002 Stakeholder Investigation · 003 Process &amp; Gap Analysis<br/>
+<strong>Next workstream:</strong> Customer Data &amp; SQL, followed by CRM/data design and validation exercises.</p></article>
+  </section>
+
+  <section class="reader-continuation" aria-labelledby="next-in-story">
+    <p class="eyebrow">Continue the story</p>
+    <h2 id="next-in-story">Check the information</h2>
+    <p>Next, examine the information those requirements rely on. Artefact 005 introduces the customer–enquiry data model and synthetic SQL checks without silently changing these ownership rules.</p>
+    <nav class="reader-page-links" aria-label="Previous and next artefacts"><a href="03-process-gap-analysis.html">← Previous: Understand how work flows</a><a href="05-customer-data.html">Next: Check the information →</a></nav>
+  </section>
+  <section class="reader-source-links" aria-labelledby="supporting-source">
+    <h2 id="supporting-source">Supporting source</h2>
+    <p>The complete document is readable above. The source link provides the Markdown version and its GitHub history.</p>
+    <p><a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/04-requirements-catalogue.md" target="_blank" rel="noopener noreferrer">View source document on GitHub ↗</a></p>
+  </section>
+  <details id="preserved-overview" class="preserved-overview">
+    <summary>Optional: earlier website overview and worked examples</summary>
+    <p class="reader-provenance">This preserves the earlier web presentation in addition to the full document above. Its document text and examples have been retained.</p>
+    <div class="original-overview"><a class="back" href="index.html">← Case study overview</a>
 <div class="eyebrow" style="margin-top:28px">Artefact 004 · v1.0 · Completed case-study specification</div>
-<h1>Requirements Catalogue &amp; Traceability</h1>
+<h2>Requirements Catalogue &amp; Traceability</h2>
 <p class="lead">A scoped, solution-neutral requirements specification for Sales enquiry visibility and ownership—connecting stakeholder needs to rules, system behaviour, data and proposed acceptance criteria.</p>
 <div class="notice"><strong>Evidence boundary:</strong> Northstar is fictional. The author-selected rules form a coherent <em>case-study baseline</em>, not a stakeholder-approved business specification. No interviews, CRM deployment or execution of acceptance tests are claimed. The hypothetical change analysis and validation-question dispositions are completed documentation, not unresolved publication tasks.</div>
 <div class="status-row"><span class="pill">Session 4 artefact finalised</span><span class="pill neutral">Simulated requirements</span><span class="pill neutral">No production implementation</span></div>
-<h2>Business objective &amp; scoped need</h2>
+<h3>Business objective &amp; scoped need</h3>
 <div class="grid-2">
-<article class="card"><span class="label-note">BO-02 · Business objective</span><h3>Strengthen lead ownership and follow-up visibility</h3><p>Support clear accountability and visibility of Sales enquiry ownership.</p></article>
-<article class="card"><span class="label-note">GAP-02 · Candidate gap</span><h3>Enquiry capture, ownership and follow-up</h3><p>Consider how unassigned enquiries can be identified and how ownership is recorded.</p></article>
+<article class="card"><span class="label-note">BO-02 · Business objective</span><h4>Strengthen lead ownership and follow-up visibility</h4><p>Support clear accountability and visibility of Sales enquiry ownership.</p></article>
+<article class="card"><span class="label-note">GAP-02 · Candidate gap</span><h4>Enquiry capture, ownership and follow-up</h4><p>Consider how unassigned enquiries can be identified and how ownership is recorded.</p></article>
 </div>
 <p>The defined case-study need is to identify unassigned Sales enquiries and provide appropriate visibility of enquiry ownership. These are simulated objectives and requirements, not stakeholder-approved findings.</p>
-<h2>Candidate functional requirements</h2>
+<h3>Candidate functional requirements</h3>
 <div class="table-wrap"><table><thead><tr><th>ID</th><th>Required behaviour</th><th>Supports</th></tr></thead><tbody>
 <tr><td>FR-001</td><td>Show <strong>New AND unassigned</strong> Sales enquiries to an authorised Sales Manager.</td><td>SR-001 / BR-001</td></tr>
 <tr><td>FR-002</td><td>Show a signed-in Sales Representative their assigned enquiries, including Closed records under the selected exercise assumption.</td><td>SR-002 / BR-002</td></tr>
@@ -24,10 +711,10 @@
 <tr><td>FR-005</td><td>Prevent a new unassigned Sales enquiry changing status to Contacted.</td><td>SR-004 / BR-004</td></tr>
 </tbody></table></div>
 <p class="small">Four simulated stakeholder requirements, four business rules, five functional requirements and three supporting data requirements are linked in the full catalogue. No automatic assignment, date filter or unsupported performance dashboard was introduced.</p>
-<h2>Two distinct views, two distinct rules</h2><div class="grid-2">
-<article class="card"><h3>My Assigned Enquiries</h3><p>Includes records owned by the signed-in representative <strong>regardless of status</strong>. In AC-002, Sales Rep A sees ENQ-501 and ENQ-504 (Closed), but not ENQ-502 or ENQ-503.</p><span class="label-note">Selected case-study rule: AS-03 / BR-002</span></article>
-<article class="card"><h3>Active Enquiry List</h3><p>Excludes records with status <strong>Closed</strong>. This does not mean that only Open records qualify. In AC-003, ENQ-501, ENQ-503 and ENQ-505 appear; ENQ-504 does not.</p><span class="label-note">Selected case-study rule: AS-04 / BR-003</span></article></div>
-<h2>Acceptance criteria: testing both conditions</h2>
+<h3>Two distinct views, two distinct rules</h3><div class="grid-2">
+<article class="card"><h4>My Assigned Enquiries</h4><p>Includes records owned by the signed-in representative <strong>regardless of status</strong>. In AC-002, Sales Rep A sees ENQ-501 and ENQ-504 (Closed), but not ENQ-502 or ENQ-503.</p><span class="label-note">Selected case-study rule: AS-03 / BR-002</span></article>
+<article class="card"><h4>Active Enquiry List</h4><p>Excludes records with status <strong>Closed</strong>. This does not mean that only Open records qualify. In AC-003, ENQ-501, ENQ-503 and ENQ-505 appear; ENQ-504 does not.</p><span class="label-note">Selected case-study rule: AS-04 / BR-003</span></article></div>
+<h3>Acceptance criteria: testing both conditions</h3>
 <p>AC-001 checks the candidate <em>New Unassigned Enquiries</em> view using five synthetic records. Both conditions must match simultaneously.</p>
 <div class="table-wrap"><table><thead><tr><th>Record</th><th>Status</th><th>Owner</th><th>Expected result</th></tr></thead><tbody>
 <tr><td>ENQ-601</td><td>New</td><td>Unassigned</td><td><strong>Include</strong></td></tr>
@@ -37,17 +724,17 @@
 <tr><td>ENQ-605</td><td>New</td><td>Sales Rep B</td><td>Exclude</td></tr>
 </tbody></table></div>
 <p><strong>Given</strong> the authorised Sales Manager is signed in and these records exist, <strong>when</strong> the Manager opens New Unassigned Enquiries, <strong>then</strong> only ENQ-601 and ENQ-604 are shown. The expected results are proposed criteria, <strong>not evidence of an executed test</strong>.</p>
-<h2>Requirements traceability</h2>
+<h3>Requirements traceability</h3>
 <div class="table-wrap"><table><thead><tr><th>Objective</th><th>Stakeholder need</th><th>Rule</th><th>Functional requirement</th><th>Acceptance criterion</th></tr></thead><tbody>
 <tr><td>BO-02 / GAP-02</td><td>SR-001</td><td>BR-001</td><td>FR-001</td><td>AC-001</td></tr>
 <tr><td>BO-02 / GAP-02</td><td>SR-002</td><td>BR-002</td><td>FR-002</td><td>AC-002</td></tr>
 <tr><td>BO-02 / GAP-02</td><td>SR-003</td><td>BR-003</td><td>FR-003 / FR-004</td><td>AC-003</td></tr>
 <tr><td>BO-02 / GAP-02</td><td>SR-004</td><td>BR-004</td><td>FR-005</td><td>AC-004</td></tr>
-</tbody></table></div><p class="small">The full <a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/04-requirements-catalogue.md" target="_blank" rel="noopener noreferrer">Markdown catalogue</a> also links supporting data requirements DR-001–DR-003.</p>
-<h2>Completed simulated change analysis — CR-001</h2>
+</tbody></table></div><p class="small">The full <a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/04-requirements-catalogue.md" rel="noopener noreferrer" target="_blank">Markdown catalogue</a> also links supporting data requirements DR-001–DR-003.</p>
+<h3>Completed simulated change analysis — CR-001</h3>
 <p>The original <strong>My Assigned Enquiries</strong> exercise includes Closed records. A hypothetical stakeholder later requested excluding them from that view. The analysis identified that ENQ-504 would change from <strong>included</strong> to <strong>excluded</strong>; FR-002, BR-002, AC-002 and related tests would need review.</p>
 <p>The potential change was assessed for business rationale, view behaviour, history access, outstanding follow-ups, scope, delivery impact and traceability. <strong>It was not adopted into the v1.0 case-study baseline, and no real approval/rejection is claimed.</strong> CR-001 is complete as a documented training analysis, not an active change awaiting a decision.</p>
-<h2>Validation-question register: documented dispositions</h2>
+<h3>Validation-question register: documented dispositions</h3>
 <p>Session 4 identified twelve questions a real BA would investigate. All twelve have explicit dispositions for this limited fictional case study; none is presented as completed real stakeholder validation.</p>
 <div class="table-wrap"><table><thead><tr><th>Questions</th><th>Case-study disposition</th></tr></thead><tbody>
 <tr><td>Lifecycle statuses, assignment rights and permissions (OQ-01, 02, 05)</td><td>Bounded by stated assumptions; full policy and workflow modelling excluded.</td></tr>
@@ -55,10 +742,14 @@
 <tr><td>Mandatory data fields, duplicates and follow-up definitions (OQ-06–08)</td><td>Minimum necessary fields included; deeper data and activity modelling assigned to later phases.</td></tr>
 <tr><td>KPIs, Sales–Support handoffs, NFRs and solution choice (OQ-09–12)</td><td>Explicitly outside this view-level specification; no unevidenced solution/threshold invented.</td></tr>
 </tbody></table></div>
-<h2>Non-functional considerations &amp; limitations</h2>
+<h3>Non-functional considerations &amp; limitations</h3>
 <p>Security, performance, auditability, accessibility, privacy and retention were considered as quality categories, but no unsupported latency targets, full permission matrix or legal compliance assertions were manufactured. Later phases may establish measurable criteria with appropriate evidence.</p>
 <div class="notice"><strong>Completion statement:</strong> The bounded Session 4 requirements specification, impact analysis and validation-question dispositions are complete for a fictional portfolio case study. Later customer-data, CRM and testing activities are separate workstreams—not missing Session 4 tasks.</div>
-<p><a class="btn btn-primary" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/04-requirements-catalogue.md" target="_blank" rel="noopener noreferrer">Read complete Artefact 004 ↗</a></p>
+<p><a class="btn btn-primary" href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/04-requirements-catalogue.md" rel="noopener noreferrer" target="_blank">Read complete Artefact 004 ↗</a></p>
 <p><a class="btn btn-outline" href="index.html#roadmap">View project roadmap →</a></p>
-</main><footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></span></div></footer></body></html>
-
+</div>
+  </details>
+</main>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></div></footer>
+</body>
+</html>
