@@ -1,7 +1,553 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#138342"><meta name="description" content="Independent simulated CRM and customer-data Business Analysis case study: stakeholder investigation, process mapping, gaps and future-state design."><title>Stakeholder &amp; Investigation Plan | Customer 360 Case Study</title><link rel="stylesheet" href="assets/style.css"><script src="assets/navigation.js" defer></script></head><body><header class="site-header"><div class="container inner"><a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a><nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html">Requirements</a><a href="05-customer-data.html">Data &amp; SQL</a> <a href="06-crm-design.html">CRM Design</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav></div></header><main class="container paper"><a class="back" href="index.html">← Case study overview</a><div class="eyebrow" style="margin-top:28px">Artefact 002 · v1.0 · Planned, not executed</div><h1>Stakeholder &amp; Investigation Plan</h1><p class="lead">Identify whose perspective and evidence we need before writing requirements or confirming causes.</p><div class="notice"><strong>Status:</strong> This is a proposed stakeholder map and discovery plan. No interviews, workshops, observation sessions or data reviews have yet been conducted with real Northstar employees.</div>
-<h2>Provisional stakeholder groups</h2><div class="table-wrap"><table><thead><tr><th>Group</th><th>Information to obtain</th><th>Proposed technique</th></tr></thead><tbody><tr><td>Executive sponsor</td><td>Business outcomes, constraints, investment priorities, success criteria</td><td>Interview</td></tr><tr><td>Sales manager</td><td>Lead lifecycle, ownership, follow-up targets, KPI/report issues</td><td>Interview + report review</td></tr><tr><td>Sales representatives</td><td>Actual enquiry handling, notes, workarounds, status updates</td><td>Interviews + observation + workshop</td></tr><tr><td>Marketing</td><td>Campaign intake, lead-source attribution, handoffs and exports</td><td>Interview + document/data review</td></tr><tr><td>Customer Support</td><td>Ticket history, customer identifiers, case handoffs, access needs</td><td>Interview + ticket review</td></tr><tr><td>IT / Systems / Data</td><td>System inventory, storage, access, integration, security</td><td>Interview + technical documentation</td></tr></tbody></table></div>
-<h2>Discovery questions</h2><ol><li>Walk through an enquiry from arrival to first action. Who handles it?</li><li>Where and how is it recorded by channel?</li><li>Who assigns ownership, and how is reassignment controlled?</li><li>Which fields are required and which are frequently missing?</li><li>How are enquiry, lead, opportunity, customer and case defined?</li><li>How are duplicate or repeat enquiries handled?</li><li>What follow-up expectations exist, and how is performance evidenced?</li><li>What is transferred between Sales and Support, and when?</li><li>How is the weekly Excel report prepared, checked and interpreted?</li><li>What access, retention, privacy and implementation constraints apply?</li></ol>
-<h2>Triangulation and validation</h2><p>Compare stakeholder descriptions against available spreadsheets, ticket histories, timestamp records, existing procedures and observation where access is permitted. Record disagreements as questions rather than silently treating one person's account as fact. The provisional As-Is model should be reviewed in a facilitated cross-functional session.</p>
-<h2>Risks to avoid</h2><ul><li>Leading stakeholders by asking whether Salesforce is the answer.</li><li>Confusing the manager's intended workflow with employees' actual workflow.</li><li>Assuming separate systems necessarily mean broken integration.</li><li>Assigning high/low influence ratings before decision rights are understood.</li></ul>
-<p class="small">Full investigation notes: <a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/02-stakeholder-investigation-plan.md" target="_blank" rel="noopener noreferrer">Markdown working artefact</a>.</p><p><a class="btn btn-outline" href="03-process-gap-analysis.html">Next: process analysis →</a></p></main><footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></span></div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Having described the problem, the next question is: who should we learn from, what should we ask, and what evidence would help?">
+  <meta name="theme-color" content="#138342">
+  <title>Discovery | Northstar Customer 360</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script src="assets/navigation.js" defer></script>
+</head>
+<body>
+<a class="reader-skip" href="#main-content">Skip to the project document</a>
+<header class="site-header"><div class="container inner">
+  <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
+  <nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html" aria-current="page">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html">Requirements</a><a href="05-customer-data.html">Data &amp; SQL</a><a href="06-crm-design.html">CRM Design</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav>
+</div></header>
+<main id="main-content" class="container paper reader-paper">
+  <a class="back" href="index.html#artefacts">← Project overview and all artefacts</a>
+  <div class="reader-intro">
+    <p class="eyebrow">Step 2 of 6 · Proposed investigation plan</p>
+    <h1>Artefact 002 — Stakeholder Identification &amp; Investigation Plan</h1>
+    <p class="lead">Having described the problem, the next question is: who should we learn from, what should we ask, and what evidence would help?</p>
+    <p>Different teams see different parts of an enquiry&#x27;s journey. Sales may know about follow-ups, Marketing about incoming leads, Support about customer history, and IT about systems and access. This document plans how those perspectives could be investigated and checked against records.</p>
+    <p class="reader-connection"><strong>Where this fits:</strong> Artefact 001 supplied the initial concerns. This plan explains how a real investigation could test them before process models and requirements are treated as agreed.</p>
+    <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. The original document's scope, assumptions and limitations are retained below. Reader explanations are labelled “In plain English”; they do not represent new findings, approvals or implementation evidence.</div>
+    <div class="actions"><a class="btn btn-primary" href="#full-artefact">Read full artefact ↓</a><a class="btn btn-outline" href="#on-this-page">Browse this document</a></div>
+  </div>
+  <nav class="reader-journey" aria-label="Read the Northstar story in order"><a href="01-business-context.html"><span class="reader-step-number">01</span><span>Understand the problem</span></a><a href="02-stakeholder-plan.html" aria-current="step"><span class="reader-step-number">02</span><span>Find the people and evidence</span></a><a href="03-process-gap-analysis.html"><span class="reader-step-number">03</span><span>Understand how work flows</span></a><a href="04-requirements-catalogue.html"><span class="reader-step-number">04</span><span>Specify what must happen</span></a><a href="05-customer-data.html"><span class="reader-step-number">05</span><span>Check the information</span></a><a href="06-crm-design.html"><span class="reader-step-number">06</span><span>Propose the CRM design</span></a></nav>
+  <details class="reader-glossary">
+    <summary>New to business analysis or CRM? Open the plain-English glossary</summary>
+    <dl><dt>Artefact</dt><dd>A work product, such as a requirements document, process map or data analysis.</dd><dt>Business analyst (BA)</dt><dd>A person who investigates a business situation, clarifies needs and helps define and evaluate changes.</dd><dt>CRM</dt><dd>Customer relationship management: the processes and systems used to organise customer relationships and related information.</dd><dt>Customer 360</dt><dd>The idea of bringing relevant customer information together into a more consistent view; it is the project&#x27;s theme, rather than a completed product claim.</dd><dt>Enquiry / lead / prospect</dt><dd>An enquiry is an incoming request or expression of interest. A lead or prospect is a potential customer; the exact business definitions need agreement.</dd><dt>Stakeholder</dt><dd>Someone who affects the work, makes relevant decisions, or is affected by the proposed change.</dd><dt>Discovery / elicitation</dt><dd>Learning about the situation and drawing out needs through questions, observation, workshops or records.</dd><dt>Scenario fact / hypothesis</dt><dd>A scenario fact is supplied by the fictional brief. A hypothesis is a possible explanation still requiring evidence.</dd><dt>As-Is / To-Be</dt><dd>As-Is describes current working arrangements. To-Be describes a proposed future way of working.</dd><dt>Gap analysis</dt><dd>Comparing the current situation with the capability that would be needed, then identifying what must change.</dd><dt>Scope / baseline</dt><dd>Scope defines the boundaries of the work. A baseline is the selected reference version against which later changes are assessed.</dd><dt>Requirement</dt><dd>A statement of a capability, behaviour or quality needed to address a business or user need.</dd><dt>Business rule / functional requirement</dt><dd>A business rule sets a condition or restriction. A functional requirement describes system behaviour that supports the need or rule.</dd><dt>User story</dt><dd>A short explanation of who needs something, what they want and why it matters.</dd><dt>Acceptance criterion</dt><dd>A specific condition or example describing what an acceptable result would look like.</dd><dt>Traceability</dt><dd>Following a requirement back to its reason and forward to related design or verification work.</dd><dt>BO / GAP / SR / BR / FR / DR</dt><dd>Reference labels for business objective, gap, stakeholder requirement, business rule, functional requirement and data requirement.</dd><dt>BN / H / PP / NFR</dt><dd>Reference labels for business need, hypothesis, pain point and non-functional requirement. A non-functional requirement describes a quality the solution must meet, rather than a particular action.</dd><dt>REC / REV / REQ</dt><dd>REC-01 identifies a proposed reconciliation control; REV-01 identifies a proposed duplicate-review control. REQ references identify earlier learning exercises and do not add system features by themselves.</dd><dt>AS / AC / US / CR / OQ</dt><dd>Reference labels for assumption, acceptance criterion, user story, change request and open question.</dd><dt>DQ / VAL / D / T / Q</dt><dd>Reference labels for a data-quality finding, validation proposal, design decision, test scenario and SQL query.</dd><dt>Data model / entity / field</dt><dd>A data model describes information and relationships. An entity is a kind of record; a field is one piece of information stored about it.</dd><dt>Data dictionary</dt><dd>A reference explaining each field&#x27;s meaning, form and applicable rules.</dd><dt>Schema / type / mandatory</dt><dd>A schema is the organised structure of a database. A type describes the kind of value stored. Mandatory means a value is required under an agreed rule.</dd><dt>Data completeness / accuracy / consistency</dt><dd>Completeness asks whether required values are present; accuracy asks whether values are correct; consistency asks whether related information agrees.</dd><dt>Normalisation / deduplication / identity resolution</dt><dd>Here, normalisation can mean bringing values into a comparable form. Deduplication reviews and resolves duplicate records; identity resolution determines which records refer to the same real customer. None is claimed as implemented.</dd><dt>Identifier / reference / foreign key</dt><dd>An identifier distinguishes a record. A reference points to another record. A foreign-key constraint can enforce valid references; the diagnostic fixture deliberately omits that constraint.</dd><dt>NULL / nullable</dt><dd>NULL means no value is stored in the illustrated database field. Nullable means the field can have no stored value.</dd><dt>Customer ID / assigned owner</dt><dd>Customer ID identifies the customer linked to an enquiry. The assigned owner identifies the Sales representative responsible for it; these are different relationships.</dd><dt>SQL / SQLite</dt><dd>SQL is a language for asking questions of structured data. SQLite is the database engine used for the synthetic exercise.</dd><dt>SELECT / FROM / WHERE</dt><dd>SELECT chooses what a query returns, FROM names its starting table, and WHERE applies conditions to individual rows.</dd><dt>LEFT JOIN / INNER JOIN</dt><dd>LEFT JOIN keeps every row from the starting table while looking for matches. INNER JOIN keeps only matching rows.</dd><dt>COUNT / GROUP BY / HAVING / ORDER BY</dt><dd>COUNT counts rows; GROUP BY groups matching values; HAVING filters groups; ORDER BY sorts results.</dd><dt>CREATE / INSERT / DROP</dt><dd>In the practice SQL file, CREATE defines a table, INSERT adds sample records, and DROP removes an existing practice table before recreating it. The fixture is a repeatable synthetic exercise, not a production setup.</dd><dt>IF / AND / THEN / ELSE</dt><dd>IF introduces a condition; AND requires both conditions to hold; THEN states the result if they hold; ELSE states what happens otherwise.</dd><dt>Synthetic data / fixture / staging</dt><dd>Synthetic data is invented for practice. A fixture sets up a repeatable example. Staging data is an intermediate set of records being checked before use.</dd><dt>Reconciliation / duplicate signal</dt><dd>Reconciliation compares sources record by record. A duplicate signal flags possible repetition for review, without proving that records should be merged or deleted.</dd><dt>KPI / baseline measure / ROI</dt><dd>A KPI is a key performance indicator. A baseline measure describes the starting position. ROI means return on investment; no achieved ROI is claimed here.</dd><dt>MVP / UAT</dt><dd>MVP means minimum viable product, a limited useful demonstration. UAT means user acceptance testing, checking the solution against agreed user needs.</dd><dt>Salesforce object / mapping</dt><dd>An object is a platform structure for a type of record. Mapping decides how a business concept or field corresponds to that structure.</dd><dt>Lead / Account / Contact / Opportunity</dt><dd>Salesforce record types for a potential buyer, an organisation or account, a person, and a qualified sales deal. Their suitability for Northstar is still being evaluated.</dd><dt>Picklist / Lookup / Auto Number</dt><dd>A picklist offers a defined set of values. A Lookup links a record to another record. Auto Number can generate a record reference automatically.</dd><dt>Validation / automation / pseudocode</dt><dd>Validation checks whether an action or value is allowed. Automation performs an action. Pseudocode expresses intended logic in readable steps without being a deployed program.</dd><dt>API / integration / migration</dt><dd>An API is an interface through which systems exchange requests or data. Integration connects systems; migration moves information between them.</dd><dt>SOP / handoff / escalation</dt><dd>An SOP is a standard operating procedure, a documented way to carry out work. A handoff transfers work or information to another person or team. An escalation raises an unresolved issue for further attention.</dd><dt>Permission / least privilege / audit</dt><dd>A permission controls who may view or change something. Least privilege gives people only the access needed for their work. An audit record helps trace relevant actions or changes.</dd><dt>Assumption / dependency / decision gate</dt><dd>An assumption is provisionally taken as true; a dependency is something the work relies on; a decision gate is a point where a choice must be resolved before moving forward.</dd><dt>B2B / B2C / session</dt><dd>B2B serves businesses; B2C serves individual consumers. Session in these documents refers to a learning stage, not a claimed client meeting.</dd></dl>
+  </details>
+  <details id="on-this-page" class="reader-contents" open>
+    <summary>On this page — jump to any section</summary>
+    <nav aria-label="Document contents"><div class="toc">
+<ul>
+<li><a href="#1-executive-summary">1. Executive Summary</a></li>
+<li><a href="#2-investigation-objectives">2. Investigation Objectives</a></li>
+<li><a href="#3-preliminary-stakeholder-identification">3. Preliminary Stakeholder Identification</a></li>
+<li><a href="#4-initial-stakeholder-prioritisation">4. Initial Stakeholder Prioritisation</a></li>
+<li><a href="#5-investigation-techniques-and-rationale">5. Investigation Techniques and Rationale</a></li>
+<li><a href="#6-proposed-stakeholder-investigation-matrix">6. Proposed Stakeholder Investigation Matrix</a></li>
+<li><a href="#7-core-investigation-questions">7. Core Investigation Questions</a><ul>
+<li><a href="#lead-capture-and-ownership">Lead Capture and Ownership</a></li>
+<li><a href="#lead-management-and-follow-up">Lead Management and Follow-Up</a></li>
+<li><a href="#customer-information-and-cross-functional-processes">Customer Information and Cross-Functional Processes</a></li>
+<li><a href="#management-reporting-and-technology">Management Reporting and Technology</a></li>
+</ul>
+</li>
+<li><a href="#8-evidence-required-to-evaluate-initial-hypotheses">8. Evidence Required to Evaluate Initial Hypotheses</a></li>
+<li><a href="#9-proposed-investigation-sequence">9. Proposed Investigation Sequence</a><ul>
+<li><a href="#stage-1-confirm-purpose-and-scope">Stage 1 — Confirm Purpose and Scope</a></li>
+<li><a href="#stage-2-understand-current-working-practices">Stage 2 — Understand Current Working Practices</a></li>
+<li><a href="#stage-3-examine-data-and-reporting">Stage 3 — Examine Data and Reporting</a></li>
+<li><a href="#stage-4-validate-findings">Stage 4 — Validate Findings</a></li>
+<li><a href="#stage-5-establish-requirements-inputs">Stage 5 — Establish Requirements Inputs</a></li>
+</ul>
+</li>
+<li><a href="#10-evidence-management-and-documentation">10. Evidence Management and Documentation</a></li>
+<li><a href="#11-findings-validation-and-stakeholder-communication">11. Findings Validation and Stakeholder Communication</a></li>
+<li><a href="#12-expected-investigation-outputs">12. Expected Investigation Outputs</a></li>
+<li><a href="#13-risks-assumptions-and-limitations">13. Risks, Assumptions and Limitations</a></li>
+<li><a href="#14-conclusion-and-next-steps">14. Conclusion and Next Steps</a></li>
+</ul>
+</div>
+</nav>
+  </details>
+  <section id="full-artefact" class="full-artefact" aria-labelledby="full-artefact-heading">
+    <h2 id="full-artefact-heading">Full artefact</h2>
+    <p class="reader-provenance">Read from top to bottom, or use the contents above. All original document sections, tables, examples and qualifications are included in their original order.</p>
+    <article class="document-content" data-source="docs/02-stakeholder-investigation-plan.md" data-source-sha256="ebf4d59fc8e2b3b12c71741a4d0a9b46e1308879718012e4417ba36ba8cb23a1">
+<p><strong>Project:</strong> Customer 360 — CRM Transformation &amp; Customer Data Integration<br/>
+<strong>Organisation:</strong> Northstar Services (Fictional)<br/>
+<strong>Document Type:</strong> Business Analysis — Stakeholder &amp; Investigation Planning<br/>
+<strong>Version:</strong> 1.0 — Initial Working Baseline<br/>
+<strong>Status:</strong> Proposed Investigation Plan | Execution and Validation Pending<br/>
+<strong>Prepared By:</strong> Varun Kumar Darbari</p>
+<hr/>
+<h2 id="1-executive-summary">1. Executive Summary</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This summarises the proposed investigation. Planning interviews or workshops is different from conducting them; no real sessions are claimed here.</p></aside>
+<p>The Northstar Customer 360 case study examines reported challenges with fragmented customer information, inconsistent lead follow-ups and difficulties producing reliable sales and conversion reports.</p>
+<p>Understanding these challenges requires investigation across Sales, Marketing, Customer Support, Management and IT rather than relying on assumptions or selecting a CRM platform prematurely.</p>
+<p>This document identifies preliminary stakeholder groups, assesses their likely interests, recommends appropriate investigation techniques and defines how the resulting evidence would be analysed and validated.</p>
+<p><strong>This is a proposed plan developed from a fictional business scenario. No actual stakeholder interviews, workshops, observations or system assessments have been conducted.</strong></p>
+<h2 id="2-investigation-objectives">2. Investigation Objectives</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>These are the questions the investigation is intended to answer. They keep the work focused on enquiry handling, information quality, responsibility and reporting.</p></aside>
+<p>The proposed investigation aims to:</p>
+<ul>
+<li>Understand how customer enquiries are received, recorded and managed across communication channels.</li>
+<li>Identify the people responsible for lead ownership, follow-up and changes in responsibility.</li>
+<li>Understand how customer and prospect information is stored, updated and shared.</li>
+<li>Examine the relationship between Sales and Customer Support workflows.</li>
+<li>Establish how weekly sales reports are prepared and which reporting issues require investigation.</li>
+<li>Identify applicable business rules, technical constraints, data-quality considerations and information-access requirements.</li>
+<li>Obtain sufficient evidence to refine the As-Is process, validate or reject hypotheses, and define future business requirements.</li>
+</ul>
+<p>The investigation should remain business-problem-led and solution-neutral.</p>
+<h2 id="3-preliminary-stakeholder-identification">3. Preliminary Stakeholder Identification</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Each stakeholder group has a different view of the problem. This list identifies the people whose experience or decisions could be relevant.</p></aside>
+<p>The following stakeholder groups have been identified from the scenario and the anticipated investigation scope.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Stakeholder Group</th>
+<th>Business Interest</th>
+<th>Information or Decisions Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executive Management / Sponsor</td>
+<td>Business priorities, performance visibility and transformation outcomes</td>
+<td>Objectives, constraints, business value, investment priorities and success criteria</td>
+</tr>
+<tr>
+<td>Sales Manager</td>
+<td>Lead management, team performance and sales reporting</td>
+<td>Assignment rules, lifecycle definitions, follow-up expectations, KPIs and operational exceptions</td>
+</tr>
+<tr>
+<td>Sales Representatives</td>
+<td>Daily enquiry handling and prospect management</td>
+<td>Actual workflows, recording practices, follow-up activities, pain points and workarounds</td>
+</tr>
+<tr>
+<td>Marketing</td>
+<td>Lead generation, campaign information and Sales handoffs</td>
+<td>Enquiry sources, captured fields, spreadsheet exports and lead-transfer practices</td>
+</tr>
+<tr>
+<td>Customer Support</td>
+<td>Service enquiries and customer-information continuity</td>
+<td>Ticket processes, available customer history, handoffs and information requirements</td>
+</tr>
+<tr>
+<td>IT / Systems / Data Representatives</td>
+<td>Technology feasibility and information controls</td>
+<td>Applications, data locations, access permissions, data quality, integrations and constraints</td>
+</tr>
+</tbody>
+</table></div>
+<p>The stakeholder list is provisional. Other relevant groups, such as information security, data protection, finance or external service providers, may need to be included depending on findings.</p>
+<h2 id="4-initial-stakeholder-prioritisation">4. Initial Stakeholder Prioritisation</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Prioritisation helps decide whom to involve first and how closely. The assessments are provisional, rather than confirmed statements about real people.</p></aside>
+<p>Stakeholders can be assessed using a Power/Interest Grid to determine appropriate engagement approaches.</p>
+<p>The following classifications are <strong>working assumptions</strong>, not verified assessments of individuals or their authority.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Stakeholder Group</th>
+<th>Indicative Power</th>
+<th>Indicative Interest</th>
+<th>Proposed Engagement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executive Management / Sponsor</td>
+<td>High</td>
+<td>High</td>
+<td>Manage closely; confirm direction, constraints and decisions</td>
+</tr>
+<tr>
+<td>Sales Manager</td>
+<td>High within sales operations</td>
+<td>High</td>
+<td>Involve closely in process and reporting validation</td>
+</tr>
+<tr>
+<td>Sales Representatives</td>
+<td>Lower formal decision authority</td>
+<td>High</td>
+<td>Consult regularly and validate actual working practices</td>
+</tr>
+<tr>
+<td>Marketing</td>
+<td>To be confirmed</td>
+<td>High for lead-generation changes</td>
+<td>Engage on intake and handoff requirements</td>
+</tr>
+<tr>
+<td>Customer Support</td>
+<td>To be confirmed</td>
+<td>High for customer-information sharing</td>
+<td>Engage on support workflows and cross-functional handoffs</td>
+</tr>
+<tr>
+<td>IT / Systems / Data Representatives</td>
+<td>Significant technical influence; formal authority to be confirmed</td>
+<td>High for system changes</td>
+<td>Involve early in feasibility, access and integration analysis</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Validation requirement:</strong> Actual power, influence, decision rights and interest must be confirmed before the grid is treated as an agreed stakeholder assessment.</p>
+<p>Formal authority should not be inferred solely from a job title.</p>
+<h2 id="5-investigation-techniques-and-rationale">5. Investigation Techniques and Rationale</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>A technique is a way to gather information. Interviews explore individual experience, observation shows work in practice, and document analysis examines existing records.</p></aside>
+<p>Different questions require different investigation methods. A combination of techniques should reduce dependence on a single account of the current process.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Intended Use</th>
+<th>Why It Is Appropriate</th>
+<th>Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interviews</td>
+<td>Understand stakeholder goals, responsibilities, problems and constraints</td>
+<td>Allows detailed questioning and follow-up</td>
+<td>May reflect perception rather than actual practice</td>
+</tr>
+<tr>
+<td>Observation</td>
+<td>Understand how employees handle enquiries and maintain information</td>
+<td>Can reveal informal workarounds and undocumented steps</td>
+<td>Observation may affect behaviour; permissions are required</td>
+</tr>
+<tr>
+<td>Cross-functional Workshop</td>
+<td>Compare perspectives and agree process boundaries and terminology</td>
+<td>Exposes handoff issues and competing assumptions</td>
+<td>Group dynamics may influence responses</td>
+</tr>
+<tr>
+<td>Document Analysis</td>
+<td>Examine available SOPs, spreadsheets, reports and process instructions</td>
+<td>Establishes how procedures and data are documented</td>
+<td>Documents may be outdated or incomplete</td>
+</tr>
+<tr>
+<td>Data and Report Analysis</td>
+<td>Investigate completeness, consistency, duplicates and KPI reliability</td>
+<td>Provides measurable evidence where suitable records exist</td>
+<td>Requires appropriate access, definitions and sufficient data quality</td>
+</tr>
+<tr>
+<td>Process Walkthroughs / Scenarios</td>
+<td>Follow representative enquiries from capture to outcome</td>
+<td>Tests whether the process model covers normal and exceptional paths</td>
+<td>Illustrative examples may not represent every situation</td>
+</tr>
+<tr>
+<td>Prototypes (Later Stage)</td>
+<td>Clarify proposed information fields, screens and workflows</td>
+<td>Helps validate ambiguous requirements</td>
+<td>Premature prototypes may bias stakeholders toward a particular solution</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Recommended approach:</strong> Begin with interviews and document review, then use observation, data checks and cross-functional validation to confirm or challenge initial findings.</p>
+<p>A survey is not proposed as the primary discovery technique because the immediate problem requires detailed workflow understanding. It could be useful later if many employees need to provide comparable feedback.</p>
+<h2 id="6-proposed-stakeholder-investigation-matrix">6. Proposed Stakeholder Investigation Matrix</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Read each row as a small investigation plan: who to involve, what to learn, how to learn it, and what evidence that activity should produce.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Stakeholder</th>
+<th>Proposed Activities</th>
+<th>Priority Questions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executive Management</td>
+<td>Sponsor interview</td>
+<td>What business decisions are currently difficult? What outcomes would justify change? Which constraints must be respected?</td>
+</tr>
+<tr>
+<td>Sales Manager</td>
+<td>Interview, report review, process walkthrough</td>
+<td>How are leads allocated? What counts as a conversion? Which reports are unreliable?</td>
+</tr>
+<tr>
+<td>Sales Representatives</td>
+<td>Individual interviews, observation, workflow walkthroughs</td>
+<td>Where is each enquiry recorded? How is follow-up tracked? What happens to unassigned or repeat enquiries?</td>
+</tr>
+<tr>
+<td>Marketing</td>
+<td>Interview, campaign-export review</td>
+<td>What fields are captured for campaign leads? How are they handed to Sales?</td>
+</tr>
+<tr>
+<td>Customer Support</td>
+<td>Interview, process walkthrough, permitted ticket review</td>
+<td>When is Sales history needed? How are customer identities matched? What handoffs occur?</td>
+</tr>
+<tr>
+<td>IT / Systems / Data</td>
+<td>Interview, technical documentation and data review</td>
+<td>Which systems exist? What integrations and permissions are available? What data restrictions apply?</td>
+</tr>
+</tbody>
+</table></div>
+<p>The proposed activities are designed to guide investigation. Their completion is not implied.</p>
+<h2 id="7-core-investigation-questions">7. Core Investigation Questions</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>These are proposed questions to ask during discovery. They are questions, not invented interview answers or established findings.</p></aside>
+<h3 id="lead-capture-and-ownership">Lead Capture and Ownership</h3>
+<ol>
+<li>Which channels generate enquiries, and how does each channel deliver them?</li>
+<li>Which details are captured at the point of entry?</li>
+<li>How are enquiries assigned to employees?</li>
+<li>What happens when the expected owner is unavailable?</li>
+<li>How are duplicate or repeat enquiries recognised?</li>
+</ol>
+<h3 id="lead-management-and-follow-up">Lead Management and Follow-Up</h3>
+<ol start="6">
+<li>Which lead statuses are currently used?</li>
+<li>How are interactions, follow-ups and outcomes recorded?</li>
+<li>Are follow-up deadlines, reminders or escalation rules defined?</li>
+<li>What causes a lead to be marked converted, lost or closed?</li>
+<li>Which steps differ between employees or enquiry channels?</li>
+</ol>
+<h3 id="customer-information-and-cross-functional-processes">Customer Information and Cross-Functional Processes</h3>
+<ol start="11">
+<li>Where is customer information stored and maintained?</li>
+<li>Who is authorised to view or update customer records?</li>
+<li>What information, if any, passes between Sales and Customer Support?</li>
+<li>How are errors, missing details and conflicting records resolved?</li>
+</ol>
+<h3 id="management-reporting-and-technology">Management Reporting and Technology</h3>
+<ol start="15">
+<li>How are weekly Excel sales reports assembled?</li>
+<li>Which data sources and definitions contribute to each KPI?</li>
+<li>How are reporting totals checked for accuracy?</li>
+<li>What existing technology, security, privacy, cost or operational constraints apply?</li>
+</ol>
+<p>These questions are starting points. Follow-up questions would depend on the evidence obtained.</p>
+<h2 id="8-evidence-required-to-evaluate-initial-hypotheses">8. Evidence Required to Evaluate Initial Hypotheses</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Evidence helps distinguish a plausible explanation from a supported one. The table connects initial hypotheses with the records or observations needed to assess them.</p></aside>
+<p>The hypotheses below correspond to those recorded in Artefact 001.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Hypothesis</th>
+<th>Investigation Approach</th>
+<th>Evidence to Examine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H-01: Distributed information storage may limit visibility</td>
+<td>Interviews, workflow observation, document analysis</td>
+<td>Record locations, access arrangements and information-sharing steps</td>
+</tr>
+<tr>
+<td>H-02: Enquiry procedures may vary across channels</td>
+<td>Channel walkthroughs, observation, sample-record review</td>
+<td>Capture fields, routing practices, missing records and exceptions</td>
+</tr>
+<tr>
+<td>H-03: Ownership and follow-up rules may lack standardisation</td>
+<td>Interviews, SOP review, process walkthroughs</td>
+<td>Assignment rules, follow-up logs and escalation arrangements</td>
+</tr>
+<tr>
+<td>H-04: Reporting definitions or consolidation may be inconsistent</td>
+<td>Sales Manager interview, report and data analysis</td>
+<td>KPI definitions, report formulas, source fields and reconciliation procedures</td>
+</tr>
+<tr>
+<td>H-05: Incomplete or duplicate records may affect data quality</td>
+<td>Authorised data profiling and record review</td>
+<td>Missing-field patterns, repeated identifiers and matching exceptions</td>
+</tr>
+</tbody>
+</table></div>
+<p>Each hypothesis should be accepted, rejected or refined only after suitable evidence is examined.</p>
+<p>A lack of evidence should be documented as an unresolved question rather than treated as proof.</p>
+<h2 id="9-proposed-investigation-sequence">9. Proposed Investigation Sequence</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The stages put the investigation in a sensible order: agree the purpose, understand working practices, examine information and check the resulting findings.</p></aside>
+<h3 id="stage-1-confirm-purpose-and-scope">Stage 1 — Confirm Purpose and Scope</h3>
+<ul>
+<li>Review the business problem and preliminary objectives.</li>
+<li>Identify the sponsor and decision-makers.</li>
+<li>Confirm investigation boundaries, constraints and required access.</li>
+<li>Agree on the terminology used for leads, enquiries, customers and conversions.</li>
+</ul>
+<h3 id="stage-2-understand-current-working-practices">Stage 2 — Understand Current Working Practices</h3>
+<ul>
+<li>Conduct role-specific interviews.</li>
+<li>Review available documents and examples.</li>
+<li>Walk through representative enquiry scenarios.</li>
+<li>Observe relevant activities where permitted.</li>
+</ul>
+<h3 id="stage-3-examine-data-and-reporting">Stage 3 — Examine Data and Reporting</h3>
+<ul>
+<li>Identify relevant data sources and owners.</li>
+<li>Review report generation and KPI calculations.</li>
+<li>Investigate data completeness, consistency and possible duplication.</li>
+<li>Document limitations in available evidence.</li>
+</ul>
+<h3 id="stage-4-validate-findings">Stage 4 — Validate Findings</h3>
+<ul>
+<li>Prepare a preliminary As-Is process model.</li>
+<li>Compare accounts across stakeholder groups and available records.</li>
+<li>Review disagreements, gaps and exceptional process paths.</li>
+<li>Hold a cross-functional validation session where feasible.</li>
+</ul>
+<h3 id="stage-5-establish-requirements-inputs">Stage 5 — Establish Requirements Inputs</h3>
+<ul>
+<li>Produce an updated problem and root-cause assessment.</li>
+<li>Record confirmed business rules and constraints.</li>
+<li>Identify priorities and unresolved decisions.</li>
+<li>Establish inputs for future To-Be design and requirements specification.</li>
+</ul>
+<p>This is a recommended sequence, not an execution log.</p>
+<h2 id="10-evidence-management-and-documentation">10. Evidence Management and Documentation</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Evidence needs a clear record of where it came from and what it supports. Good documentation also preserves uncertainty and protects sensitive information.</p></aside>
+<p>The investigation should maintain a traceable record of findings and their sources.</p>
+<p>A suggested evidence register would include:</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Evidence ID</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>Source</td>
+<td>Stakeholder role, document, observation or dataset</td>
+</tr>
+<tr>
+<td>Date / Version</td>
+<td>When the evidence was obtained</td>
+</tr>
+<tr>
+<td>Related Process</td>
+<td>Business activity or workflow</td>
+</tr>
+<tr>
+<td>Related Hypothesis</td>
+<td>Problem or potential cause being investigated</td>
+</tr>
+<tr>
+<td>Finding</td>
+<td>What the evidence actually supports</td>
+</tr>
+<tr>
+<td>Confidence / Limitation</td>
+<td>Uncertainty, missing context or potential bias</td>
+</tr>
+<tr>
+<td>Follow-Up Action</td>
+<td>Further validation or decision needed</td>
+</tr>
+</tbody>
+</table></div>
+<p>Separate facts, stakeholder opinions, analyst interpretations and recommendations.</p>
+<p>Where real organisational data is used in future exercises, access permissions, confidentiality and applicable privacy requirements must be respected. Public or synthetic data should be used for portfolio demonstrations unless disclosure is explicitly authorised.</p>
+<h2 id="11-findings-validation-and-stakeholder-communication">11. Findings Validation and Stakeholder Communication</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Validation means checking that the analysis reflects the evidence and stakeholders' understanding. Triangulation means checking an explanation using more than one source or method.</p></aside>
+<p>Proposed validation practices include:</p>
+<ul>
+<li>Comparing stakeholder statements with available documents and operational data.</li>
+<li>Checking for contradictions between departments.</li>
+<li>Asking process participants to review relevant As-Is process steps.</li>
+<li>Confirming process boundaries, ownership and exceptional scenarios.</li>
+<li>Reviewing KPI definitions with the responsible business owners.</li>
+<li>Recording open questions and decisions requiring sponsor input.</li>
+<li>Maintaining versioned documentation as assumptions are resolved.</li>
+</ul>
+<p>Findings should not be described as stakeholder-approved until an actual review and approval have occurred.</p>
+<h2 id="12-expected-investigation-outputs">12. Expected Investigation Outputs</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Outputs are the things the proposed investigation should produce, such as clearer process information and requirements inputs. Listing an output does not mean it has already been produced through real discovery.</p></aside>
+<p>If the proposed investigation were executed, its expected outputs would include:</p>
+<ol>
+<li>Confirmed stakeholder register and engagement priorities.</li>
+<li>Evidence-supported As-Is process models.</li>
+<li>Validated pain points and root-cause analysis.</li>
+<li>Business rules, ownership definitions and reporting requirements.</li>
+<li>Agreed initial business objectives and potential success measures.</li>
+<li>Identified information-quality and technical constraints.</li>
+<li>A structured input set for the requirements catalogue and future-state design.</li>
+</ol>
+<p>For the current fictional case study, these remain <strong>expected outputs of the proposed plan</strong>, not evidence of completed fieldwork.</p>
+<h2 id="13-risks-assumptions-and-limitations">13. Risks, Assumptions and Limitations</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>These limits explain what could affect the plan and which assumptions still need checking.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Risk or Limitation</th>
+<th>Potential Effect</th>
+<th>Proposed Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stakeholder perspectives may conflict</td>
+<td>Inaccurate understanding of the process</td>
+<td>Triangulate interviews, observation and documents</td>
+</tr>
+<tr>
+<td>Documentation may be outdated</td>
+<td>Incorrect As-Is model</td>
+<td>Compare procedures with actual workflows</td>
+</tr>
+<tr>
+<td>Data may be incomplete or inaccessible</td>
+<td>Uncertain root causes and KPIs</td>
+<td>Document limitations and use authorised samples</td>
+</tr>
+<tr>
+<td>Departments may use different terminology</td>
+<td>Ambiguous requirements</td>
+<td>Create and validate a shared glossary</td>
+</tr>
+<tr>
+<td>Proposed technology may influence discovery</td>
+<td>Solution bias</td>
+<td>Confirm problems and needs before evaluating systems</td>
+</tr>
+<tr>
+<td>The organisation is fictional</td>
+<td>No real stakeholder validation is available</td>
+<td>Clearly label the case as simulated and distinguish assumptions</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="14-conclusion-and-next-steps">14. Conclusion and Next Steps</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>The conclusion connects the planned investigation to the next analysis stage while preserving the distinction between a plan and completed fieldwork.</p></aside>
+<p>This investigation plan provides a structured method for exploring Northstar's customer-information and operational challenges.</p>
+<p>The approach prioritises stakeholder coverage, appropriate evidence collection, cross-functional understanding and careful validation before moving toward detailed requirements or CRM solution selection.</p>
+<p>The next project artefact will consolidate the currently available scenario facts into a preliminary As-Is process, identify candidate gaps and document a proposed To-Be process for later validation.</p>
+<hr/>
+<p><strong>Document Status:</strong> Proposed investigation plan — not executed.<br/>
+<strong>Next Artefact:</strong> Artefact 003 — As-Is Process, Pain Points, Gap Analysis &amp; Proposed To-Be.<br/>
+<strong>Project Integrity:</strong> Northstar Services is a fictional case-study organisation. No actual interviews, workshops, observations or production data assessments are claimed.</p></article>
+  </section>
 
+  <section class="reader-continuation" aria-labelledby="next-in-story">
+    <p class="eyebrow">Continue the story</p>
+    <h2 id="next-in-story">Understand how work flows</h2>
+    <p>Next, use the scenario to describe the current process, possible gaps and a proposed future process. Artefact 003 keeps those models clearly provisional because this investigation has not been executed.</p>
+    <nav class="reader-page-links" aria-label="Previous and next artefacts"><a href="01-business-context.html">← Previous: Understand the problem</a><a href="03-process-gap-analysis.html">Next: Understand how work flows →</a></nav>
+  </section>
+  <section class="reader-source-links" aria-labelledby="supporting-source">
+    <h2 id="supporting-source">Supporting source</h2>
+    <p>The complete document is readable above. The source link provides the Markdown version and its GitHub history.</p>
+    <p><a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/02-stakeholder-investigation-plan.md" target="_blank" rel="noopener noreferrer">View source document on GitHub ↗</a></p>
+  </section>
+  <details id="preserved-overview" class="preserved-overview">
+    <summary>Optional: earlier website overview and worked examples</summary>
+    <p class="reader-provenance">This preserves the earlier web presentation in addition to the full document above. Its document text and examples have been retained.</p>
+    <div class="original-overview"><a class="back" href="index.html">← Case study overview</a><div class="eyebrow" style="margin-top:28px">Artefact 002 · v1.0 · Planned, not executed</div><h2>Stakeholder &amp; Investigation Plan</h2><p class="lead">Identify whose perspective and evidence we need before writing requirements or confirming causes.</p><div class="notice"><strong>Status:</strong> This is a proposed stakeholder map and discovery plan. No interviews, workshops, observation sessions or data reviews have yet been conducted with real Northstar employees.</div>
+<h3>Provisional stakeholder groups</h3><div class="table-wrap"><table><thead><tr><th>Group</th><th>Information to obtain</th><th>Proposed technique</th></tr></thead><tbody><tr><td>Executive sponsor</td><td>Business outcomes, constraints, investment priorities, success criteria</td><td>Interview</td></tr><tr><td>Sales manager</td><td>Lead lifecycle, ownership, follow-up targets, KPI/report issues</td><td>Interview + report review</td></tr><tr><td>Sales representatives</td><td>Actual enquiry handling, notes, workarounds, status updates</td><td>Interviews + observation + workshop</td></tr><tr><td>Marketing</td><td>Campaign intake, lead-source attribution, handoffs and exports</td><td>Interview + document/data review</td></tr><tr><td>Customer Support</td><td>Ticket history, customer identifiers, case handoffs, access needs</td><td>Interview + ticket review</td></tr><tr><td>IT / Systems / Data</td><td>System inventory, storage, access, integration, security</td><td>Interview + technical documentation</td></tr></tbody></table></div>
+<h3>Discovery questions</h3><ol><li>Walk through an enquiry from arrival to first action. Who handles it?</li><li>Where and how is it recorded by channel?</li><li>Who assigns ownership, and how is reassignment controlled?</li><li>Which fields are required and which are frequently missing?</li><li>How are enquiry, lead, opportunity, customer and case defined?</li><li>How are duplicate or repeat enquiries handled?</li><li>What follow-up expectations exist, and how is performance evidenced?</li><li>What is transferred between Sales and Support, and when?</li><li>How is the weekly Excel report prepared, checked and interpreted?</li><li>What access, retention, privacy and implementation constraints apply?</li></ol>
+<h3>Triangulation and validation</h3><p>Compare stakeholder descriptions against available spreadsheets, ticket histories, timestamp records, existing procedures and observation where access is permitted. Record disagreements as questions rather than silently treating one person's account as fact. The provisional As-Is model should be reviewed in a facilitated cross-functional session.</p>
+<h3>Risks to avoid</h3><ul><li>Leading stakeholders by asking whether Salesforce is the answer.</li><li>Confusing the manager's intended workflow with employees' actual workflow.</li><li>Assuming separate systems necessarily mean broken integration.</li><li>Assigning high/low influence ratings before decision rights are understood.</li></ul>
+<p class="small">Full investigation notes: <a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/02-stakeholder-investigation-plan.md" rel="noopener noreferrer" target="_blank">Markdown working artefact</a>.</p><p><a class="btn btn-outline" href="03-process-gap-analysis.html">Next: process analysis →</a></p></div>
+  </details>
+</main>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.4</span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></div></footer>
+</body>
+</html>
