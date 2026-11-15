@@ -139,6 +139,25 @@ def add_reader_guides(document, page):
         paragraph.string = text
         note.extend([label, paragraph])
         heading.insert_after(note)
+        if page['output'] == '03-process-gap-analysis.html':
+            number = heading.get_text().split('.', 1)[0]
+            diagrams = {
+                '5': ('as-is.svg', 'Preliminary As-Is process landscape', 'Scenario-based illustration; not a stakeholder-validated process map.'),
+                '9': ('to-be.svg', 'Proposed To-Be process', 'Illustrative future-state process; not approved, configured or implemented.'),
+            }
+            if number in diagrams:
+                filename, label_text, caption_text = diagrams[number]
+                figure = document.new_tag('figure', attrs={'data-reader-added': 'existing-diagram'})
+                link = document.new_tag('a', href='assets/' + filename, target='_blank', rel='noopener noreferrer', attrs={'class': 'diagram-link', 'aria-label': 'Open full-size ' + label_text})
+                image = document.new_tag('img', src='assets/' + filename, alt=label_text, attrs={'class': 'diagram'})
+                link.append(image)
+                caption = document.new_tag('figcaption', attrs={'class': 'caption'})
+                caption.string = caption_text + ' '
+                full_size = document.new_tag('a', href='assets/' + filename, target='_blank', rel='noopener noreferrer')
+                full_size.string = 'Open full-size diagram ↗'
+                caption.append(full_size)
+                figure.extend([link, caption])
+                note.insert_after(figure)
     for table in list(document.find_all('table')):
         wrap = document.new_tag('div', attrs={'class': 'table-wrap', 'role': 'region', 'tabindex': '0', 'aria-label': 'Scrollable document table'})
         table.wrap(wrap)
