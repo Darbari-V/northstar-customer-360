@@ -23,6 +23,7 @@ GITHUB = 'https://github.com/Darbari-V/northstar-customer-360/blob/main/'
 GUIDES = json.loads((ROOT / 'web/reading-guides.json').read_text(encoding='utf-8'))
 PAGES = GUIDES['pages']
 OVERVIEWS = json.loads((ROOT / 'web/original-web-overviews.json').read_text(encoding='utf-8'))
+CONSOLIDATION = json.loads((ROOT / 'web/overview-consolidation.json').read_text(encoding='utf-8'))
 PAGE_BY_SOURCE = {page['source']: page['output'] for page in PAGES}
 
 
@@ -170,16 +171,42 @@ def add_reader_guides(document, page):
     add_sql_walkthroughs(document)
 
 
-def legacy_overview(page):
-    saved = parse(OVERVIEWS[page['output']])
-    main = saved.find('main')
-    if not main:
-        raise ValueError('Original overview has no main content: ' + page['output'])
-    for heading in main.find_all(re.compile(r'^h[1-5]$')):
-        heading.name = 'h' + str(int(heading.name[1]) + 1)
-    for element in main.find_all(id=True):
-        element['id'] = 'overview-' + element['id']
-    return main.decode_contents()
+def verify_consolidation(result, page, original_document):
+    """Check the reviewed section map and preserve the exact historical archive.
+
+    The map records a manual semantic comparison; it is not a substitute for the
+    separate exact-text, table and code checks on the current master documents.
+    """
+    name = page['output']
+    review = CONSOLIDATION[name]
+    archived = OVERVIEWS[name]
+    if hashlib.sha256(archived.encode('utf-8')).hexdigest() != review['archive_sha256']:
+        raise ValueError('Historical overview archive changed: ' + name)
+    old = parse(archived).find('main')
+    old_headings = [heading.get_text(' ', strip=True) for heading in old.find_all('h2')]
+    if old_headings != [item['earlier_section'] for item in review['sections']]:
+        raise ValueError('Consolidation review misses an earlier section: ' + name)
+    current_ids = {heading['id'] for heading in original_document.find_all(['h2', 'h3'])}
+    for item in review['sections']:
+        if not item['current_sections'] or not item['coverage']:
+            raise ValueError('Incomplete consolidation decision: ' + name)
+        if not set(item['current_sections']) <= current_ids:
+            raise ValueError('Consolidation target section is absent: ' + name)
+    for prompt in review['reader_prompts']:
+        if prompt not in result.select_one('article.document-content').get_text(' ', strip=True):
+            raise ValueError('Retained discovery prompt is absent: ' + name)
+    # All four older SQL queries occur verbatim in the complete data artefact.
+    if name == '05-customer-data.html':
+        current_codes = [code.get_text().strip() for code in original_document.select('pre > code')]
+        if any(pre.get_text().strip() not in current_codes for pre in old.find_all('pre')):
+            raise ValueError('An earlier SQL example is absent: ' + name)
+    if name == '03-process-gap-analysis.html':
+        old_images = {image['src'] for image in old.find_all('img', src=True)}
+        current_images = {image['src'] for image in result.select('article.document-content img[src]')}
+        if not old_images <= current_images:
+            raise ValueError('An earlier process diagram is absent: ' + name)
+    if result.select_one('#preserved-overview, .original-overview, .preserved-overview'):
+        raise ValueError('Duplicate historical overview is publicly rendered: ' + name)
 
 
 def source_metrics(document):
@@ -214,10 +241,7 @@ def verify_document(output: str, page, original_document, title):
         raise ValueError('Original table cells changed: ' + page['source'])
     if result.find('h1').get_text() != title or len(result.find_all('h1')) != 1:
         raise ValueError('Document title differs or is duplicated')
-    original_main = parse(OVERVIEWS[page['output']]).find('main')
-    saved_overview = result.select_one('.original-overview')
-    if normalized(original_main.get_text()) != normalized(saved_overview.get_text()):
-        raise ValueError('Earlier web overview omitted or changed: ' + page['output'])
+    verify_consolidation(result, page, original_document)
     ids = [element['id'] for element in result.find_all(id=True)]
     if len(ids) != len(set(ids)):
         raise ValueError('Duplicate anchor IDs: ' + page['output'])
@@ -265,7 +289,7 @@ def render_page(page, index):
         contents=contents, source=esc(page['source']), source_hash=hashlib.sha256(source_bytes).hexdigest(),
         document=str(document), reproducible_sql=sql, next_title=esc(next_title),
         next_explanation=esc(page['next']), previous_next=adjacent,
-        source_url=esc(GITHUB + page['source']), original_overview=legacy_overview(page),
+        source_url=esc(GITHUB + page['source']),
     )
     metrics = verify_document(output, page, original, title)
     if sql:
@@ -317,7 +341,7 @@ def main():
             path.write_text(output, encoding='utf-8')
     if stale:
         raise SystemExit('Regenerate these pages: ' + ', '.join(stale))
-    print(f"PASS: {len(outputs)} complete artefacts; {totals}; original overview text retained; links and contents verified.")
+    print(f"PASS: {len(outputs)} complete artefacts; {totals}; historical archives unchanged; consolidation map, examples, links and contents verified.")
 
 
 if __name__ == '__main__':

@@ -1,0 +1,362 @@
+{
+  "01-business-context.html": {
+    "archive_sha256": "30d0935d54c678912336e3f312a356d88644603f806720e89ca3de0f14b2b503",
+    "reader_prompts": [
+      "Also ask how many enquiries arrive through each channel; enquiry volumes help establish the scale of the investigation."
+    ],
+    "sections": [
+      {
+        "earlier_section": "Scenario facts",
+        "current_sections": [
+          "2-business-background",
+          "4-symptoms-possible-causes-and-business-impact"
+        ],
+        "coverage": "Channel arrangements and reported concerns are described in detail."
+      },
+      {
+        "earlier_section": "Initial business problem",
+        "current_sections": [
+          "3-business-problem-statement",
+          "4-symptoms-possible-causes-and-business-impact"
+        ],
+        "coverage": "The problem and unverified causes are distinguished."
+      },
+      {
+        "earlier_section": "Business need",
+        "current_sections": [
+          "5-preliminary-business-need"
+        ],
+        "coverage": "Required information-management capabilities are retained."
+      },
+      {
+        "earlier_section": "Objectives to validate",
+        "current_sections": [
+          "6-preliminary-business-objectives",
+          "10-candidate-success-measures"
+        ],
+        "coverage": "Candidate objectives and measures cover traceability, ownership, access and reporting."
+      },
+      {
+        "earlier_section": "Scope and boundaries",
+        "current_sections": [
+          "8-preliminary-scope-of-investigation",
+          "13-project-integrity-and-limitations"
+        ],
+        "coverage": "Investigation scope and implementation boundaries are explicit."
+      },
+      {
+        "earlier_section": "Initial hypotheses",
+        "current_sections": [
+          "9-initial-investigation-hypotheses"
+        ],
+        "coverage": "Hypotheses and evidence requirements are retained."
+      },
+      {
+        "earlier_section": "Open questions",
+        "current_sections": [
+          "11-assumptions-dependencies-and-open-questions"
+        ],
+        "coverage": "Open questions are retained; the additional enquiry-volume prompt is in the reader note."
+      }
+    ]
+  },
+  "02-stakeholder-plan.html": {
+    "archive_sha256": "60bf4c95aa4ce32070af400a29b5774694e5d2c660c1637225f16ea3ff5f54c6",
+    "reader_prompts": [
+      "Compare the manager's intended workflow with what employees actually do; use observation and records to check the difference."
+    ],
+    "sections": [
+      {
+        "earlier_section": "Provisional stakeholder groups",
+        "current_sections": [
+          "3-preliminary-stakeholder-identification",
+          "5-investigation-techniques-and-rationale",
+          "6-proposed-stakeholder-investigation-matrix"
+        ],
+        "coverage": "Stakeholder groups, information needs and investigation techniques are retained."
+      },
+      {
+        "earlier_section": "Discovery questions",
+        "current_sections": [
+          "7-core-investigation-questions"
+        ],
+        "coverage": "Discovery questions cover intake, ownership, definitions, handoffs, data and reporting."
+      },
+      {
+        "earlier_section": "Triangulation and validation",
+        "current_sections": [
+          "8-evidence-required-to-evaluate-initial-hypotheses",
+          "9-proposed-investigation-sequence",
+          "11-findings-validation-and-stakeholder-communication"
+        ],
+        "coverage": "Evidence triangulation, disagreement review and cross-functional validation are retained."
+      },
+      {
+        "earlier_section": "Risks to avoid",
+        "current_sections": [
+          "4-initial-stakeholder-prioritisation",
+          "5-investigation-techniques-and-rationale",
+          "13-risks-assumptions-and-limitations"
+        ],
+        "coverage": "Solution bias, provisional authority and evidence limits are retained; intended versus actual workflow is explicit in the reader note."
+      }
+    ]
+  },
+  "03-process-gap-analysis.html": {
+    "archive_sha256": "c33480e4cfd923d8fd1db8e9d73359881705acee04aa8b5db276a4e4d168f40f",
+    "reader_prompts": [],
+    "sections": [
+      {
+        "earlier_section": "Preliminary As-Is landscape",
+        "current_sections": [
+          "4-preliminary-as-is-process-landscape",
+          "5-preliminary-as-is-process-model"
+        ],
+        "coverage": "Current-state workstreams and the original As-Is SVG are in the main document flow."
+      },
+      {
+        "earlier_section": "Pain points and possible impacts",
+        "current_sections": [
+          "6-reported-pain-points-and-potential-operational-concerns"
+        ],
+        "coverage": "Reported concerns and hypotheses are distinguished in the expanded pain-point table."
+      },
+      {
+        "earlier_section": "Initial gap analysis",
+        "current_sections": [
+          "7-preliminary-gap-analysis",
+          "8-gap-prioritisation-preliminary-assessment"
+        ],
+        "coverage": "Gap analysis expands each current/desired-state comparison and its validation needs."
+      },
+      {
+        "earlier_section": "Proposed To-Be process",
+        "current_sections": [
+          "9-proposed-to-be-business-process"
+        ],
+        "coverage": "The proposed process and original To-Be SVG are in the main document flow."
+      },
+      {
+        "earlier_section": "Decision points that require agreement",
+        "current_sections": [
+          "10-proposed-future-state-process-controls",
+          "12-information-and-requirements-dependencies"
+        ],
+        "coverage": "Capture, identity, classification, ownership, handoff and reporting decisions are retained."
+      },
+      {
+        "earlier_section": "Not a completed implementation",
+        "current_sections": [
+          "2-purpose-and-scope",
+          "11-technology-considerations",
+          "15-conclusion-and-project-integrity"
+        ],
+        "coverage": "No implementation, validation or achieved benefit is claimed."
+      }
+    ]
+  },
+  "04-requirements-catalogue.html": {
+    "archive_sha256": "c35bb0706ecb05ddb655792852f46261bde6decffc2b6847bc6005fe7e3153f7",
+    "reader_prompts": [],
+    "sections": [
+      {
+        "earlier_section": "Business objective & scoped need",
+        "current_sections": [
+          "2-source-context-and-traceability-anchors",
+          "3-finalised-scope-for-this-case-study-edition",
+          "5-business-need-and-stakeholder-requirements"
+        ],
+        "coverage": "BO-02, GAP-02 and the bounded ownership-visibility need are retained."
+      },
+      {
+        "earlier_section": "Candidate functional requirements",
+        "current_sections": [
+          "7-functional-requirements",
+          "8-data-requirements"
+        ],
+        "coverage": "All five functional requirements and three supporting data requirements are retained."
+      },
+      {
+        "earlier_section": "Two distinct views, two distinct rules",
+        "current_sections": [
+          "4-case-study-assumptions-and-definitions",
+          "6-business-rules",
+          "10-proposed-acceptance-criteria-synthetic-verification-examples"
+        ],
+        "coverage": "My Assigned includes Closed; Active excludes Closed. Both worked cases remain."
+      },
+      {
+        "earlier_section": "Acceptance criteria: testing both conditions",
+        "current_sections": [
+          "10-proposed-acceptance-criteria-synthetic-verification-examples"
+        ],
+        "coverage": "AC-001 retains all five ENQ-601–605 records and positive/negative expectations."
+      },
+      {
+        "earlier_section": "Requirements traceability",
+        "current_sections": [
+          "11-requirements-traceability-matrix"
+        ],
+        "coverage": "The complete traceability table includes the older subset and supporting data/stories."
+      },
+      {
+        "earlier_section": "Completed simulated change analysis — CR-001",
+        "current_sections": [
+          "13-completed-change-impact-analysis-cr-001-simulation-only"
+        ],
+        "coverage": "CR-001 includes the ENQ-504 before/after example, impact analysis and unchanged baseline."
+      },
+      {
+        "earlier_section": "Validation-question register: documented dispositions",
+        "current_sections": [
+          "14-assumptions-stakeholder-validation-register-completed-analytical-dispositions"
+        ],
+        "coverage": "All twelve questions and documented dispositions remain."
+      },
+      {
+        "earlier_section": "Non-functional considerations & limitations",
+        "current_sections": [
+          "12-non-functional-requirements-and-quality-considerations",
+          "15-requirements-quality-and-session-closure"
+        ],
+        "coverage": "Quality concerns, scope limitations and simulated completion are retained."
+      }
+    ]
+  },
+  "05-customer-data.html": {
+    "archive_sha256": "0505a82d51216ccf8531cdc62a028a841edeedce67bfffb3c5b33c5c302911db",
+    "reader_prompts": [],
+    "sections": [
+      {
+        "earlier_section": "Why this analysis matters",
+        "current_sections": [
+          "1-executive-summary",
+          "2-context-scope-and-traceability"
+        ],
+        "coverage": "Business context, BO-01/GAP-01 and diagnostic approach are retained."
+      },
+      {
+        "earlier_section": "Proposed logical data model",
+        "current_sections": [
+          "3-proposed-logical-data-model"
+        ],
+        "coverage": "Customer–Enquiry structure and customer-versus-owner distinction are retained."
+      },
+      {
+        "earlier_section": "Minimum data dictionary",
+        "current_sections": [
+          "3-proposed-logical-data-model"
+        ],
+        "coverage": "Customer, Enquiry and reconciliation dictionaries retain every earlier field."
+      },
+      {
+        "earlier_section": "Synthetic example records",
+        "current_sections": [
+          "4-synthetic-test-records"
+        ],
+        "coverage": "All three customer and four enquiry records are retained unchanged."
+      },
+      {
+        "earlier_section": "SQL: identify the differences",
+        "current_sections": [
+          "5-sql-investigation-and-results"
+        ],
+        "coverage": "All three older diagnostic SQL snippets and results occur verbatim; four additional queries remain."
+      },
+      {
+        "earlier_section": "Reconciliation: website vs Sales",
+        "current_sections": [
+          "4-synthetic-test-records",
+          "5-sql-investigation-and-results"
+        ],
+        "coverage": "Both source ID lists, the fourth older SQL snippet and WEB-303/305 result remain."
+      },
+      {
+        "earlier_section": "Data-quality findings",
+        "current_sections": [
+          "6-data-quality-findings-and-business-implications"
+        ],
+        "coverage": "DQ-01–DQ-04, interpretation, actions and evidence limits are retained."
+      },
+      {
+        "earlier_section": "Candidate validation and review controls",
+        "current_sections": [
+          "7-proposed-validation-and-investigation-controls"
+        ],
+        "coverage": "VAL-01–03, REC-01, REV-01 and first-time-customer exception are retained."
+      },
+      {
+        "earlier_section": "Completion boundaries and next work",
+        "current_sections": [
+          "9-verification-assumptions-and-limits",
+          "10-completed-case-study-disposition-and-next-steps"
+        ],
+        "coverage": "Synthetic execution boundaries, completed analysis and future work are retained."
+      }
+    ]
+  },
+  "06-crm-design.html": {
+    "archive_sha256": "58388a20d3a00c365ecc9bc062acbb23860fabf3b605260e2058d4a87bfcaf59",
+    "reader_prompts": [],
+    "sections": [
+      {
+        "earlier_section": "Purpose and MVP boundary",
+        "current_sections": [
+          "1-executive-summary",
+          "2-source-and-traceability-boundaries"
+        ],
+        "coverage": "MVP scope and excluded implementation claims remain explicit."
+      },
+      {
+        "earlier_section": "Logical entities and relationships",
+        "current_sections": [
+          "3-logical-crm-model-deliberately-platform-neutral"
+        ],
+        "coverage": "Logical relationships, pending D-01 exception and separate business ownership are retained."
+      },
+      {
+        "earlier_section": "Candidate Salesforce object mapping",
+        "current_sections": [
+          "3-logical-crm-model-deliberately-platform-neutral"
+        ],
+        "coverage": "All candidate mappings and their open decisions remain."
+      },
+      {
+        "earlier_section": "Candidate field dictionary",
+        "current_sections": [
+          "4-field-design-candidate-dictionary"
+        ],
+        "coverage": "All earlier candidate fields are present with qualifications and traceability."
+      },
+      {
+        "earlier_section": "Business rules mapped to proposed CRM behaviour",
+        "current_sections": [
+          "5-existing-business-rules-proposed-behaviour"
+        ],
+        "coverage": "All view rules, BR-004 pseudocode and no-automatic-status-change explanation are retained."
+      },
+      {
+        "earlier_section": "Design decisions before configuration",
+        "current_sections": [
+          "6-design-decisions-conflicts-and-open-questions"
+        ],
+        "coverage": "D-01–D-07 remain open; no retroactive baseline changes are introduced."
+      },
+      {
+        "earlier_section": "Future verification plan — not executed",
+        "current_sections": [
+          "7-proposed-verification-scenarios-not-executed"
+        ],
+        "coverage": "T-01–T-08 remain proposed tests with expected results, not executed evidence."
+      },
+      {
+        "earlier_section": "Completion boundary and next work",
+        "current_sections": [
+          "8-practical-mvp-build-order-and-evidence-plan",
+          "9-case-study-disposition"
+        ],
+        "coverage": "Completed design, pending configuration and future verification work remain explicit."
+      }
+    ]
+  }
+}

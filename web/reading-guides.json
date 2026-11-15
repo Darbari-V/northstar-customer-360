@@ -17,7 +17,7 @@
         "Scope sets the boundary of this investigation. Read the in-scope and out-of-scope lists together to see what this stage covers and what it leaves for later.",
         "A hypothesis is a possible explanation, not a confirmed cause. Each statement below needs evidence before it can be treated as a finding.",
         "A measure is a way to judge future improvement. These are candidate measures, not measured results, targets already agreed, or benefits already delivered.",
-        "Assumptions are things provisionally taken as true; dependencies are things the work relies on. Open questions identify what still needs to be found out.",
+        "Assumptions are things provisionally taken as true; dependencies are things the work relies on. Open questions identify what still needs to be found out. Also ask how many enquiries arrive through each channel; enquiry volumes help establish the scale of the investigation.",
         "These are the proposed next steps for turning the initial problem description into better-supported analysis.",
         "This explains the evidence boundary. The work demonstrates analysis of a fictional scenario, without claiming client interviews, implementation or measured improvement."
       ]
@@ -41,7 +41,7 @@
         "Evidence needs a clear record of where it came from and what it supports. Good documentation also preserves uncertainty and protects sensitive information.",
         "Validation means checking that the analysis reflects the evidence and stakeholders' understanding. Triangulation means checking an explanation using more than one source or method.",
         "Outputs are the things the proposed investigation should produce, such as clearer process information and requirements inputs. Listing an output does not mean it has already been produced through real discovery.",
-        "These limits explain what could affect the plan and which assumptions still need checking.",
+        "These limits explain what could affect the plan and which assumptions still need checking. Compare the manager's intended workflow with what employees actually do; use observation and records to check the difference.",
         "The conclusion connects the planned investigation to the next analysis stage while preserving the distinction between a plan and completed fieldwork."
       ]
     },
