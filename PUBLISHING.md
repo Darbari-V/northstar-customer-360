@@ -27,9 +27,13 @@ The verification workflow checks that the generated pages are current. It has re
 
 The generator does not write to `docs/`, `data/`, `README.md`, the overview page, or the original shared assets. Markdown links between artefacts are translated into the corresponding public HTML links without changing the source documents.
 
-## Preserved web overviews
+## One public reading path and preserved history
 
-`web/original-web-overviews.json` retains the six previous HTML pages as exact strings, captured before this presentation update. Their main content is also available in the optional earlier-overview section on each new artefact page. The full document is the primary reading path. The earlier overview is a historical presentation and is not a second master document.
+Each public artefact has one complete reading path. Earlier summaries are not appended as a second version. Their worked examples are already present in the complete documents; both process diagrams remain in Artefact 003. Two useful discovery prompts are incorporated into the reader notes in Artefacts 001 and 002.
+
+`web/original-web-overviews.json` retains the six previous HTML pages as exact strings, captured before the full-document presentation update. Keep this historical archive unchanged. Git history also preserves earlier published versions. These are reference history, not additional master documents for readers to choose between.
+
+`web/overview-consolidation.json` records the manual review of every earlier main section, its corresponding current sections, archive checksums and retained reader prompts. Builds validate the section map and archive integrity, verify that all four earlier SQL queries are present verbatim, and check that both process diagrams remain in the main reading flow. The section map records a semantic review; exact source-preservation checks independently protect the complete master documents.
 
 ## Add a future artefact
 
@@ -37,4 +41,4 @@ Add its reviewed Markdown file and an entry to `web/reading-guides.json`, with a
 
 ## Preservation checks
 
-Every build checks the complete rendered document text, section counts, table-cell text and order, exact code-block contents, full contents navigation, original-overview text, local links and anchor targets. Artefact 005 also checks the exact embedded SQL practice file. These checks use the current source documents; they do not freeze the project against future deliberate, reviewed changes.
+Every build checks the complete rendered document text, section counts, table-cell text and order, exact code-block contents, full contents navigation, consolidation review and archive integrity, local links and anchor targets. It also rejects accidental reintroduction of the duplicate historical-overview block. Artefact 005 checks the exact embedded SQL practice file. These checks use the current source documents; they do not freeze the project against future deliberate, reviewed changes.
