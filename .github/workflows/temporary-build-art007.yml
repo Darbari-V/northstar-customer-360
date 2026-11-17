@@ -1,0 +1,50 @@
+name: Temporary Artefact 007 page build (feature branch only)
+on:
+  push:
+    branches:
+      - feat/session-7-salesforce-evidence
+    paths:
+      - .github/workflows/temporary-build-art007.yml
+      - docs/07-salesforce-crm-configuration-and-functional-verification.md
+      - web/reading-guides.json
+      - scripts/build_artefacts.py
+      - web/artefact-page.template.html
+permissions:
+  contents: write
+jobs:
+  generate:
+    if: github.repository == 'Darbari-V/northstar-customer-360' && github.ref == 'refs/heads/feat/session-7-salesforce-evidence'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/session-7-salesforce-evidence
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned site dependencies
+        run: python -m pip install -r requirements-site.txt
+      - name: Generate all seven pages and check preservation
+        run: |
+          python scripts/build_artefacts.py
+          python scripts/build_artefacts.py --check
+      - name: Confirm previous six master documents are unchanged
+        run: |
+          git fetch origin main
+          git diff --exit-code origin/main -- docs/01-business-context.md docs/02-stakeholder-investigation-plan.md docs/03-process-gap-analysis.md docs/04-requirements-catalogue.md docs/05-customer-data-model-and-quality-analysis.md docs/06-crm-data-and-solution-design.md
+      - name: Commit generated pages only to the review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- 01-business-context.html 02-stakeholder-plan.html 03-process-gap-analysis.html 04-requirements-catalogue.html 05-customer-data.html 06-crm-design.html 07-salesforce-configuration.html
+          if git diff --cached --quiet; then
+            echo 'All generated HTML is already current'
+            exit 0
+          fi
+          echo 'Generated page changes:'
+          git diff --cached --name-status
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "site: generate seven verified complete Northstar artefact pages"
+          git push origin HEAD:feat/session-7-salesforce-evidence
