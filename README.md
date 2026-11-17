@@ -49,8 +49,8 @@ These objectives are provisional and have not been formally approved by real sta
 | 2. Requirements Engineering | Bounded candidate requirements catalogue, business rules, user stories, acceptance criteria, traceability, simulated change analysis and validation-question dispositions | **Completed for Session 4 case-study scope** |
 | 3. Customer Data & SQL | Logical data model, data dictionary, synthetic SQL investigations, data quality analysis, reconciliation and proposed validation controls | **Completed for Session 5 case-study scope** |
 | 4. CRM Data & Solution Design | Proposed CRM objects, fields, relationships, validation and MVP design | **Session 6 proposed design prepared; implementation decisions pending** |
-| 5. CRM Build & Integration | Hands-on Salesforce configuration, API analysis and data mapping | Planned |
-| 6. Testing & Analytics | UAT, reconciliation and reporting | Planned |
+| 5. CRM Build & Integration | Scoped Salesforce Sales Enquiry MVP, validation rule and three list views; API/integration work remains future scope | **Session 7 development demo documented; integration pending** |
+| 6. Testing & Analytics | Author-executed Salesforce development checks documented with screenshots; multi-user access, UAT, reconciliation and reporting remain future work | **Development evidence reviewed; formal UAT and analytics pending** |
 
 New learning phases will be documented as their corresponding artefacts are developed and reviewed.
 
@@ -84,7 +84,13 @@ A completed fictional customer-data analysis comprising a proposed logical data 
 
 A proposed CRM design for the limited Northstar MVP V1 demonstration, covering logical entities, candidate Salesforce object mappings, field types, optional Customer–Enquiry relationships, Sales ownership rules, validation logic, manager views and proposed verification scenarios.
 
-The design preserves the existing requirements baseline and identifies decisions requiring resolution before implementation. No Salesforce configuration or application testing has been performed.
+The design preserves the existing requirements baseline and identifies decisions requiring resolution before implementation. At the time Artefact 006 was written, no Salesforce configuration or application testing had been performed. Artefact 007 documents the subsequent limited demonstration.
+
+### [Artefact 007 — Salesforce CRM Configuration & Functional Verification](docs/07-salesforce-crm-configuration-and-functional-verification.md)
+
+An author-built Salesforce Sales Enquiry MVP demonstration with six synthetic enquiries, an active status-transition validation rule, three filtered list views, a representative display formula and an evidence register. Six reviewed Salesforce screenshots document configuration and observed development-test behaviour; separately executed role-based access testing, formal UAT, integrations and production deployment are not claimed.
+
+[Read the complete public presentation](07-salesforce-configuration.html)
 
 ## Techniques Applied So Far
 
@@ -102,6 +108,8 @@ The design preserves the existing requirements baseline and identifies decisions
 - SQL Data Investigation (JOINs and NULL Checks)
 - Data Quality Assessment and Reconciliation
 - Proposed Data Validation Rules
+- Salesforce Custom Object, Lookup, Formula and Validation-Rule Configuration
+- CRM Functional Views, Synthetic Test Records and Development Verification
 
 ## Project Integrity
 
@@ -111,10 +119,10 @@ This case study distinguishes between:
 - **Reported problems:** Challenges described by fictional management.
 - **Hypotheses:** Potential causes requiring further investigation.
 - **Selected exercise assumptions:** Illustrative rules chosen to create an internally consistent case-study specification.
-- **Proposed improvements:** Future-state ideas, not implemented features.
+- **Proposed improvements:** Future-state ideas not yet implemented, separate from the limited Salesforce demonstration.
 - **Completed deliverables:** Documents and diagrams actually prepared and reviewed.
 
-No real stakeholder interviews, production deployments, executed UAT or measured business improvements are claimed.
+No real stakeholder interviews, production deployments, formal UAT, cross-user authorisation testing or measured business improvements are claimed. Scoped development tests and reviewed screenshots for Artefact 007 are documented separately.
 
 ## About the Author
 
@@ -125,4 +133,4 @@ IT Business Analyst | CRM & Customer Data Systems | SaaS Implementation
 
 ---
 
-*This repository will evolve as the Customer 360 project progresses through further data analysis, CRM solution design, integration and testing.*
+*This repository will evolve as the Customer 360 project progresses through further CRM integration, access testing, formal UAT, data analysis and reporting.*
