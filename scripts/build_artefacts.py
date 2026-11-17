@@ -74,9 +74,32 @@ def rewrite_links(document, source_path: str):
                 raise ValueError('Missing source link: ' + resolved)
         if link['href'].startswith(('https://', 'http://')):
             link['target'] = '_blank'
-            link['rel'] = ['noopener', 'noreferrer']
+            link['rel'] = ['noopener', 'noreferrer']            
+    
+    for image in document.find_all('img', src=True):
+        uri = urlsplit(image['src'])
 
+        if uri.scheme or uri.netloc or not uri.path or uri.path.startswith('/'):
+            continue
 
+        parts = []
+        for part in (PurePosixPath(source_path).parent / unquote(uri.path)).parts:
+            if part == '..':
+                if not parts:
+                    raise ValueError('Image path escapes repository: ' + image['src'])
+                parts.pop()
+            elif part != '.':
+                parts.append(part)
+
+        resolved = '/'.join(parts)
+
+        if not (ROOT / resolved).is_file():
+            raise ValueError('Missing source image: ' + resolved)
+
+        image['src'] = urlunsplit(
+            ('', '', resolved, uri.query, uri.fragment)
+        )
+        
 SQL_LINES = {
     'SELECT Customers.customer_id, Customers.name': 'Return the customer identifier and customer name.',
     'FROM Customers': 'Start with the Customers table.',
@@ -178,6 +201,24 @@ def verify_consolidation(result, page, original_document):
     separate exact-text, table and code checks on the current master documents.
     """
     name = page['output']
+    historical_pages = {
+        '01-business-context.html',
+        '02-stakeholder-plan.html',
+        '03-process-gap-analysis.html',
+        '04-requirements-catalogue.html',
+        '05-customer-data.html',
+        '06-crm-design.html',
+    }
+
+    if set(CONSOLIDATION) != historical_pages or set(OVERVIEWS) != historical_pages:
+        raise ValueError('Historical archive inventory has changed')
+
+    if name not in historical_pages:
+        if result.select_one(
+            '#preserved-overview, .original-overview, .preserved-overview'
+        ):
+            raise ValueError('Duplicate historical overview in new page: ' + name)
+        return
     review = CONSOLIDATION[name]
     archived = OVERVIEWS[name]
     if hashlib.sha256(archived.encode('utf-8')).hexdigest() != review['archive_sha256']:
