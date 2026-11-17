@@ -114,10 +114,10 @@
     },
     {
       "source": "docs/06-crm-data-and-solution-design.md", "output": "06-crm-design.html", "short": "CRM Design", "step": "Propose the CRM design", "status": "Proposed design; build pending",
-      "lead": "The final published stage asks how the agreed exercise rules and proposed data structures could be represented in a small CRM demonstration.",
+      "lead": "This proposed-design stage asks how the existing exercise rules and data structures could be represented in a small CRM demonstration.",
       "story": "CRM means customer relationship management. Here, the design considers records, fields, relationships, views and validation rules that could support the earlier enquiry requirements. Salesforce is a candidate platform for the future demonstration. The document compares options and records open decisions; it does not claim that those options have been configured or tested.",
       "connection": "Artefact 004 supplies the ownership and visibility requirements, and Artefact 005 supplies the exploratory customer-data work. This stage links them to a proposed minimum viable product: the smallest useful demonstration for the selected scope.",
-      "next": "The story currently ends at proposed design. The next work is to resolve the open object, ownership and workflow decisions, then configure a demonstration and record actual test evidence. Integrations and reporting remain later work where applicable.",
+      "next": "Next, Artefact 007 documents the subsequent Salesforce development demonstration and tests, while retaining the proposed design's original limitations and open questions. This does not retroactively change the design decisions or imply production deployment.",
       "sections": [
         "This is the proposed design in brief. MVP means minimum viable product: a limited demonstration focused on the selected enquiry behaviours, rather than a full enterprise CRM.",
         "These links identify which earlier requirements and findings the design must respect. Reusing an identifier does not turn a proposed rule into an approved or implemented one.",
@@ -128,8 +128,31 @@
         "These scenarios state inputs and expected outcomes for future checks. Expected results are test specifications; there are no executed CRM or UAT results in this document.",
         "The build order explains how a future demonstration could proceed and what evidence would count as done. The definition of done has not yet been met.",
         "This closing note records the document's status when written. Making the analysis available on the website does not complete the CRM configuration, decisions or tests listed here."
-      ]
-    }
+            ]
+    },
+    {
+  "source": "docs/07-salesforce-crm-configuration-and-functional-verification.md",
+  "output": "07-salesforce-configuration.html",
+  "short": "CRM Build & Tests",
+  "step": "Build and verify the MVP",
+  "status": "Development demonstration; screenshots reviewed; access testing pending",
+  "lead": "After proposing the CRM design, the next question is: can the important Sales-enquiry rules actually be configured and shown to work?",
+  "story": "This stage documents a real development exercise in Salesforce Developer Edition using fictional Northstar records. The author configured an enquiry object, basic business fields, three list views and a rule stopping one invalid status transition. Screenshots show the observed views, validation rule and blocked save. They do not establish production readiness or user-role permissions.",
+  "connection": "Artefact 004 states the bounded business rules and acceptance criteria; Artefact 005 explores synthetic customer data separately; Artefact 006 proposes CRM design choices. This document shows which selected behaviours were implemented, what was tested, and which decisions remain open. The earlier design is not retroactively rewritten.",
+  "next": "The small CRM demonstration is tested under the author’s Salesforce account. Further work would address separate Sales Manager and representative users, permissions, optional customer associations, additional test scenarios and integrations only after the requirements are clarified. No future feature is represented as already delivered.",
+  "sections": [
+    "This is the result in brief: a narrow, functioning CRM development demonstration rather than a complete customer platform. Read the completed behaviour and its limits together.",
+    "Traceability means showing where each implementation idea came from. The earlier documents explain the business need, rules, and proposed design; this section connects the implementation back to them.",
+    "A Salesforce object groups similar records; a field stores an attribute. The standard Record Owner is different from the optional Sales Representative responsible for following up. A text formula makes blank assignment readable without changing the stored lookup.",
+    "A validation rule blocks saving a record when its condition is true. Here it stops only a specific requested New-to-Contacted change while the business assignment is blank; assigning a person does not itself change the status.",
+    "These six example enquiries were created for the demonstration, with generated identifiers different from earlier SQL fixtures and acceptance-test samples. The table is a snapshot of their reported final state.",
+    "Each view answers a different business question: which New enquiries are unassigned, which belong to the signed-in representative, and which are not Closed. The text display formula makes unassigned ownership easy to see.",
+    "Expected and actual results must be separated. This register distinguishes author-executed tests from what screenshots directly show, and makes access-testing gaps explicit.",
+    "Screenshots provide reproducible evidence, not just a claim. The six images show the list filters, the active validation rule, the blocked transition and the saved record that remained unchanged. Browser addresses were removed before preparing publication copies.",
+    "A design decision may be appropriate for a demo without being a real stakeholder approval. This section records open customer-link, user-permission and workflow questions, along with a harmless list-view naming issue.",
+    "This closes the limited development stage: what was configured, what the tests showed and what has not been implemented. The portfolio should describe only the supported development work, not a production deployment or UAT."
+  ]
+}
   ],
   "glossary": [
     ["Artefact", "A work product, such as a requirements document, process map or data analysis."],
