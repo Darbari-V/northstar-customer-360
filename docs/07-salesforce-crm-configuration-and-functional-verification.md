@@ -3,8 +3,8 @@
 **Project:** Customer 360 — CRM Transformation & Customer Data Integration  
 **Organisation:** Northstar Services (Fictional)  
 **Document type:** IT Business Analysis — Implementation Evidence, Requirements Traceability & Development Verification  
-**Version:** 1.0 — Evidence-reviewed publication candidate (not yet merged or deployed)  
-**Status:** Scoped Salesforce MVP configuration and development tests reported by the author; six user-supplied screenshots reviewed; publishing and multi-user access verification pending  
+**Version:** 1.0 — Evidence-reviewed case-study edition  
+**Status:** Scoped Salesforce MVP configuration and author-reported development tests; six user-supplied screenshots reviewed; multi-user access and production deployment not verified  
 **Prepared by:** Varun Kumar Darbari  
 **Review date:** 17 November 2026
 
@@ -190,9 +190,9 @@ The evidence was supplied by the author during Session 7 and visually inspected 
 
 **Completed and reported in Session 7:** A limited Sales Enquiry Salesforce demonstration, the core ownership/status data fields, a display formula, BR-004 validation, three list views, six synthetic records and user-executed behaviour/regression checks. The implementation illustrates a direct trace from case-study requirements to configured CRM behaviour and observed development test outcomes.
 
-**Publication candidate, not yet deployed:** Six redacted evidence images have been prepared and visually reviewed. The Markdown is ready for a GitHub feature-branch review, but public-page generation, CI, visual acceptance on desktop/mobile and post-merge regression checks remain pending. Multi-user authorisation, the object/field setup screenshot and other deferred work remain explicit limitations. The README and main professional portfolio must only be updated after the full release passes verification.
+**Evidence-reviewed portfolio case study, not a production deployment:** Six redacted evidence images were prepared and visually reviewed. Publication of this document does not establish Salesforce production release or UAT. Multi-user authorisation, the object/field setup screenshot and other deferred work remain explicit limitations; the repository and main professional portfolio must describe these distinctions accurately.
 
-**Publishing method:** Retain this Markdown in `docs/` as the master. Add a new reading-guide entry and adjust the generator to treat only the six legacy pages as archived history; a newly created seventh artefact has no historical overview. Regenerate the public HTML, check all seven pages and original links, and perform the mandatory pre-merge and post-deployment regression audit. Do not rewrite Artefacts 001–006 to change their historical status.
+**Document provenance:** This Markdown in `docs/` is the master, and the public HTML is generated from it. The first six artefacts retain their original contents and historical status. Project publication checks verify the generated reading pages, historical archives and supporting links separately from CRM development testing.
 
 ---
 
