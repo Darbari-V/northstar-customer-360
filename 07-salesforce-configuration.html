@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="After proposing the CRM design, the next question is: can the important Sales-enquiry rules actually be configured and shown to work?">
+  <meta name="theme-color" content="#138342">
+  <title>CRM Build &amp; Tests | Northstar Customer 360</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script src="assets/navigation.js" defer></script>
+</head>
+<body>
+<a class="reader-skip" href="#main-content">Skip to the project document</a>
+<header class="site-header"><div class="container inner">
+  <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
+  <nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html">Requirements</a><a href="05-customer-data.html">Data &amp; SQL</a><a href="06-crm-design.html">CRM Design</a><a href="07-salesforce-configuration.html" aria-current="page">CRM Build &amp; Tests</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav>
+</div></header>
+<main id="main-content" class="container paper reader-paper">
+  <a class="back" href="index.html#artefacts">← Project overview and all artefacts</a>
+  <div class="reader-intro">
+    <p class="eyebrow">Step 7 of 7 · Development demonstration; screenshots reviewed; access testing pending</p>
+    <h1>Artefact 007 — Salesforce CRM Configuration &amp; Functional Verification (MVP V1)</h1>
+    <p class="lead">After proposing the CRM design, the next question is: can the important Sales-enquiry rules actually be configured and shown to work?</p>
+    <p>This stage documents a real development exercise in Salesforce Developer Edition using fictional Northstar records. The author configured an enquiry object, basic business fields, three list views and a rule stopping one invalid status transition. Screenshots show the observed views, validation rule and blocked save. They do not establish production readiness or user-role permissions.</p>
+    <p class="reader-connection"><strong>Where this fits:</strong> Artefact 004 states the bounded business rules and acceptance criteria; Artefact 005 explores synthetic customer data separately; Artefact 006 proposes CRM design choices. This document shows which selected behaviours were implemented, what was tested, and which decisions remain open. The earlier design is not retroactively rewritten.</p>
+    <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. The original document's scope, assumptions and limitations are retained below. Reader explanations are labelled “In plain English”; they do not represent new findings, approvals or implementation evidence.</div>
+    <div class="actions"><a class="btn btn-primary" href="#full-artefact">Read full artefact ↓</a><a class="btn btn-outline" href="#on-this-page">Browse this document</a></div>
+  </div>
+  <nav class="reader-journey" aria-label="Read the Northstar story in order"><a href="01-business-context.html"><span class="reader-step-number">01</span><span>Understand the problem</span></a><a href="02-stakeholder-plan.html"><span class="reader-step-number">02</span><span>Find the people and evidence</span></a><a href="03-process-gap-analysis.html"><span class="reader-step-number">03</span><span>Understand how work flows</span></a><a href="04-requirements-catalogue.html"><span class="reader-step-number">04</span><span>Specify what must happen</span></a><a href="05-customer-data.html"><span class="reader-step-number">05</span><span>Check the information</span></a><a href="06-crm-design.html"><span class="reader-step-number">06</span><span>Propose the CRM design</span></a><a href="07-salesforce-configuration.html" aria-current="step"><span class="reader-step-number">07</span><span>Build and verify the MVP</span></a></nav>
+  <details class="reader-glossary">
+    <summary>New to business analysis or CRM? Open the plain-English glossary</summary>
+    <dl><dt>Artefact</dt><dd>A work product, such as a requirements document, process map or data analysis.</dd><dt>Business analyst (BA)</dt><dd>A person who investigates a business situation, clarifies needs and helps define and evaluate changes.</dd><dt>CRM</dt><dd>Customer relationship management: the processes and systems used to organise customer relationships and related information.</dd><dt>Customer 360</dt><dd>The idea of bringing relevant customer information together into a more consistent view; it is the project&#x27;s theme, rather than a completed product claim.</dd><dt>Enquiry / lead / prospect</dt><dd>An enquiry is an incoming request or expression of interest. A lead or prospect is a potential customer; the exact business definitions need agreement.</dd><dt>Stakeholder</dt><dd>Someone who affects the work, makes relevant decisions, or is affected by the proposed change.</dd><dt>Discovery / elicitation</dt><dd>Learning about the situation and drawing out needs through questions, observation, workshops or records.</dd><dt>Scenario fact / hypothesis</dt><dd>A scenario fact is supplied by the fictional brief. A hypothesis is a possible explanation still requiring evidence.</dd><dt>As-Is / To-Be</dt><dd>As-Is describes current working arrangements. To-Be describes a proposed future way of working.</dd><dt>Gap analysis</dt><dd>Comparing the current situation with the capability that would be needed, then identifying what must change.</dd><dt>Scope / baseline</dt><dd>Scope defines the boundaries of the work. A baseline is the selected reference version against which later changes are assessed.</dd><dt>Requirement</dt><dd>A statement of a capability, behaviour or quality needed to address a business or user need.</dd><dt>Business rule / functional requirement</dt><dd>A business rule sets a condition or restriction. A functional requirement describes system behaviour that supports the need or rule.</dd><dt>User story</dt><dd>A short explanation of who needs something, what they want and why it matters.</dd><dt>Acceptance criterion</dt><dd>A specific condition or example describing what an acceptable result would look like.</dd><dt>Traceability</dt><dd>Following a requirement back to its reason and forward to related design or verification work.</dd><dt>BO / GAP / SR / BR / FR / DR</dt><dd>Reference labels for business objective, gap, stakeholder requirement, business rule, functional requirement and data requirement.</dd><dt>BN / H / PP / NFR</dt><dd>Reference labels for business need, hypothesis, pain point and non-functional requirement. A non-functional requirement describes a quality the solution must meet, rather than a particular action.</dd><dt>REC / REV / REQ</dt><dd>REC-01 identifies a proposed reconciliation control; REV-01 identifies a proposed duplicate-review control. REQ references identify earlier learning exercises and do not add system features by themselves.</dd><dt>AS / AC / US / CR / OQ</dt><dd>Reference labels for assumption, acceptance criterion, user story, change request and open question.</dd><dt>DQ / VAL / D / T / Q</dt><dd>Reference labels for a data-quality finding, validation proposal, design decision, test scenario and SQL query.</dd><dt>Data model / entity / field</dt><dd>A data model describes information and relationships. An entity is a kind of record; a field is one piece of information stored about it.</dd><dt>Data dictionary</dt><dd>A reference explaining each field&#x27;s meaning, form and applicable rules.</dd><dt>Schema / type / mandatory</dt><dd>A schema is the organised structure of a database. A type describes the kind of value stored. Mandatory means a value is required under an agreed rule.</dd><dt>Data completeness / accuracy / consistency</dt><dd>Completeness asks whether required values are present; accuracy asks whether values are correct; consistency asks whether related information agrees.</dd><dt>Normalisation / deduplication / identity resolution</dt><dd>Here, normalisation can mean bringing values into a comparable form. Deduplication reviews and resolves duplicate records; identity resolution determines which records refer to the same real customer. None is claimed as implemented.</dd><dt>Identifier / reference / foreign key</dt><dd>An identifier distinguishes a record. A reference points to another record. A foreign-key constraint can enforce valid references; the diagnostic fixture deliberately omits that constraint.</dd><dt>NULL / nullable</dt><dd>NULL means no value is stored in the illustrated database field. Nullable means the field can have no stored value.</dd><dt>Customer ID / assigned owner</dt><dd>Customer ID identifies the customer linked to an enquiry. The assigned owner identifies the Sales representative responsible for it; these are different relationships.</dd><dt>SQL / SQLite</dt><dd>SQL is a language for asking questions of structured data. SQLite is the database engine used for the synthetic exercise.</dd><dt>SELECT / FROM / WHERE</dt><dd>SELECT chooses what a query returns, FROM names its starting table, and WHERE applies conditions to individual rows.</dd><dt>LEFT JOIN / INNER JOIN</dt><dd>LEFT JOIN keeps every row from the starting table while looking for matches. INNER JOIN keeps only matching rows.</dd><dt>COUNT / GROUP BY / HAVING / ORDER BY</dt><dd>COUNT counts rows; GROUP BY groups matching values; HAVING filters groups; ORDER BY sorts results.</dd><dt>CREATE / INSERT / DROP</dt><dd>In the practice SQL file, CREATE defines a table, INSERT adds sample records, and DROP removes an existing practice table before recreating it. The fixture is a repeatable synthetic exercise, not a production setup.</dd><dt>IF / AND / THEN / ELSE</dt><dd>IF introduces a condition; AND requires both conditions to hold; THEN states the result if they hold; ELSE states what happens otherwise.</dd><dt>Synthetic data / fixture / staging</dt><dd>Synthetic data is invented for practice. A fixture sets up a repeatable example. Staging data is an intermediate set of records being checked before use.</dd><dt>Reconciliation / duplicate signal</dt><dd>Reconciliation compares sources record by record. A duplicate signal flags possible repetition for review, without proving that records should be merged or deleted.</dd><dt>KPI / baseline measure / ROI</dt><dd>A KPI is a key performance indicator. A baseline measure describes the starting position. ROI means return on investment; no achieved ROI is claimed here.</dd><dt>MVP / UAT</dt><dd>MVP means minimum viable product, a limited useful demonstration. UAT means user acceptance testing, checking the solution against agreed user needs.</dd><dt>Salesforce object / mapping</dt><dd>An object is a platform structure for a type of record. Mapping decides how a business concept or field corresponds to that structure.</dd><dt>Lead / Account / Contact / Opportunity</dt><dd>Salesforce record types for a potential buyer, an organisation or account, a person, and a qualified sales deal. Their suitability for Northstar is still being evaluated.</dd><dt>Picklist / Lookup / Auto Number</dt><dd>A picklist offers a defined set of values. A Lookup links a record to another record. Auto Number can generate a record reference automatically.</dd><dt>Validation / automation / pseudocode</dt><dd>Validation checks whether an action or value is allowed. Automation performs an action. Pseudocode expresses intended logic in readable steps without being a deployed program.</dd><dt>API / integration / migration</dt><dd>An API is an interface through which systems exchange requests or data. Integration connects systems; migration moves information between them.</dd><dt>SOP / handoff / escalation</dt><dd>An SOP is a standard operating procedure, a documented way to carry out work. A handoff transfers work or information to another person or team. An escalation raises an unresolved issue for further attention.</dd><dt>Permission / least privilege / audit</dt><dd>A permission controls who may view or change something. Least privilege gives people only the access needed for their work. An audit record helps trace relevant actions or changes.</dd><dt>Assumption / dependency / decision gate</dt><dd>An assumption is provisionally taken as true; a dependency is something the work relies on; a decision gate is a point where a choice must be resolved before moving forward.</dd><dt>B2B / B2C / session</dt><dd>B2B serves businesses; B2C serves individual consumers. Session in these documents refers to a learning stage, not a claimed client meeting.</dd></dl>
+  </details>
+  <details id="on-this-page" class="reader-contents" open>
+    <summary>On this page — jump to any section</summary>
+    <nav aria-label="Document contents"><div class="toc">
+<ul>
+<li><a href="#1-executive-summary">1. Executive summary</a></li>
+<li><a href="#2-traceability-to-earlier-northstar-work">2. Traceability to earlier Northstar work</a></li>
+<li><a href="#3-selected-mvp-object-and-field-design">3. Selected MVP object and field design</a></li>
+<li><a href="#4-implemented-business-rule-br-004">4. Implemented business rule BR-004</a></li>
+<li><a href="#5-synthetic-salesforce-demonstration-records">5. Synthetic Salesforce demonstration records</a></li>
+<li><a href="#6-list-view-implementation-and-functional-verification">6. List-view implementation and functional verification</a><ul>
+<li><a href="#61-new-unassigned-enquiries-br-001-fr-001">6.1 New Unassigned Enquiries — BR-001 / FR-001</a></li>
+<li><a href="#62-my-assigned-enquiries-br-002-fr-002">6.2 My Assigned Enquiries — BR-002 / FR-002</a></li>
+<li><a href="#63-active-enquiry-list-br-003-fr-003-fr-004">6.3 Active Enquiry List — BR-003 / FR-003 / FR-004</a></li>
+</ul>
+</li>
+<li><a href="#7-development-test-and-regression-evidence-register">7. Development test and regression evidence register</a></li>
+<li><a href="#8-screenshot-evidence-and-review-register">8. Screenshot evidence and review register</a></li>
+<li><a href="#9-decisions-deviations-and-outstanding-work">9. Decisions, deviations and outstanding work</a></li>
+<li><a href="#10-conclusion-and-case-study-disposition">10. Conclusion and case-study disposition</a></li>
+</ul>
+</div>
+</nav>
+  </details>
+  <section id="full-artefact" class="full-artefact" aria-labelledby="full-artefact-heading">
+    <h2 id="full-artefact-heading">Full artefact</h2>
+    <p class="reader-provenance">Read from top to bottom, or use the contents above. All original document sections, tables, examples and qualifications are included in their original order.</p>
+    <article class="document-content" data-source="docs/07-salesforce-crm-configuration-and-functional-verification.md" data-source-sha256="d3b2525a0edee70ad60fffdf03e0c6162e8a1b0157f88351ab55cd6296ed2bd9">
+<p><strong>Project:</strong> Customer 360 — CRM Transformation &amp; Customer Data Integration<br/>
+<strong>Organisation:</strong> Northstar Services (Fictional)<br/>
+<strong>Document type:</strong> IT Business Analysis — Implementation Evidence, Requirements Traceability &amp; Development Verification<br/>
+<strong>Version:</strong> 1.0 — Evidence-reviewed case-study edition<br/>
+<strong>Status:</strong> Scoped Salesforce MVP configuration and author-reported development tests; six user-supplied screenshots reviewed; multi-user access and production deployment not verified<br/>
+<strong>Prepared by:</strong> Varun Kumar Darbari<br/>
+<strong>Review date:</strong> 17 November 2026</p>
+<blockquote>
+<p><strong>Evidence boundary.</strong> Northstar Services is fictional. All demonstration enquiries and business scenarios are synthetic. Salesforce configuration and tests in this document were carried out by the author and reported during guided Session 7. Six screenshots provided by the author were visually reviewed and prepared for publication with browser-address details removed. This is <strong>not</strong> independent access to the authenticated Salesforce environment, nor evidence of production readiness, real stakeholder acceptance, multi-user authorisation, integration execution, a data migration or measured business outcomes. This document is a candidate for publication, not a deployed production system.</p>
+</blockquote>
+<hr/>
+<h2 id="1-executive-summary">1. Executive summary</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This is the result in brief: a narrow, functioning CRM development demonstration rather than a complete customer platform. Read the completed behaviour and its limits together.</p></aside>
+<p>This artefact records a limited, hands-on Salesforce CRM demonstration constructed after the proposed design in <a href="06-crm-design.html">Artefact 006</a>. It implements a narrow slice of the simulated Sales-enquiry requirements defined in <a href="04-requirements-catalogue.html">Artefact 004</a>: store an enquiry's status, permit a blank business-assigned Sales Representative, prevent a particular invalid status transition, and expose three views of enquiry ownership and activity. This is an <strong>implemented case-study demonstration</strong>, not a complete enterprise CRM system.</p>
+<p>The author configured a Sales Enquiry custom object, two core business data fields, a read-only representative display formula, a status-change validation rule, six synthetic example records and three list views in Salesforce Developer Edition. User-executed development tests and a consolidated regression check were reported as passing in Session 7. Six subsequently supplied screenshots were reviewed: they directly show the three views and filters, the active validation formula, a blocked status change, and the persisted unchanged record. The evidence strengthens the demonstration but does not prove role-based access across multiple users. Publication and deployment checks are still outstanding.</p>
+<p>The project deliberately keeps the technical Salesforce <strong>Record Owner</strong> separate from the optional Northstar <strong>Assigned Sales Representative</strong>. That distinction permits an enquiry to be <code>New</code> and <em>business-unassigned</em> even when Salesforce requires a technical owner for the record.</p>
+<h2 id="2-traceability-to-earlier-northstar-work">2. Traceability to earlier Northstar work</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Traceability means showing where each implementation idea came from. The earlier documents explain the business need, rules, and proposed design; this section connects the implementation back to them.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Earlier source</th>
+<th>Relevant baseline</th>
+<th>How this session relates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01-business-context.html">Artefact 001</a></td>
+<td>BO-02</td>
+<td>Improve visibility of enquiry ownership and follow-up responsibility</td>
+</tr>
+<tr>
+<td><a href="03-process-gap-analysis.html">Artefact 003</a></td>
+<td>GAP-02</td>
+<td>Candidate enquiry capture, ownership and follow-up gap</td>
+</tr>
+<tr>
+<td><a href="04-requirements-catalogue.html">Artefact 004</a></td>
+<td>BR-001–BR-004; FR-001–FR-005; DR-001–DR-003; AC-001–AC-004</td>
+<td>Author-selected simulated requirements and expected behaviour</td>
+</tr>
+<tr>
+<td><a href="05-customer-data.html">Artefact 005</a></td>
+<td>Synthetic Customer–Enquiry diagnostic data; VAL-01 candidate</td>
+<td>SQL investigation is <strong>separate</strong> from this configured Salesforce demonstration; no database migration or Salesforce Customer lookup is claimed</td>
+</tr>
+<tr>
+<td><a href="06-crm-design.html">Artefact 006</a></td>
+<td>D-01–D-07, T-01–T-08</td>
+<td>Design options and test specifications preceding this implementation</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <strong>ENQ-0001 to ENQ-0006</strong> identifiers below belong to the Salesforce demonstration. They are <strong>not</strong> the same records as the fictional SQL examples ENQ-201–204 in Artefact 005 or the acceptance-test illustration IDs ENQ-501–605 in Artefact 004. The previous documents retain their historical status and are not changed retroactively.</p>
+<h2 id="3-selected-mvp-object-and-field-design">3. Selected MVP object and field design</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>A Salesforce object groups similar records; a field stores an attribute. The standard Record Owner is different from the optional Sales Representative responsible for following up. A text formula makes blank assignment readable without changing the stored lookup.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Salesforce component</th>
+<th>Configuration selected or reported</th>
+<th>Why it exists</th>
+<th>Qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Custom object</td>
+<td>Sales Enquiry (<code>Sales_Enquiry__c</code>)</td>
+<td>Represent the case-study enquiry independently of standard Lead conversion</td>
+<td>D-02: author-selected MVP implementation choice; not real stakeholder approval</td>
+</tr>
+<tr>
+<td>Enquiry Number</td>
+<td>Auto Number record name, display format <code>ENQ-{0000}</code></td>
+<td>Maintain a unique demonstration reference</td>
+<td>DR-001; actual records ENQ-0001–0006 reported</td>
+</tr>
+<tr>
+<td>Enquiry Status</td>
+<td>Picklist <code>Enquiry_Status__c</code></td>
+<td>Support filtering and status-transition testing</td>
+<td>DR-002; values <code>New</code>, <code>Contacted</code>, <code>Open</code>, <code>In Progress</code>, <code>Closed</code> are provisional demonstration values</td>
+</tr>
+<tr>
+<td>Assigned Sales Representative</td>
+<td>Optional Lookup(User) <code>Assigned_Sales_Representative__c</code></td>
+<td>Represent nullable <em>business</em> assignment separately from technical record ownership</td>
+<td>DR-003, D-03; tested through saved records with this lookup blank</td>
+</tr>
+<tr>
+<td>Sales Representative Display</td>
+<td>Formula(Text) <code>Sales_Representative_Display__c</code></td>
+<td>Render <code>Unassigned</code> for blank lookup; otherwise render assigned user's name</td>
+<td>FR-004; display only, not a stored identity</td>
+</tr>
+<tr>
+<td>Record Owner</td>
+<td>Salesforce's standard Owner field</td>
+<td>Preserve platform record ownership</td>
+<td>Not equivalent to Northstar's assigned Sales Representative</td>
+</tr>
+</tbody>
+</table></div>
+<p>The display formula reports a <strong>read-only label</strong>, not a separate identity record. The author reported that this formula passed Salesforce syntax checking and displayed the expected output:</p>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-text">IF(
+    ISBLANK(Assigned_Sales_Representative__c),
+    "Unassigned",
+    TRIM(
+        Assigned_Sales_Representative__r.FirstName
+        &amp; " " &amp;
+        Assigned_Sales_Representative__r.LastName
+    )
+)
+</code></pre>
+<p>An earlier attempt referencing the User relationship's <code>.Name</code> failed syntax checking. This revised formula was <strong>not independently inspected in Salesforce Setup</strong>, but its visible output is demonstrated by evidence <a href="assets/evidence/07-e03-active-enquiry-view.png">E-03</a>.</p>
+<p><strong>In plain English:</strong> the lookup stores either a Salesforce user reference or nothing. The formula presents the real user's name when available and the readable label <code>Unassigned</code> otherwise; it never populates the blank business-assignment lookup.</p>
+<p>No Account/Contact customer association, Opportunity conversion, automated assignment, follow-up reminder, external integration, data import, reporting dashboard, or production security model was implemented in this scoped demonstration.</p>
+<h2 id="4-implemented-business-rule-br-004">4. Implemented business rule BR-004</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>A validation rule blocks saving a record when its condition is true. Here it stops only a specific requested New-to-Contacted change while the business assignment is blank; assigning a person does not itself change the status.</p></aside>
+<p><strong>Source requirement:</strong> A new Sales enquiry without a business-assigned representative must not move from <code>New</code> to <code>Contacted</code>.</p>
+<p>The author created and activated validation rule <code>BR004_Require_Assignee_For_Contacted</code> for the Sales Enquiry object. Evidence <a href="assets/evidence/07-e04-validation-rule.png">E-04</a> shows the Active checkbox, saved formula and error message. Its conditions are:</p>
+<ol>
+<li><code>Enquiry_Status__c</code> is changing.</li>
+<li>The prior picklist value is <code>New</code>.</li>
+<li>The requested picklist value is <code>Contacted</code>.</li>
+<li><code>Assigned_Sales_Representative__c</code> is blank at save time.</li>
+</ol>
+<p>The saved error-condition formula shown in the configuration screenshot is:</p>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-text">AND(
+    ISCHANGED(Enquiry_Status__c),
+    ISPICKVAL(PRIORVALUE(Enquiry_Status__c), "New"),
+    ISPICKVAL(Enquiry_Status__c, "Contacted"),
+    ISBLANK(Assigned_Sales_Representative__c)
+)
+</code></pre>
+<p>The rule evaluates to TRUE only when every condition is satisfied. When TRUE, Salesforce blocks saving that change and shows the configured message:</p>
+<blockquote>
+<p>Assign a Sales representative before changing this enquiry to Contacted.</p>
+</blockquote>
+<p>The rule does <strong>not</strong> automatically update the status when a representative is assigned. It also does not require the representative to have been assigned in an earlier transaction: a valid assignment and requested status change in the same save would be assessed against the values at save time. That combination was <strong>not separately tested</strong> in this session.</p>
+<p><strong>Observed and reported outcomes:</strong> Screenshot <a href="assets/evidence/07-e05-blocked-transition.png">E-05</a> shows an attempted change of ENQ-0001 to <code>Contacted</code> rejected because the assignment is blank; <a href="assets/evidence/07-e06-unchanged-record.png">E-06</a> shows its saved status remains <code>New</code> after the attempt (T-04). The author separately reported that an assigned <code>New</code> enquiry was allowed to change (T-06), and that assigning a representative alone left status <code>New</code> (T-05). These latter two actions were not captured as standalone before-and-after screenshots.</p>
+<p><img alt="Blocked status transition in Salesforce: ENQ-0001 remains unassigned and the attempted Contacted save is rejected" src="assets/evidence/07-e05-blocked-transition.png"/></p>
+<p><em>Figure: Reproduced validation error in the Salesforce development environment; browser address removed from the published image.</em></p>
+<h2 id="5-synthetic-salesforce-demonstration-records">5. Synthetic Salesforce demonstration records</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>These six example enquiries were created for the demonstration, with generated identifiers different from earlier SQL fixtures and acceptance-test samples. The table is a snapshot of their reported final state.</p></aside>
+<p>The author created six Salesforce demonstration records. Their reported state at the end of Task 7.8 is:</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Demonstration label</th>
+<th>Enquiry number</th>
+<th>Enquiry status</th>
+<th>Assigned Sales Representative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Record A</td>
+<td>ENQ-0001</td>
+<td>New</td>
+<td>Blank</td>
+</tr>
+<tr>
+<td>Record B</td>
+<td>ENQ-0002</td>
+<td>Contacted</td>
+<td>Signed-in Salesforce user</td>
+</tr>
+<tr>
+<td>Record C</td>
+<td>ENQ-0003</td>
+<td>New</td>
+<td>Signed-in Salesforce user</td>
+</tr>
+<tr>
+<td>Record D</td>
+<td>ENQ-0004</td>
+<td>In Progress</td>
+<td>Blank</td>
+</tr>
+<tr>
+<td>Record E</td>
+<td>ENQ-0005</td>
+<td>Open</td>
+<td>Signed-in Salesforce user</td>
+</tr>
+<tr>
+<td>Record F</td>
+<td>ENQ-0006</td>
+<td>Closed</td>
+<td>Signed-in Salesforce user</td>
+</tr>
+</tbody>
+</table></div>
+<p>All names, roles and records serve the simulated case study. This table is a reported final snapshot; the earlier test of Record B's status occurred while it was still <code>New</code>.</p>
+<h2 id="6-list-view-implementation-and-functional-verification">6. List-view implementation and functional verification</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Each view answers a different business question: which New enquiries are unassigned, which belong to the signed-in representative, and which are not Closed. The text display formula makes unassigned ownership easy to see.</p></aside>
+<h3 id="61-new-unassigned-enquiries-br-001-fr-001">6.1 New Unassigned Enquiries — BR-001 / FR-001</h3>
+<p><strong>Filter behaviour:</strong> <code>Enquiry Status = New</code> <strong>AND</strong> <code>Assigned Sales Representative = blank</code>, using the All Sales Enquiries record scope available to the signed-in tester.</p>
+<p><strong>Result:</strong> Evidence <a href="assets/evidence/07-e01-new-unassigned-view.png">E-01</a> shows <code>Enquiry Status equals New</code>, <code>Assigned Sales Representative equals</code> blank, filter logic <code>1 AND 2</code>, and <strong>only ENQ-0001</strong> returned. The initial four-record filtering test and consolidated six-record regression check were reported as passing. This supports filter logic under the author's account, not authorisation of a separate Sales Manager.</p>
+<h3 id="62-my-assigned-enquiries-br-002-fr-002">6.2 My Assigned Enquiries — BR-002 / FR-002</h3>
+<p><strong>Filter behaviour:</strong> <code>Assigned Sales Representative equals $USER</code> for the currently signed-in user; no status restriction.</p>
+<p><strong>Result:</strong> Evidence <a href="assets/evidence/07-e02-my-assigned-view.png">E-02</a> shows <code>Assigned Sales Representative equals $USER</code>, with ENQ-0002, ENQ-0003, ENQ-0005 and <strong>Closed ENQ-0006</strong> included. Blank-assignment ENQ-0001 and ENQ-0004 are excluded. The screenshot tests the signed-in administrator only; it does not demonstrate isolation between two representative accounts.</p>
+<p><strong>Correction during testing:</strong> The first attempt displayed all six records because the custom lookup filter had not been saved. After the filter was saved, the expected four records appeared. This was an actual configuration/testing issue resolved without deleting test data. The <code>$USER</code> behaviour has only been exercised with the author's signed-in user; a second-user test remains outstanding.</p>
+<h3 id="63-active-enquiry-list-br-003-fr-003-fr-004">6.3 Active Enquiry List — BR-003 / FR-003 / FR-004</h3>
+<p><strong>Filter behaviour:</strong> <code>Enquiry Status not equal to Closed</code> with All Sales Enquiries record scope. The display column uses a read-only formula showing the Salesforce User's name if assigned and <code>Unassigned</code> if blank.</p>
+<p><strong>Result:</strong> Evidence <a href="assets/evidence/07-e03-active-enquiry-view.png">E-03</a> shows five records ENQ-0001–0005, a <code>not equal to Closed</code> filter and the display column. ENQ-0001 and ENQ-0004 show the literal <code>Unassigned</code>, while the other three records show the assigned Salesforce user. ENQ-0006 is not listed.</p>
+<p><strong>Correction during testing:</strong> The initial formula using the related User's <code>.Name</code> did not pass Salesforce syntax checking. A revised formula combining the related User's <code>FirstName</code> and <code>LastName</code> was accepted, and the screenshot confirmed the expected display. The original blank business assignments remain blank.</p>
+<p><img alt="Active Enquiry List: New, Contacted, In Progress and Open records; Unassigned labels visible; Closed excluded" src="assets/evidence/07-e03-active-enquiry-view.png"/></p>
+<p><em>Figure: Current-user view and display outcome with the filter visible; browser address removed.</em></p>
+<h2 id="7-development-test-and-regression-evidence-register">7. Development test and regression evidence register</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Expected and actual results must be separated. This register distinguishes author-executed tests from what screenshots directly show, and makes access-testing gaps explicit.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Test / checkpoint</th>
+<th>Behaviour tested</th>
+<th>Author-reported actual result</th>
+<th>Status</th>
+<th>Important limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DR-003 smoke test</td>
+<td>Create New enquiry without business assignment</td>
+<td>Record A saved with blank assignment</td>
+<td>Pass — saved record E-06 reviewed</td>
+<td>Tested via one form and one user</td>
+</tr>
+<tr>
+<td>T-05 / AS-05</td>
+<td>Assign rep without changing New status</td>
+<td>Record B remained <code>New</code> on assignment</td>
+<td>Pass — self-reported</td>
+<td>Record B was subsequently changed to Contacted during T-06</td>
+</tr>
+<tr>
+<td>T-04 / BR-004</td>
+<td>Change unassigned New enquiry to Contacted</td>
+<td>Validation rejected status update</td>
+<td>Pass — screenshots E-05/E-06 reviewed</td>
+<td>Only this path/record shown</td>
+</tr>
+<tr>
+<td>T-06 / BR-004</td>
+<td>Change assigned New enquiry to Contacted</td>
+<td>Status update saved</td>
+<td>Pass — author-reported; final status in E-02</td>
+<td>No screenshot of the successful save action</td>
+</tr>
+<tr>
+<td>T-01 equivalent / FR-001</td>
+<td>New and unassigned view logic</td>
+<td>Only ENQ-0001 included among current six records</td>
+<td>Pass — self-reported</td>
+<td>Not tested with a separate Sales Manager</td>
+</tr>
+<tr>
+<td>T-02 partial / FR-002</td>
+<td>Current user's business assignments across statuses</td>
+<td>B, C, E, F included, including Closed F</td>
+<td>Pass — screenshot E-02 reviewed</td>
+<td>Second-representative exclusion and access controls untested</td>
+</tr>
+<tr>
+<td>T-03 partial / FR-003–004</td>
+<td>Active view and Unassigned display</td>
+<td>A–E included; F excluded; A/D show Unassigned</td>
+<td>Pass — screenshot E-03 reviewed</td>
+<td>Manager permissions untested</td>
+</tr>
+<tr>
+<td>7.8 regression</td>
+<td>Re-open three views; verify BR-004 is Active</td>
+<td>All three views matched and rule remained Active</td>
+<td>Pass — self-reported; screenshot consistency checked</td>
+<td>Live authenticated environment not accessed independently</td>
+</tr>
+</tbody>
+</table></div>
+<p>The original acceptance criteria in Artefact 004 remain specifications for the fictional scenario. The tests above use <strong>new</strong> Salesforce demonstration fixtures; they should not be represented as literal execution against earlier ENQ-501–605 records. The simulated management authorisation and inter-user visibility requirements have not been fully exercised.</p>
+<h2 id="8-screenshot-evidence-and-review-register">8. Screenshot evidence and review register</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Screenshots provide reproducible evidence, not just a claim. The six images show the list filters, the active validation rule, the blocked transition and the saved record that remained unchanged. Browser addresses were removed before preparing publication copies.</p></aside>
+<p>The evidence was supplied by the author during Session 7 and visually inspected in this review. The six images below <strong>represent five evidence groups</strong>: three list-view outcomes, one validation configuration, and the blocked transition together with its unchanged saved record. The publication copies crop out the browser's Salesforce organisation address and, for focused screenshots, unrelated browser/page chrome. They do not alter the test-result tables or validation error.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>File</th>
+<th>Directly visible proof</th>
+<th>Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E-01 — New Unassigned</td>
+<td><a href="assets/evidence/07-e01-new-unassigned-view.png">Screenshot</a></td>
+<td>Both AND filters; ENQ-0001 only</td>
+<td>Tested using current signed-in account</td>
+</tr>
+<tr>
+<td>E-02 — My Assigned</td>
+<td><a href="assets/evidence/07-e02-my-assigned-view.png">Screenshot</a></td>
+<td><code>$USER</code> lookup filter; ENQ-0002/0003/0005/0006; Closed included</td>
+<td>No independent second-representative account</td>
+</tr>
+<tr>
+<td>E-03 — Active and display</td>
+<td><a href="assets/evidence/07-e03-active-enquiry-view.png">Screenshot</a></td>
+<td><code>not equal to Closed</code>; five records; <code>Unassigned</code> for ENQ-0001/0004</td>
+<td>Manager access not separately tested</td>
+</tr>
+<tr>
+<td>E-04 — Saved validation rule</td>
+<td><a href="assets/evidence/07-e04-validation-rule.png">Screenshot</a></td>
+<td>BR-004 rule name; Active checkbox; formula and message</td>
+<td>Does not alone prove execution</td>
+</tr>
+<tr>
+<td>E-05 — Blocked change</td>
+<td><a href="assets/evidence/07-e05-blocked-transition.png">Screenshot</a></td>
+<td>ENQ-0001 attempted <code>Contacted</code>, blank business assignment and validation error</td>
+<td>One specific transition scenario</td>
+</tr>
+<tr>
+<td>E-06 — Persisted state</td>
+<td><a href="assets/evidence/07-e06-unchanged-record.png">Screenshot</a></td>
+<td>ENQ-0001 remains <code>New</code>; technical Owner populated; business assignment blank</td>
+<td>Does not prove unrelated transitions</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>What the screenshots do not establish:</strong> a complete setup export of every custom field, a second signed-in user, manager/representative permissions, an integration, a production rollout, or a successful-save screenshot for T-06. The field design and T-05/T-06 results are reported from the author's earlier executed tasks; they should not be silently upgraded to independently observed evidence.</p>
+<p><strong>How to reproduce the key check:</strong> in a Salesforce Developer Edition with the described object and fields, create a <code>New</code> enquiry with no business-assigned representative, attempt to change its status to <code>Contacted</code> and save. BR-004 should reject that attempted update and preserve the previously saved <code>New</code> status. To test the allowed comparison, use an otherwise equivalent enquiry whose business-assignment User lookup is populated.</p>
+<p><strong>Publication handling:</strong> the six cropped images in <code>assets/evidence/</code> are included with this document in the companion package. They contain the author's professional Salesforce display name because it identifies the assigned test user; the browser host and URL identifiers have been removed. The source captures remain outside GitHub, unless explicitly needed for an audit. The screenshots are evidence of a fictional development exercise and must not be presented as client or production records.</p>
+<h2 id="9-decisions-deviations-and-outstanding-work">9. Decisions, deviations and outstanding work</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>A design decision may be appropriate for a demo without being a real stakeholder approval. This section records open customer-link, user-permission and workflow questions, along with a harmless list-view naming issue.</p></aside>
+<ul>
+<li><strong>D-02 selected for the demonstration:</strong> <code>Sales_Enquiry__c</code> custom object instead of a standard Lead for this limited case-study scope. The original Artefact 006 recorded it as open <em>before</em> the build; that historical statement is preserved.</li>
+<li><strong>D-03 selected for the demonstration:</strong> separate technical Salesforce Record Owner and nullable business assignment Lookup(User).</li>
+<li><strong>D-04 provisionally selected:</strong> demonstration statuses <code>New</code>, <code>Contacted</code>, <code>Open</code>, <code>In Progress</code> and <code>Closed</code>; no full lifecycle agreement is claimed.</li>
+<li><strong>D-01 deferred:</strong> Customer association and the tension with Artefact 005 candidate VAL-01 remain unresolved; no custom Customer lookup or customer migration is claimed.</li>
+<li><strong>D-05–D-07 partly or wholly open:</strong> deletion/merge treatment, optional follow-up/description fields and full assignment/editing permissions not baselined or tested.</li>
+<li><strong>Access limitation:</strong> The views were created as private list views for the author's signed-in user. A separate Sales Manager and a separate Sales Representative were not used to test visibility and permissions.</li>
+<li><strong>No integrations or UAT:</strong> API integrations, production security, executed business-user acceptance testing, analytics dashboards and real-world outcomes remain outside the demonstrated work.</li>
+<li><strong>List-view metadata housekeeping:</strong> A screenshot URL for the <code>New Unassigned Enquiries</code> view contained the internal filter API identifier <code>Accept_the_generated_value</code>. That label is not evidence of a filtering error; it is an optional naming cleanup for later, not grounds to recreate or delete a working view.</li>
+<li><strong>Evidence gap:</strong> An object/field-definition screenshot and a dedicated successful T-06 save screenshot have not been collected. This case study labels the corresponding configuration and test-result claims appropriately.</li>
+</ul>
+<h2 id="10-conclusion-and-case-study-disposition">10. Conclusion and case-study disposition</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>This closes the limited development stage: what was configured, what the tests showed and what has not been implemented. The portfolio should describe only the supported development work, not a production deployment or UAT.</p></aside>
+<p><strong>Completed and reported in Session 7:</strong> A limited Sales Enquiry Salesforce demonstration, the core ownership/status data fields, a display formula, BR-004 validation, three list views, six synthetic records and user-executed behaviour/regression checks. The implementation illustrates a direct trace from case-study requirements to configured CRM behaviour and observed development test outcomes.</p>
+<p><strong>Evidence-reviewed portfolio case study, not a production deployment:</strong> Six redacted evidence images were prepared and visually reviewed. Publication of this document does not establish Salesforce production release or UAT. Multi-user authorisation, the object/field setup screenshot and other deferred work remain explicit limitations; the repository and main professional portfolio must describe these distinctions accurately.</p>
+<p><strong>Document provenance:</strong> This Markdown in <code>docs/</code> is the master, and the public HTML is generated from it. The first six artefacts retain their original contents and historical status. Project publication checks verify the generated reading pages, historical archives and supporting links separately from CRM development testing.</p>
+<hr/>
+<p><strong>Related sources:</strong> <a href="04-requirements-catalogue.html">Artefact 004</a> · <a href="05-customer-data.html">Artefact 005</a> · <a href="06-crm-design.html">Artefact 006</a> · <a href="PUBLISHING.md">Publishing guidance</a></p></article>
+  </section>
+
+  <section class="reader-continuation" aria-labelledby="next-in-story">
+    <p class="eyebrow">Continue the story</p>
+    <h2 id="next-in-story">What remains to be built and verified</h2>
+    <p>The small CRM demonstration is tested under the author’s Salesforce account. Further work would address separate Sales Manager and representative users, permissions, optional customer associations, additional test scenarios and integrations only after the requirements are clarified. No future feature is represented as already delivered.</p>
+    <nav class="reader-page-links" aria-label="Previous and next artefacts"><a href="06-crm-design.html">← Previous: Propose the CRM design</a><a href="index.html#roadmap">View the development roadmap →</a></nav>
+  </section>
+  <section class="reader-source-links" aria-labelledby="supporting-source">
+    <h2 id="supporting-source">Supporting source</h2>
+    <p>The complete document is readable above. The source link provides the Markdown version and its GitHub history.</p>
+    <p><a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/07-salesforce-crm-configuration-and-functional-verification.md" target="_blank" rel="noopener noreferrer">View source document on GitHub ↗</a></p>
+  </section>
+</main>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.5</span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></div></footer>
+</body>
+</html>
