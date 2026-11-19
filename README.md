@@ -2,7 +2,7 @@
 
 **Organisation:** Northstar Services (Fictional)  
 **Project Type:** Independent IT Business Analysis Case Study  
-**Status:** In Progress | Started October 2026  
+**Status:** MVP V1 Sales Enquiry demonstration verified in development | Started October 2026\
 **Focus:** Business Analysis · CRM · Customer Data · SaaS Implementation
 
 ## Project Overview
@@ -50,7 +50,7 @@ These objectives are provisional and have not been formally approved by real sta
 | 3. Customer Data & SQL | Logical data model, data dictionary, synthetic SQL investigations, data quality analysis, reconciliation and proposed validation controls | **Completed for Session 5 case-study scope** |
 | 4. CRM Data & Solution Design | Proposed CRM objects, fields, relationships, validation and MVP design | **Session 6 proposed design prepared; implementation decisions pending** |
 | 5. CRM Build & Integration | Scoped Salesforce Sales Enquiry MVP, validation rule and three list views; API/integration work remains future scope | **Session 7 development demo documented; integration pending** |
-| 6. Testing & Analytics | Author-executed Salesforce development checks documented with screenshots; multi-user access, UAT, reconciliation and reporting remain future work | **Development evidence reviewed; formal UAT and analytics pending** |
+| 6. Testing & Analytics | Salesforce development checks, restored test data, regression results and case-study walkthrough | **Session 8 verification complete for the tested scenarios; separate-account access unverified** |
 
 New learning phases will be documented as their corresponding artefacts are developed and reviewed.
 
@@ -91,6 +91,12 @@ The design preserves the existing requirements baseline and identifies decisions
 An author-built Salesforce Sales Enquiry MVP demonstration with six synthetic enquiries, an active status-transition validation rule, three filtered list views, a representative display formula and an evidence register. Six reviewed Salesforce screenshots document configuration and observed development-test behaviour; separately executed role-based access testing, formal UAT, integrations and production deployment are not claimed.
 
 [Read the complete public presentation](07-salesforce-configuration.html)
+
+### [Artefact 008 — MVP V1 Sales Enquiry Verification](docs/08-mvp-verification-and-case-study-review.md)
+
+Records the test steps and observed outcomes for three enquiry views, representative assignment, and blocked and allowed New-to-Contacted saves. It documents restoration of the test data, refreshed view results and the active validation rule. Customer linking remains deferred, and access with separate accounts remains unverified.
+
+[Read the verification results and walkthrough](08-mvp-verification.html)
 
 ## Techniques Applied So Far
 

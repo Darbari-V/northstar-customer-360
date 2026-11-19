@@ -139,7 +139,7 @@
   "lead": "After proposing the CRM design, the next question is: can the important Sales-enquiry rules actually be configured and shown to work?",
   "story": "This stage documents a real development exercise in Salesforce Developer Edition using fictional Northstar records. The author configured an enquiry object, basic business fields, three list views and a rule stopping one invalid status transition. Screenshots show the observed views, validation rule and blocked save. They do not establish production readiness or user-role permissions.",
   "connection": "Artefact 004 states the bounded business rules and acceptance criteria; Artefact 005 explores synthetic customer data separately; Artefact 006 proposes CRM design choices. This document shows which selected behaviours were implemented, what was tested, and which decisions remain open. The earlier design is not retroactively rewritten.",
-  "next": "The small CRM demonstration is tested under the author’s Salesforce account. Further work would address separate Sales Manager and representative users, permissions, optional customer associations, additional test scenarios and integrations only after the requirements are clarified. No future feature is represented as already delivered.",
+  "next": "Continue to Artefact 008 for the Session 8 test results, restored test data and case-study walkthrough.",
   "sections": [
     "This is the result in brief: a narrow, functioning CRM development demonstration rather than a complete customer platform. Read the completed behaviour and its limits together.",
     "Traceability means showing where each implementation idea came from. The earlier documents explain the business need, rules, and proposed design; this section connects the implementation back to them.",
@@ -152,7 +152,29 @@
     "A design decision may be appropriate for a demo without being a real stakeholder approval. This section records open customer-link, user-permission and workflow questions, along with a harmless list-view naming issue.",
     "This closes the limited development stage: what was configured, what the tests showed and what has not been implemented. The portfolio should describe only the supported development work, not a production deployment or UAT."
   ]
-}
+},
+    {
+      "source": "docs/08-mvp-verification-and-case-study-review.md",
+      "output": "08-mvp-verification.html",
+      "short": "MVP V1 Verification",
+      "step": "Review MVP V1 test results",
+      "status": "Development testing completed for the observed scenarios",
+      "lead": "Follow one enquiry through assignment, a blocked save and a successful status change.",
+      "story": "The author tested the Salesforce Sales Enquiry demonstration using six synthetic records and one development account. The evidence shows how the filters and validation rule behaved.",
+      "connection": "Artefact 004 defines the rules, Artefact 006 sets out the proposed tests, and Artefact 007 documents the configured demonstration.",
+      "next": "Use the walkthrough to explain the results and the remaining gaps in customer linking and separate-account access.",
+      "sections": [
+        "Review what was tested and the environment used.",
+        "Follow each verified behaviour back to its source requirement.",
+        "Identify the six test records and the order of operations.",
+        "Compare expected and observed results for each scenario.",
+        "Read the configured conditions alongside the blocked and allowed saves.",
+        "Open the evidence for each result.",
+        "Check which claims the evidence supports and which questions remain open.",
+        "Walk through the problem, the configuration and the results in interview order.",
+        "Review what the demonstration delivered and what remains outside this release."
+      ]
+    }
   ],
   "glossary": [
     ["Artefact", "A work product, such as a requirements document, process map or data analysis."],

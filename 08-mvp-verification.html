@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Follow one enquiry through assignment, a blocked save and a successful status change.">
+  <meta name="theme-color" content="#138342">
+  <title>MVP V1 Verification | Northstar Customer 360</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script src="assets/navigation.js" defer></script>
+</head>
+<body>
+<a class="reader-skip" href="#main-content">Skip to the project document</a>
+<header class="site-header"><div class="container inner">
+  <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
+  <nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html">Requirements</a><a href="05-customer-data.html">Data &amp; SQL</a><a href="06-crm-design.html">CRM Design</a><a href="07-salesforce-configuration.html">CRM Build &amp; Tests</a><a href="08-mvp-verification.html" aria-current="page">MVP V1 Verification</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav>
+</div></header>
+<main id="main-content" class="container paper reader-paper">
+  <a class="back" href="index.html#artefacts">← Project overview and all artefacts</a>
+  <div class="reader-intro">
+    <p class="eyebrow">Step 8 of 8 · Development testing completed for the observed scenarios</p>
+    <h1>Artefact 008 Northstar MVP V1 Sales Enquiry Verification</h1>
+    <p class="lead">Follow one enquiry through assignment, a blocked save and a successful status change.</p>
+    <p>The author tested the Salesforce Sales Enquiry demonstration using six synthetic records and one development account. The evidence shows how the filters and validation rule behaved.</p>
+    <p class="reader-connection"><strong>Where this fits:</strong> Artefact 004 defines the rules, Artefact 006 sets out the proposed tests, and Artefact 007 documents the configured demonstration.</p>
+    <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. The original document's scope, assumptions and limitations are retained below. Reader explanations are labelled “In plain English”; they do not represent new findings, approvals or implementation evidence.</div>
+    <div class="actions"><a class="btn btn-primary" href="#full-artefact">Read full artefact ↓</a><a class="btn btn-outline" href="#on-this-page">Browse this document</a></div>
+  </div>
+  <nav class="reader-journey" aria-label="Read the Northstar story in order"><a href="01-business-context.html"><span class="reader-step-number">01</span><span>Understand the problem</span></a><a href="02-stakeholder-plan.html"><span class="reader-step-number">02</span><span>Find the people and evidence</span></a><a href="03-process-gap-analysis.html"><span class="reader-step-number">03</span><span>Understand how work flows</span></a><a href="04-requirements-catalogue.html"><span class="reader-step-number">04</span><span>Specify what must happen</span></a><a href="05-customer-data.html"><span class="reader-step-number">05</span><span>Check the information</span></a><a href="06-crm-design.html"><span class="reader-step-number">06</span><span>Propose the CRM design</span></a><a href="07-salesforce-configuration.html"><span class="reader-step-number">07</span><span>Build and verify the MVP</span></a><a href="08-mvp-verification.html" aria-current="step"><span class="reader-step-number">08</span><span>Review MVP V1 test results</span></a></nav>
+  <details class="reader-glossary">
+    <summary>New to business analysis or CRM? Open the plain-English glossary</summary>
+    <dl><dt>Artefact</dt><dd>A work product, such as a requirements document, process map or data analysis.</dd><dt>Business analyst (BA)</dt><dd>A person who investigates a business situation, clarifies needs and helps define and evaluate changes.</dd><dt>CRM</dt><dd>Customer relationship management: the processes and systems used to organise customer relationships and related information.</dd><dt>Customer 360</dt><dd>The idea of bringing relevant customer information together into a more consistent view; it is the project&#x27;s theme, rather than a completed product claim.</dd><dt>Enquiry / lead / prospect</dt><dd>An enquiry is an incoming request or expression of interest. A lead or prospect is a potential customer; the exact business definitions need agreement.</dd><dt>Stakeholder</dt><dd>Someone who affects the work, makes relevant decisions, or is affected by the proposed change.</dd><dt>Discovery / elicitation</dt><dd>Learning about the situation and drawing out needs through questions, observation, workshops or records.</dd><dt>Scenario fact / hypothesis</dt><dd>A scenario fact is supplied by the fictional brief. A hypothesis is a possible explanation still requiring evidence.</dd><dt>As-Is / To-Be</dt><dd>As-Is describes current working arrangements. To-Be describes a proposed future way of working.</dd><dt>Gap analysis</dt><dd>Comparing the current situation with the capability that would be needed, then identifying what must change.</dd><dt>Scope / baseline</dt><dd>Scope defines the boundaries of the work. A baseline is the selected reference version against which later changes are assessed.</dd><dt>Requirement</dt><dd>A statement of a capability, behaviour or quality needed to address a business or user need.</dd><dt>Business rule / functional requirement</dt><dd>A business rule sets a condition or restriction. A functional requirement describes system behaviour that supports the need or rule.</dd><dt>User story</dt><dd>A short explanation of who needs something, what they want and why it matters.</dd><dt>Acceptance criterion</dt><dd>A specific condition or example describing what an acceptable result would look like.</dd><dt>Traceability</dt><dd>Following a requirement back to its reason and forward to related design or verification work.</dd><dt>BO / GAP / SR / BR / FR / DR</dt><dd>Reference labels for business objective, gap, stakeholder requirement, business rule, functional requirement and data requirement.</dd><dt>BN / H / PP / NFR</dt><dd>Reference labels for business need, hypothesis, pain point and non-functional requirement. A non-functional requirement describes a quality the solution must meet, rather than a particular action.</dd><dt>REC / REV / REQ</dt><dd>REC-01 identifies a proposed reconciliation control; REV-01 identifies a proposed duplicate-review control. REQ references identify earlier learning exercises and do not add system features by themselves.</dd><dt>AS / AC / US / CR / OQ</dt><dd>Reference labels for assumption, acceptance criterion, user story, change request and open question.</dd><dt>DQ / VAL / D / T / Q</dt><dd>Reference labels for a data-quality finding, validation proposal, design decision, test scenario and SQL query.</dd><dt>Data model / entity / field</dt><dd>A data model describes information and relationships. An entity is a kind of record; a field is one piece of information stored about it.</dd><dt>Data dictionary</dt><dd>A reference explaining each field&#x27;s meaning, form and applicable rules.</dd><dt>Schema / type / mandatory</dt><dd>A schema is the organised structure of a database. A type describes the kind of value stored. Mandatory means a value is required under an agreed rule.</dd><dt>Data completeness / accuracy / consistency</dt><dd>Completeness asks whether required values are present; accuracy asks whether values are correct; consistency asks whether related information agrees.</dd><dt>Normalisation / deduplication / identity resolution</dt><dd>Here, normalisation can mean bringing values into a comparable form. Deduplication reviews and resolves duplicate records; identity resolution determines which records refer to the same real customer. None is claimed as implemented.</dd><dt>Identifier / reference / foreign key</dt><dd>An identifier distinguishes a record. A reference points to another record. A foreign-key constraint can enforce valid references; the diagnostic fixture deliberately omits that constraint.</dd><dt>NULL / nullable</dt><dd>NULL means no value is stored in the illustrated database field. Nullable means the field can have no stored value.</dd><dt>Customer ID / assigned owner</dt><dd>Customer ID identifies the customer linked to an enquiry. The assigned owner identifies the Sales representative responsible for it; these are different relationships.</dd><dt>SQL / SQLite</dt><dd>SQL is a language for asking questions of structured data. SQLite is the database engine used for the synthetic exercise.</dd><dt>SELECT / FROM / WHERE</dt><dd>SELECT chooses what a query returns, FROM names its starting table, and WHERE applies conditions to individual rows.</dd><dt>LEFT JOIN / INNER JOIN</dt><dd>LEFT JOIN keeps every row from the starting table while looking for matches. INNER JOIN keeps only matching rows.</dd><dt>COUNT / GROUP BY / HAVING / ORDER BY</dt><dd>COUNT counts rows; GROUP BY groups matching values; HAVING filters groups; ORDER BY sorts results.</dd><dt>CREATE / INSERT / DROP</dt><dd>In the practice SQL file, CREATE defines a table, INSERT adds sample records, and DROP removes an existing practice table before recreating it. The fixture is a repeatable synthetic exercise, not a production setup.</dd><dt>IF / AND / THEN / ELSE</dt><dd>IF introduces a condition; AND requires both conditions to hold; THEN states the result if they hold; ELSE states what happens otherwise.</dd><dt>Synthetic data / fixture / staging</dt><dd>Synthetic data is invented for practice. A fixture sets up a repeatable example. Staging data is an intermediate set of records being checked before use.</dd><dt>Reconciliation / duplicate signal</dt><dd>Reconciliation compares sources record by record. A duplicate signal flags possible repetition for review, without proving that records should be merged or deleted.</dd><dt>KPI / baseline measure / ROI</dt><dd>A KPI is a key performance indicator. A baseline measure describes the starting position. ROI means return on investment; no achieved ROI is claimed here.</dd><dt>MVP / UAT</dt><dd>MVP means minimum viable product, a limited useful demonstration. UAT means user acceptance testing, checking the solution against agreed user needs.</dd><dt>Salesforce object / mapping</dt><dd>An object is a platform structure for a type of record. Mapping decides how a business concept or field corresponds to that structure.</dd><dt>Lead / Account / Contact / Opportunity</dt><dd>Salesforce record types for a potential buyer, an organisation or account, a person, and a qualified sales deal. Their suitability for Northstar is still being evaluated.</dd><dt>Picklist / Lookup / Auto Number</dt><dd>A picklist offers a defined set of values. A Lookup links a record to another record. Auto Number can generate a record reference automatically.</dd><dt>Validation / automation / pseudocode</dt><dd>Validation checks whether an action or value is allowed. Automation performs an action. Pseudocode expresses intended logic in readable steps without being a deployed program.</dd><dt>API / integration / migration</dt><dd>An API is an interface through which systems exchange requests or data. Integration connects systems; migration moves information between them.</dd><dt>SOP / handoff / escalation</dt><dd>An SOP is a standard operating procedure, a documented way to carry out work. A handoff transfers work or information to another person or team. An escalation raises an unresolved issue for further attention.</dd><dt>Permission / least privilege / audit</dt><dd>A permission controls who may view or change something. Least privilege gives people only the access needed for their work. An audit record helps trace relevant actions or changes.</dd><dt>Assumption / dependency / decision gate</dt><dd>An assumption is provisionally taken as true; a dependency is something the work relies on; a decision gate is a point where a choice must be resolved before moving forward.</dd><dt>B2B / B2C / session</dt><dd>B2B serves businesses; B2C serves individual consumers. Session in these documents refers to a learning stage, not a claimed client meeting.</dd></dl>
+  </details>
+  <details id="on-this-page" class="reader-contents" open>
+    <summary>On this page — jump to any section</summary>
+    <nav aria-label="Document contents"><div class="toc">
+<ul>
+<li><a href="#1-what-was-verified">1 What was verified</a></li>
+<li><a href="#2-requirements-and-verification-scope">2 Requirements and verification scope</a></li>
+<li><a href="#3-test-data-and-execution-sequence">3 Test data and execution sequence</a></li>
+<li><a href="#4-reproducible-test-results">4 Reproducible test results</a><ul>
+<li><a href="#t-01-new-unassigned-enquiries">T-01 New Unassigned Enquiries</a></li>
+<li><a href="#t-02-my-assigned-enquiries">T-02 My Assigned Enquiries</a></li>
+<li><a href="#t-03-active-enquiry-list-and-display">T-03 Active Enquiry List and display</a></li>
+<li><a href="#t-04-reject-unassigned-new-to-contacted">T-04 Reject unassigned New to Contacted</a></li>
+<li><a href="#t-05-assignment-without-status-change">T-05 Assignment without status change</a></li>
+<li><a href="#t-06-allow-assigned-new-to-contacted">T-06 Allow assigned New to Contacted</a></li>
+<li><a href="#restore-the-baseline-and-check-existing-views">Restore the baseline and check existing views</a></li>
+</ul>
+</li>
+<li><a href="#5-active-validation-configuration">5 Active validation configuration</a></li>
+<li><a href="#6-evidence-register">6 Evidence register</a></li>
+<li><a href="#7-defects-and-limitations">7 Defects and limitations</a></li>
+<li><a href="#8-case-study-walkthrough">8 Case study walkthrough</a></li>
+<li><a href="#9-retrospective-and-release-disposition">9 Retrospective and release disposition</a></li>
+</ul>
+</div>
+</nav>
+  </details>
+  <section id="full-artefact" class="full-artefact" aria-labelledby="full-artefact-heading">
+    <h2 id="full-artefact-heading">Full artefact</h2>
+    <p class="reader-provenance">Read from top to bottom, or use the contents above. All original document sections, tables, examples and qualifications are included in their original order.</p>
+    <article class="document-content" data-source="docs/08-mvp-verification-and-case-study-review.md" data-source-sha256="1622121b2a5efc44a7c8059acfae5f1da1a0a03ebd18964b4152915352c7124e">
+<p><strong>Project:</strong> Northstar Customer 360<br/>
+<strong>Author:</strong> Varun Kumar Darbari<br/>
+<strong>Review date:</strong> 20 November 2026<br/>
+<strong>Version:</strong> 1.0<br/>
+<strong>Status:</strong> Session 8 development verification complete for the tested scope</p>
+<h2 id="1-what-was-verified">1 What was verified</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Review what was tested and the environment used.</p></aside>
+<p>The Salesforce Sales Enquiry demonstration produced the expected results for the tested view filters, representative display, assignment-only save and two New-to-Contacted scenarios. After testing, ENQ-0001 was restored to New with no Assigned Sales Representative; the three refreshed views again matched the six-record baseline. No unexpected outcome was observed in the supplied Session 8 evidence.</p>
+<p>This report connects those observations to the requirements in <a href="04-requirements-catalogue.html">Artefact 004</a>, the proposed tests in <a href="06-crm-design.html">Artefact 006</a> and the implemented configuration in <a href="07-salesforce-configuration.html">Artefact 007</a>. It supports a bounded enquiry-management demonstration. It does not establish completion of the broader Customer 360 vision or every role-based acceptance criterion.</p>
+<p>Northstar Services is fictional. Varun executed the Salesforce actions in his development environment and supplied screenshots for guided review. The reviewer did not independently access the authenticated environment. Business-user UAT, real stakeholder acceptance, production deployment and business benefits are not claimed.</p>
+<h2 id="2-requirements-and-verification-scope">2 Requirements and verification scope</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Follow each verified behaviour back to its source requirement.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Behaviour checked</th>
+<th>Evidence boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BR-001 and FR-001</td>
+<td>New Unassigned requires New AND blank business assignment</td>
+<td>Filtering checked under the current account; separate manager authorisation untested</td>
+</tr>
+<tr>
+<td>BR-002 and FR-002</td>
+<td>My Assigned matches the current business assignee across all statuses, including Closed</td>
+<td>Current-user and blank-assignment cases checked; another representative and cross-user permissions untested</td>
+</tr>
+<tr>
+<td>BR-003 and FR-003</td>
+<td>Active excludes Closed</td>
+<td>Six-record sample checked under the current account</td>
+</tr>
+<tr>
+<td>FR-004</td>
+<td>Show the assignee name or Unassigned</td>
+<td>Both populated and blank assignments shown</td>
+</tr>
+<tr>
+<td>BR-004 and FR-005</td>
+<td>Reject New to Contacted when business assignment is blank</td>
+<td>One blocked update and its unchanged saved record captured</td>
+</tr>
+<tr>
+<td>AS-05</td>
+<td>Assignment alone does not change New status</td>
+<td>ENQ-0001 before and after assignment captured</td>
+</tr>
+<tr>
+<td>T-06 in Artefact 006</td>
+<td>Allow the comparison transition with an existing assignee</td>
+<td>Successful save captured; separate post-refresh Contacted screenshot not supplied</td>
+</tr>
+</tbody>
+</table></div>
+<p>The logical business assignment maps to <code>Assigned_Sales_Representative__c</code>, a nullable User lookup. Salesforce Record Owner remains separate. The displayed word <code>Unassigned</code> does not populate the lookup. Screenshot evidence supports stored status and assignment on the specific records shown; it is not a complete field-definition export or an exhaustive uniqueness test.</p>
+<p>The original acceptance examples ENQ-501–605, the SQL fixtures ENQ-201–204 and the Salesforce records ENQ-0001–0006 are different datasets. These tests exercise corresponding behaviours; they are not literal execution of every original sample acceptance criterion.</p>
+<h2 id="3-test-data-and-execution-sequence">3 Test data and execution sequence</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Identify the six test records and the order of operations.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Enquiry</th>
+<th>Baseline status</th>
+<th>Assigned Sales Representative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENQ-0001</td>
+<td>New</td>
+<td>Blank</td>
+</tr>
+<tr>
+<td>ENQ-0002</td>
+<td>Contacted</td>
+<td>Varun Darbari</td>
+</tr>
+<tr>
+<td>ENQ-0003</td>
+<td>New</td>
+<td>Varun Darbari</td>
+</tr>
+<tr>
+<td>ENQ-0004</td>
+<td>In Progress</td>
+<td>Blank</td>
+</tr>
+<tr>
+<td>ENQ-0005</td>
+<td>Open</td>
+<td>Varun Darbari</td>
+</tr>
+<tr>
+<td>ENQ-0006</td>
+<td>Closed</td>
+<td>Varun Darbari</td>
+</tr>
+</tbody>
+</table></div>
+<p>The baseline capture was supplied on 18 November; the verification captures were supplied on 20 November 2026, using the author's local capture dates. Salesforce displays its own record timestamps; this report does not equate those timestamps with the screenshot timezone.</p>
+<p>The first three checks inspected views and their filters. ENQ-0001 then supplied a controlled sequence: attempt Contacted without assignment and observe rejection; inspect New with blank assignment; assign Varun while retaining New; change New to Contacted with Varun retained; restore New and blank assignment; refresh all three views. Configuration evidence was captured last. No configuration fix was made during this sequence.</p>
+<h2 id="4-reproducible-test-results">4 Reproducible test results</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Compare expected and observed results for each scenario.</p></aside>
+<h3 id="t-01-new-unassigned-enquiries">T-01 New Unassigned Enquiries</h3>
+<p>Open the view with all Sales enquiries available to the tester. Inspect <code>Enquiry Status equals New</code>, <code>Assigned Sales Representative equals</code> blank and logic <code>1 AND 2</code>. Expected and actual: only ENQ-0001 appears, with New and a blank assignment. New assigned ENQ-0003 and In Progress unassigned ENQ-0004 are excluded. <strong>Pass for filtering on this dataset.</strong> Separate manager access is untested. Evidence E08-02.</p>
+<h3 id="t-02-my-assigned-enquiries">T-02 My Assigned Enquiries</h3>
+<p>Open the view and inspect <code>Assigned Sales Representative equals $USER</code>, with no status restriction. Expected and actual: ENQ-0002, ENQ-0003, ENQ-0005 and Closed ENQ-0006 appear, all assigned to Varun; blank-assignment ENQ-0001 and ENQ-0004 are excluded. <strong>Pass for the tested current-user subset; original multi-user scenario incomplete.</strong> There is no second representative's record in this dataset and no second signed-in user. Evidence E08-03.</p>
+<h3 id="t-03-active-enquiry-list-and-display">T-03 Active Enquiry List and display</h3>
+<p>Open the view and inspect <code>Enquiry Status not equal to Closed</code>. Expected and actual: ENQ-0001–0005 appear; Closed ENQ-0006 is excluded. ENQ-0001 and ENQ-0004 display Unassigned; the other three show Varun Darbari. <strong>Pass for filtering and display under the current account.</strong> Separate manager permissions are untested. Evidence E08-04.</p>
+<h3 id="t-04-reject-unassigned-new-to-contacted">T-04 Reject unassigned New to Contacted</h3>
+<p>Start with ENQ-0001 saved as New and business assignment blank. Edit its status to Contacted and save without assigning a representative. Expected and actual: Salesforce rejects the save with <code>Assign a Sales representative before changing this enquiry to Contacted.</code> The subsequent record detail shows New, blank business assignment and Unassigned display. <strong>Pass for this record and transition.</strong> Evidence E08-05 and E08-06.</p>
+<h3 id="t-05-assignment-without-status-change">T-05 Assignment without status change</h3>
+<p>From the same New, unassigned ENQ-0001, select Varun Darbari in Assigned Sales Representative, leave status New and save. Expected and actual: the record detail shows New, Varun Darbari in the lookup and Varun Darbari in the display. Assignment did not automatically change status. <strong>Pass for the observed assignment-only save.</strong> Evidence E08-06 before and E08-07 after.</p>
+<h3 id="t-06-allow-assigned-new-to-contacted">T-06 Allow assigned New to Contacted</h3>
+<p>From ENQ-0001 saved as New with Varun assigned, change only status to Contacted and save. Expected and actual: Salesforce reports that ENQ-0001 was saved; details show Contacted and unchanged Varun assignment and display. <strong>Pass for the successful save shown.</strong> Evidence E08-07 before and E08-08 after. The user was instructed to refresh or reopen before restoration, but a separate screenshot or explicit report of that intermediate Contacted persistence check was not supplied. Do not claim independent post-refresh verification of that state.</p>
+<h3 id="restore-the-baseline-and-check-existing-views">Restore the baseline and check existing views</h3>
+<p>Set ENQ-0001 back to New and clear Assigned Sales Representative, leaving Record Owner unchanged. Salesforce confirms the save; details show New, blank assignment and Unassigned display. The subsequent refreshed views show the expected baseline results below. <strong>Pass for restoration and the three observed view checks.</strong> Evidence E08-09–E08-12.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Refreshed view</th>
+<th>Expected and observed records</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New Unassigned</td>
+<td>ENQ-0001</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>My Assigned</td>
+<td>ENQ-0002, ENQ-0003, ENQ-0005, ENQ-0006</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>ENQ-0001, ENQ-0002, ENQ-0003, ENQ-0004, ENQ-0005</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are regression checks after test-data changes. They are not retests following a newly fixed defect, and they do not add new transition or security coverage.</p>
+<h2 id="5-active-validation-configuration">5 Active validation configuration</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Read the configured conditions alongside the blocked and allowed saves.</p></aside>
+<p>Evidence E08-13 shows <code>BR004_Require_Assignee_For_Contacted</code> with Active checked, the error on Enquiry Status and this saved formula, transcribed with formatting normalised:</p>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-text">AND(
+    ISCHANGED(Enquiry_Status__c),
+    ISPICKVAL(PRIORVALUE(Enquiry_Status__c), "New"),
+    ISPICKVAL(Enquiry_Status__c, "Contacted"),
+    ISBLANK(Assigned_Sales_Representative__c)
+)
+</code></pre>
+<p>The configuration matches the blocked and allowed comparisons observed. It checks one transition, not every unassigned state. ENQ-0004 being In Progress and unassigned is therefore not itself a BR-004 defect. Assigning and changing status in the same save, creation directly as Contacted, other transitions, imports and bulk updates were not separately tested. Configuration inspection does not substitute for executing those paths.</p>
+<h2 id="6-evidence-register">6 Evidence register</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Open the evidence for each result.</p></aside>
+<p>Thirteen captures were reviewed. Twelve are reproduced unchanged here. The Session 8 blocked-save capture remains private because it includes the development organisation address. Artefact 007 includes an earlier <a href="assets/evidence/07-e05-blocked-transition.png">capture of the same validation error</a>. The author's Salesforce display name identifies the tested account; the enquiries and organisation are fictional.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>File in assets/evidence</th>
+<th>What is visible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E08-01</td>
+<td><a href="assets/evidence/08-e01-baseline.png">08-e01-baseline.png</a></td>
+<td>All six baseline enquiries</td>
+</tr>
+<tr>
+<td>E08-02</td>
+<td><a href="assets/evidence/08-e02-new-unassigned-filters.png">08-e02-new-unassigned-filters.png</a></td>
+<td>Both filters, AND logic, one result</td>
+</tr>
+<tr>
+<td>E08-03</td>
+<td><a href="assets/evidence/08-e03-my-assigned-filters.png">08-e03-my-assigned-filters.png</a></td>
+<td>Current-user filter, four results including Closed</td>
+</tr>
+<tr>
+<td>E08-04</td>
+<td><a href="assets/evidence/08-e04-active-filters.png">08-e04-active-filters.png</a></td>
+<td>Exclude Closed, five results, assignment display</td>
+</tr>
+<tr>
+<td>E08-05</td>
+<td>Private Session 8 capture</td>
+<td>Rejected Contacted save, blank assignment and actionable error</td>
+</tr>
+<tr>
+<td>E08-06</td>
+<td><a href="assets/evidence/08-e06-retained-new.png">08-e06-retained-new.png</a></td>
+<td>ENQ-0001 still New and unassigned</td>
+</tr>
+<tr>
+<td>E08-07</td>
+<td><a href="assets/evidence/08-e07-assigned-still-new.png">08-e07-assigned-still-new.png</a></td>
+<td>Same enquiry assigned to Varun while still New</td>
+</tr>
+<tr>
+<td>E08-08</td>
+<td><a href="assets/evidence/08-e08-contacted-save.png">08-e08-contacted-save.png</a></td>
+<td>Successful Contacted save with Varun retained</td>
+</tr>
+<tr>
+<td>E08-09</td>
+<td><a href="assets/evidence/08-e09-restored-record.png">08-e09-restored-record.png</a></td>
+<td>Successful restoration to New and unassigned</td>
+</tr>
+<tr>
+<td>E08-10</td>
+<td><a href="assets/evidence/08-e10-regression-new.png">08-e10-regression-new.png</a></td>
+<td>Refreshed New Unassigned contains only ENQ-0001</td>
+</tr>
+<tr>
+<td>E08-11</td>
+<td><a href="assets/evidence/08-e11-regression-assigned.png">08-e11-regression-assigned.png</a></td>
+<td>Refreshed My Assigned contains four expected records</td>
+</tr>
+<tr>
+<td>E08-12</td>
+<td><a href="assets/evidence/08-e12-regression-active.png">08-e12-regression-active.png</a></td>
+<td>Refreshed Active contains five expected records and display labels</td>
+</tr>
+<tr>
+<td>E08-13</td>
+<td><a href="assets/evidence/08-e13-active-validation.png">08-e13-active-validation.png</a></td>
+<td>Active rule, formula, error message and field location</td>
+</tr>
+</tbody>
+</table></div>
+<p><img alt="ENQ-0001 successfully saved as Contacted with Varun Darbari assigned" src="assets/evidence/08-e08-contacted-save.png"/></p>
+<h2 id="7-defects-and-limitations">7 Defects and limitations</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Check which claims the evidence supports and which questions remain open.</p></aside>
+<p>No actual Session 8 failure or corrective configuration change was observed. There is consequently no new executed defect-and-retest cycle to report. Artefact 007 retains the earlier saved-filter and formula-syntax issues. Priya examples, hypothetical assignment loss, a wrongly included Closed enquiry and the corrected written New-to-In-Progress example remain practice scenarios, not real incidents discovered here.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Remaining item</th>
+<th>Current disposition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Separate representative and manager accounts</td>
+<td>Untested; FR-001–003 role and access aspects remain only partially verified</td>
+</tr>
+<tr>
+<td>ENQ-0001 Contacted after a separate refresh</td>
+<td>Save confirmation captured; intermediate refresh outcome not separately evidenced</td>
+</tr>
+<tr>
+<td>Complete object and field setup export</td>
+<td>Not collected; existing configured-field claims retain the evidence basis described in Artefact 007</td>
+</tr>
+<tr>
+<td>Customer association and candidate VAL-01</td>
+<td>D-01 remains deferred; no Salesforce Customer link or customer migration implemented</td>
+</tr>
+<tr>
+<td>Customer deletion, merging and optional fields</td>
+<td>D-05–D-07 remain partly or wholly unresolved; no new implementation claimed</td>
+</tr>
+<tr>
+<td>Complete lifecycle, bulk paths and nonfunctional acceptance</td>
+<td>Not baselined or exhaustively tested</td>
+</tr>
+<tr>
+<td>Business-user UAT and production release</td>
+<td>Not performed</td>
+</tr>
+<tr>
+<td>API integration, dashboards and measured benefits</td>
+<td>Not implemented or measured</td>
+</tr>
+</tbody>
+</table></div>
+<p>T-07 and T-08 in Artefact 006 concern customer-data exceptions and the unresolved D-01 choice. They were not executed in Salesforce in Session 8. Artefact 005's synthetic SQL investigations remain separate completed analytical work. None of these deferrals should be silently converted into a passed test.</p>
+<h2 id="8-case-study-walkthrough">8 Case study walkthrough</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Walk through the problem, the configuration and the results in interview order.</p></aside>
+<p>Start with the fictional problem: fragmented enquiry records and unclear follow-up responsibility. Show Artefacts 001–003 to explain the problem framing, proposed stakeholder investigation and process gaps. These establish the reasoning without claiming real interviews or confirmed production causes.</p>
+<p>Open Artefact 004 and trace the ownership need to BR-001, FR-001 and AC-001. Explain why both New and blank assignment are needed. Then distinguish My Assigned, which includes Closed, from Active, which excludes Closed. Artefact 005 provides separate customer-data modelling and SQL evidence; it is not a data feed into this Salesforce demonstration.</p>
+<p>Use Artefact 006 to show the design stage, then Artefact 007 for the selected custom object and separate business assignment. Show E08-02–E08-04 for the views. Walk through E08-05–E08-08: reject unassigned Contacted, retain New, assign without automatic progression, then explicitly change to Contacted successfully. Finish with E08-09–E08-13 to show restored data, the view checks and the active rule.</p>
+<p>Close by stating what remains unverified. This demonstrates requirements reasoning, configuration, test execution and evidence handling. It does not demonstrate end-to-end Customer 360 integration, user acceptance or business improvement.</p>
+<h2 id="9-retrospective-and-release-disposition">9 Retrospective and release disposition</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Review what the demonstration delivered and what remains outside this release.</p></aside>
+<p>The main delivery lesson was to make each expected result observable before declaring success. Checking the same enquiry ID and the separate assignment field prevented a success banner or technical Owner from being mistaken for the complete business outcome. Before-and-after captures improved T-05 and T-06 beyond the earlier reported-only actions. A small dataset also provided useful exclusion cases: New assigned, non-New unassigned and Closed assigned.</p>
+<p>Evidence remains narrower than the complete requirements. A current-user filter is not proof of cross-user authorisation; a successful save banner is not a separately captured refresh check. These limits are carried into the release decision rather than hidden behind an aggregate pass percentage.</p>
+<p><strong>Release scope:</strong> Northstar MVP V1 covers the Sales Enquiry development demonstration: three filtered views, representative assignment and the tested New-to-Contacted rule. The verification above used one account. Customer linking remains deferred, and permissions with separate accounts remain unverified.</p>
+<p>The closing checkpoint confirmed that the author could describe the exact transition the rule blocks and identify the gap in separate-account testing.</p>
+<hr/>
+<p><strong>Sources:</strong> Artefacts 004, 006 and 007; the author's baseline and Session 8 screenshots; guided execution tasks 8.1–8.10. Earlier artefacts retain their historical content and status.</p></article>
+  </section>
+
+  <section class="reader-continuation" aria-labelledby="next-in-story">
+    <p class="eyebrow">Continue the story</p>
+    <h2 id="next-in-story">What remains to be built and verified</h2>
+    <p>Use the walkthrough to explain the results and the remaining gaps in customer linking and separate-account access.</p>
+    <nav class="reader-page-links" aria-label="Previous and next artefacts"><a href="07-salesforce-configuration.html">← Previous: Build and verify the MVP</a><a href="index.html#roadmap">View the development roadmap →</a></nav>
+  </section>
+  <section class="reader-source-links" aria-labelledby="supporting-source">
+    <h2 id="supporting-source">Supporting source</h2>
+    <p>The complete document is readable above. The source link provides the Markdown version and its GitHub history.</p>
+    <p><a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/08-mvp-verification-and-case-study-review.md" target="_blank" rel="noopener noreferrer">View source document on GitHub ↗</a></p>
+  </section>
+</main>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.5</span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></div></footer>
+</body>
+</html>
