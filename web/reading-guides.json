@@ -162,7 +162,7 @@
       "lead": "Follow one enquiry through assignment, a blocked save and a successful status change.",
       "story": "The author tested the Salesforce Sales Enquiry demonstration using six synthetic records and one development account. The evidence shows how the filters and validation rule behaved.",
       "connection": "Artefact 004 defines the rules, Artefact 006 sets out the proposed tests, and Artefact 007 documents the configured demonstration.",
-      "next": "Use the walkthrough to explain the results and the remaining gaps in customer linking and separate-account access.",
+      "next": "Continue to Artefact 009 for the proposed website intake and its two Postman checks.",
       "sections": [
         "Review what was tested and the environment used.",
         "Follow each verified behaviour back to its source requirement.",
@@ -173,6 +173,24 @@
         "Check which claims the evidence supports and which questions remain open.",
         "Walk through the problem, the configuration and the results in interview order.",
         "Review what the demonstration delivered and what remains outside this release."
+      ]
+    },
+    {
+      "source": "docs/09-website-enquiry-api-mock.md",
+      "output": "09-website-enquiry-api-mock.html",
+      "short": "Website Enquiry API",
+      "step": "Test website enquiry replies",
+      "status": "Two Postman mock checks completed",
+      "lead": "See what the proposed website intake would send and how it would reply when an email address is missing.",
+      "story": "I mapped the enquiry fields and ran two saved requests against a Postman mock using fictional data. Both replies matched the expected status and message.",
+      "connection": "Artefact 005 explores website-to-Sales reconciliation. Artefact 008 covers enquiries already in Salesforce. This exercise models the intake step that precedes that workflow.",
+      "next": "Use the two results to discuss how the proposed intake rules can be assessed before a live implementation.",
+      "sections": [
+        "Trace the proposed email requirement back to Sales follow-up.",
+        "Compare the website form fields with the two messages sent in Postman.",
+        "See how one mock distinguishes the two request bodies.",
+        "Compare each planned reply with what appeared after Send.",
+        "Check which behaviours the two mock runs establish and which need further implementation."
       ]
     }
   ],

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="See what the proposed website intake would send and how it would reply when an email address is missing.">
+  <meta name="theme-color" content="#138342">
+  <title>Website Enquiry API | Northstar Customer 360</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script src="assets/navigation.js" defer></script>
+</head>
+<body>
+<a class="reader-skip" href="#main-content">Skip to the project document</a>
+<header class="site-header"><div class="container inner">
+  <a class="brand" href="https://darbari-v.github.io/">Varun Darbari <span>| Business Analyst</span></a>
+  <nav class="top-nav" aria-label="Project navigation"><a href="index.html">Overview</a><a href="01-business-context.html">Business Context</a><a href="02-stakeholder-plan.html">Discovery</a><a href="03-process-gap-analysis.html">Process Analysis</a><a href="04-requirements-catalogue.html">Requirements</a><a href="05-customer-data.html">Data &amp; SQL</a><a href="06-crm-design.html">CRM Design</a><a href="07-salesforce-configuration.html">CRM Build &amp; Tests</a><a href="08-mvp-verification.html">MVP V1 Verification</a><a href="09-website-enquiry-api-mock.html" aria-current="page">Website Enquiry API</a><a href="https://darbari-v.github.io/#projects">← Portfolio</a></nav>
+</div></header>
+<main id="main-content" class="container paper reader-paper">
+  <a class="back" href="index.html#artefacts">← Project overview and all artefacts</a>
+  <div class="reader-intro">
+    <p class="eyebrow">Step 9 of 9 · Two Postman mock checks completed</p>
+    <h1>Artefact 009 Website Enquiry Intake API Mock</h1>
+    <p class="lead">See what the proposed website intake would send and how it would reply when an email address is missing.</p>
+    <p>I mapped the enquiry fields and ran two saved requests against a Postman mock using fictional data. Both replies matched the expected status and message.</p>
+    <p class="reader-connection"><strong>Where this fits:</strong> Artefact 005 explores website-to-Sales reconciliation. Artefact 008 covers enquiries already in Salesforce. This exercise models the intake step that precedes that workflow.</p>
+    <div class="notice"><strong>Evidence boundary:</strong> Northstar Services is fictional. The original document's scope, assumptions and limitations are retained below. Reader explanations are labelled “In plain English”; they do not represent new findings, approvals or implementation evidence.</div>
+    <div class="actions"><a class="btn btn-primary" href="#full-artefact">Read full artefact ↓</a><a class="btn btn-outline" href="#on-this-page">Browse this document</a></div>
+  </div>
+  <nav class="reader-journey" aria-label="Read the Northstar story in order"><a href="01-business-context.html"><span class="reader-step-number">01</span><span>Understand the problem</span></a><a href="02-stakeholder-plan.html"><span class="reader-step-number">02</span><span>Find the people and evidence</span></a><a href="03-process-gap-analysis.html"><span class="reader-step-number">03</span><span>Understand how work flows</span></a><a href="04-requirements-catalogue.html"><span class="reader-step-number">04</span><span>Specify what must happen</span></a><a href="05-customer-data.html"><span class="reader-step-number">05</span><span>Check the information</span></a><a href="06-crm-design.html"><span class="reader-step-number">06</span><span>Propose the CRM design</span></a><a href="07-salesforce-configuration.html"><span class="reader-step-number">07</span><span>Build and verify the MVP</span></a><a href="08-mvp-verification.html"><span class="reader-step-number">08</span><span>Review MVP V1 test results</span></a><a href="09-website-enquiry-api-mock.html" aria-current="step"><span class="reader-step-number">09</span><span>Test website enquiry replies</span></a></nav>
+  <details class="reader-glossary">
+    <summary>New to business analysis or CRM? Open the plain-English glossary</summary>
+    <dl><dt>Artefact</dt><dd>A work product, such as a requirements document, process map or data analysis.</dd><dt>Business analyst (BA)</dt><dd>A person who investigates a business situation, clarifies needs and helps define and evaluate changes.</dd><dt>CRM</dt><dd>Customer relationship management: the processes and systems used to organise customer relationships and related information.</dd><dt>Customer 360</dt><dd>The idea of bringing relevant customer information together into a more consistent view; it is the project&#x27;s theme, rather than a completed product claim.</dd><dt>Enquiry / lead / prospect</dt><dd>An enquiry is an incoming request or expression of interest. A lead or prospect is a potential customer; the exact business definitions need agreement.</dd><dt>Stakeholder</dt><dd>Someone who affects the work, makes relevant decisions, or is affected by the proposed change.</dd><dt>Discovery / elicitation</dt><dd>Learning about the situation and drawing out needs through questions, observation, workshops or records.</dd><dt>Scenario fact / hypothesis</dt><dd>A scenario fact is supplied by the fictional brief. A hypothesis is a possible explanation still requiring evidence.</dd><dt>As-Is / To-Be</dt><dd>As-Is describes current working arrangements. To-Be describes a proposed future way of working.</dd><dt>Gap analysis</dt><dd>Comparing the current situation with the capability that would be needed, then identifying what must change.</dd><dt>Scope / baseline</dt><dd>Scope defines the boundaries of the work. A baseline is the selected reference version against which later changes are assessed.</dd><dt>Requirement</dt><dd>A statement of a capability, behaviour or quality needed to address a business or user need.</dd><dt>Business rule / functional requirement</dt><dd>A business rule sets a condition or restriction. A functional requirement describes system behaviour that supports the need or rule.</dd><dt>User story</dt><dd>A short explanation of who needs something, what they want and why it matters.</dd><dt>Acceptance criterion</dt><dd>A specific condition or example describing what an acceptable result would look like.</dd><dt>Traceability</dt><dd>Following a requirement back to its reason and forward to related design or verification work.</dd><dt>BO / GAP / SR / BR / FR / DR</dt><dd>Reference labels for business objective, gap, stakeholder requirement, business rule, functional requirement and data requirement.</dd><dt>BN / H / PP / NFR</dt><dd>Reference labels for business need, hypothesis, pain point and non-functional requirement. A non-functional requirement describes a quality the solution must meet, rather than a particular action.</dd><dt>REC / REV / REQ</dt><dd>REC-01 identifies a proposed reconciliation control; REV-01 identifies a proposed duplicate-review control. REQ references identify earlier learning exercises and do not add system features by themselves.</dd><dt>AS / AC / US / CR / OQ</dt><dd>Reference labels for assumption, acceptance criterion, user story, change request and open question.</dd><dt>DQ / VAL / D / T / Q</dt><dd>Reference labels for a data-quality finding, validation proposal, design decision, test scenario and SQL query.</dd><dt>Data model / entity / field</dt><dd>A data model describes information and relationships. An entity is a kind of record; a field is one piece of information stored about it.</dd><dt>Data dictionary</dt><dd>A reference explaining each field&#x27;s meaning, form and applicable rules.</dd><dt>Schema / type / mandatory</dt><dd>A schema is the organised structure of a database. A type describes the kind of value stored. Mandatory means a value is required under an agreed rule.</dd><dt>Data completeness / accuracy / consistency</dt><dd>Completeness asks whether required values are present; accuracy asks whether values are correct; consistency asks whether related information agrees.</dd><dt>Normalisation / deduplication / identity resolution</dt><dd>Here, normalisation can mean bringing values into a comparable form. Deduplication reviews and resolves duplicate records; identity resolution determines which records refer to the same real customer. None is claimed as implemented.</dd><dt>Identifier / reference / foreign key</dt><dd>An identifier distinguishes a record. A reference points to another record. A foreign-key constraint can enforce valid references; the diagnostic fixture deliberately omits that constraint.</dd><dt>NULL / nullable</dt><dd>NULL means no value is stored in the illustrated database field. Nullable means the field can have no stored value.</dd><dt>Customer ID / assigned owner</dt><dd>Customer ID identifies the customer linked to an enquiry. The assigned owner identifies the Sales representative responsible for it; these are different relationships.</dd><dt>SQL / SQLite</dt><dd>SQL is a language for asking questions of structured data. SQLite is the database engine used for the synthetic exercise.</dd><dt>SELECT / FROM / WHERE</dt><dd>SELECT chooses what a query returns, FROM names its starting table, and WHERE applies conditions to individual rows.</dd><dt>LEFT JOIN / INNER JOIN</dt><dd>LEFT JOIN keeps every row from the starting table while looking for matches. INNER JOIN keeps only matching rows.</dd><dt>COUNT / GROUP BY / HAVING / ORDER BY</dt><dd>COUNT counts rows; GROUP BY groups matching values; HAVING filters groups; ORDER BY sorts results.</dd><dt>CREATE / INSERT / DROP</dt><dd>In the practice SQL file, CREATE defines a table, INSERT adds sample records, and DROP removes an existing practice table before recreating it. The fixture is a repeatable synthetic exercise, not a production setup.</dd><dt>IF / AND / THEN / ELSE</dt><dd>IF introduces a condition; AND requires both conditions to hold; THEN states the result if they hold; ELSE states what happens otherwise.</dd><dt>Synthetic data / fixture / staging</dt><dd>Synthetic data is invented for practice. A fixture sets up a repeatable example. Staging data is an intermediate set of records being checked before use.</dd><dt>Reconciliation / duplicate signal</dt><dd>Reconciliation compares sources record by record. A duplicate signal flags possible repetition for review, without proving that records should be merged or deleted.</dd><dt>KPI / baseline measure / ROI</dt><dd>A KPI is a key performance indicator. A baseline measure describes the starting position. ROI means return on investment; no achieved ROI is claimed here.</dd><dt>MVP / UAT</dt><dd>MVP means minimum viable product, a limited useful demonstration. UAT means user acceptance testing, checking the solution against agreed user needs.</dd><dt>Salesforce object / mapping</dt><dd>An object is a platform structure for a type of record. Mapping decides how a business concept or field corresponds to that structure.</dd><dt>Lead / Account / Contact / Opportunity</dt><dd>Salesforce record types for a potential buyer, an organisation or account, a person, and a qualified sales deal. Their suitability for Northstar is still being evaluated.</dd><dt>Picklist / Lookup / Auto Number</dt><dd>A picklist offers a defined set of values. A Lookup links a record to another record. Auto Number can generate a record reference automatically.</dd><dt>Validation / automation / pseudocode</dt><dd>Validation checks whether an action or value is allowed. Automation performs an action. Pseudocode expresses intended logic in readable steps without being a deployed program.</dd><dt>API / integration / migration</dt><dd>An API is an interface through which systems exchange requests or data. Integration connects systems; migration moves information between them.</dd><dt>SOP / handoff / escalation</dt><dd>An SOP is a standard operating procedure, a documented way to carry out work. A handoff transfers work or information to another person or team. An escalation raises an unresolved issue for further attention.</dd><dt>Permission / least privilege / audit</dt><dd>A permission controls who may view or change something. Least privilege gives people only the access needed for their work. An audit record helps trace relevant actions or changes.</dd><dt>Assumption / dependency / decision gate</dt><dd>An assumption is provisionally taken as true; a dependency is something the work relies on; a decision gate is a point where a choice must be resolved before moving forward.</dd><dt>B2B / B2C / session</dt><dd>B2B serves businesses; B2C serves individual consumers. Session in these documents refers to a learning stage, not a claimed client meeting.</dd></dl>
+  </details>
+  <details id="on-this-page" class="reader-contents" open>
+    <summary>On this page — jump to any section</summary>
+    <nav aria-label="Document contents"><div class="toc">
+<ul>
+<li><a href="#business-purpose">Business purpose</a></li>
+<li><a href="#proposed-request-and-data-mapping">Proposed request and data mapping</a></li>
+<li><a href="#postman-setup">Postman setup</a></li>
+<li><a href="#expected-and-observed-results">Expected and observed results</a><ul>
+<li><a href="#evidence-01-complete-enquiry">Evidence 01 Complete enquiry</a></li>
+<li><a href="#evidence-02-missing-email">Evidence 02 Missing email</a></li>
+</ul>
+</li>
+<li><a href="#verification-scope">Verification scope</a></li>
+</ul>
+</div>
+</nav>
+  </details>
+  <section id="full-artefact" class="full-artefact" aria-labelledby="full-artefact-heading">
+    <h2 id="full-artefact-heading">Full artefact</h2>
+    <p class="reader-provenance">Read from top to bottom, or use the contents above. All original document sections, tables, examples and qualifications are included in their original order.</p>
+    <article class="document-content" data-source="docs/09-website-enquiry-api-mock.md" data-source-sha256="35020ea2e58458d441c4bf16666fda46be39e857a75766ea0ba3eb5344fe8c25">
+<p><strong>Author</strong> Varun Kumar Darbari</p>
+<p><strong>Project</strong> Northstar Customer 360, an independent fictional IT Business Analysis case study</p>
+<p><strong>Milestone</strong> Session 9, two Postman mock checks executed on 25 November 2026</p>
+<h2 id="business-purpose">Business purpose</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Trace the proposed email requirement back to Sales follow-up.</p></aside>
+<p>Northstar's website is one of several channels for sales enquiries. To follow up on a website enquiry by email, Sales needs a contact address and enough context to understand what the customer is asking for. I used one fictional office furniture quote enquiry to specify what the form would pass to the receiving system and what reply the website should receive.</p>
+<p><a href="05-customer-data.html">Artefact 005</a> uses synthetic SQL data to compare submissions with Sales records. <a href="08-mvp-verification.html">Artefact 008</a> shows how Sales manages enquiries already recorded in the Salesforce demo. This exercise covers the proposed website intake step before a record would reach Salesforce.</p>
+<h2 id="proposed-request-and-data-mapping">Proposed request and data mapping</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Compare the website form fields with the two messages sent in Postman.</p></aside>
+<p>A website would submit the details as JSON, a text format that labels each value. Both Postman requests used <code>POST /enquiries</code>. Here, POST represents submitting a new enquiry, and <code>/enquiries</code> identifies where the receiving system expects it.</p>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Website field</th>
+<th>JSON field</th>
+<th>Proposed requirement</th>
+<th>Business reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td><code>fullName</code></td>
+<td>Required text</td>
+<td>Lets Sales address the customer by name</td>
+</tr>
+<tr>
+<td>Email</td>
+<td><code>email</code></td>
+<td>Required text</td>
+<td>Gives Sales an address for the reply</td>
+</tr>
+<tr>
+<td>Enquiry message</td>
+<td><code>enquiryMessage</code></td>
+<td>Required text</td>
+<td>Explains what the customer is asking for</td>
+</tr>
+</tbody>
+</table></div>
+<p>Test 01 used this complete fictional enquiry.</p>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-json">{
+  "fullName": "Maya Shah",
+  "email": "maya@example.com",
+  "enquiryMessage": "I'd like a quote for office furniture."
+}
+</code></pre>
+<p>Test 02 sent the same name and message with the <code>email</code> field omitted entirely.</p>
+<pre aria-label="Scrollable original code or model" tabindex="0"><code class="language-json">{
+  "fullName": "Maya Shah",
+  "enquiryMessage": "I'd like a quote for office furniture."
+}
+</code></pre>
+<h2 id="postman-setup">Postman setup</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>See how one mock distinguishes the two request bodies.</p></aside>
+<p>I saved both requests in the <strong>Northstar – Website Enquiry Intake</strong> collection. Each request had a saved example pairing its JSON body with a status code and reply. I set up a Postman collection mock and enabled request body matching, so the mock could distinguish the examples even though both requests used the same method and path.</p>
+<p>To repeat the checks in a Postman workspace, point the collection variable <code>mockUrl</code> at its mock server, keep the <code>/enquiries</code> path in both requests, and use <code>Content-Type: application/json</code> for the requests and their saved examples. Send each saved request and compare the status and message in the response panel with the expected values below.</p>
+<h2 id="expected-and-observed-results">Expected and observed results</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Compare each planned reply with what appeared after Send.</p></aside>
+<p class="table-hint" data-reader-added="table-help">On a small screen, swipe across this table to read every column.</p><div aria-label="Scrollable document table" class="table-wrap" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Expected reply</th>
+<th>Observed reply</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01 Complete enquiry</td>
+<td><code>201 Created</code> and “Enquiry accepted.”</td>
+<td><code>201 Created</code> and “Enquiry accepted.”</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>02 Missing email</td>
+<td><code>400 Bad Request</code> and “Enter an email address so we can reply to your enquiry.”</td>
+<td><code>400 Bad Request</code> and “Enter an email address so we can reply to your enquiry.”</td>
+<td>Pass</td>
+</tr>
+</tbody>
+</table></div>
+<p>The second case passed because the planned outcome was rejection with a message the customer could act on.</p>
+<h3 id="evidence-01-complete-enquiry">Evidence 01 Complete enquiry</h3>
+<p><img alt="Postman request includes Maya Shah's email and the mock response shows 201 Created and Enquiry accepted." src="assets/evidence/09-e01-complete-enquiry.png"/></p>
+<p><a href="assets/evidence/09-e01-complete-enquiry.png">Open the complete enquiry evidence</a></p>
+<h3 id="evidence-02-missing-email">Evidence 02 Missing email</h3>
+<p><img alt="Postman request omits the email field and the mock response shows 400 Bad Request with a message asking for an email address." src="assets/evidence/09-e02-missing-email.png"/></p>
+<p><a href="assets/evidence/09-e02-missing-email.png">Open the missing email evidence</a></p>
+<h2 id="verification-scope">Verification scope</h2><aside aria-label="In plain English" class="reader-note" data-reader-added="section-guide"><span class="reader-note-label">In plain English</span><p>Check which behaviours the two mock runs establish and which need further implementation.</p></aside>
+<p>The two runs show that the Postman mock returned the planned replies for these specific sample bodies. The mock selects saved examples. General required-field enforcement belongs to a future implementation, including separate checks for empty and invalid email values and missing name or message. The live website, Salesforce record creation, customer matching and email delivery remain outside this exercise.</p></article>
+  </section>
+
+  <section class="reader-continuation" aria-labelledby="next-in-story">
+    <p class="eyebrow">Continue the story</p>
+    <h2 id="next-in-story">What remains to be built and verified</h2>
+    <p>Use the two results to discuss how the proposed intake rules can be assessed before a live implementation.</p>
+    <nav class="reader-page-links" aria-label="Previous and next artefacts"><a href="08-mvp-verification.html">← Previous: Review MVP V1 test results</a><a href="index.html#roadmap">View the development roadmap →</a></nav>
+  </section>
+  <section class="reader-source-links" aria-labelledby="supporting-source">
+    <h2 id="supporting-source">Supporting source</h2>
+    <p>The complete document is readable above. The source link provides the Markdown version and its GitHub history.</p>
+    <p><a href="https://github.com/Darbari-V/northstar-customer-360/blob/main/docs/09-website-enquiry-api-mock.md" target="_blank" rel="noopener noreferrer">View source document on GitHub ↗</a></p>
+  </section>
+</main>
+<footer><div class="container footrow"><span>Customer 360 · Independent fictional case study · Project v0.5</span><a href="https://darbari-v.github.io/">Return to main portfolio ↗</a></div></footer>
+</body>
+</html>
