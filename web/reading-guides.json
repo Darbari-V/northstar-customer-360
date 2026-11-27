@@ -184,13 +184,31 @@
       "lead": "See what the proposed website intake would send and how it would reply when an email address is missing.",
       "story": "I mapped the enquiry fields and ran two saved requests against a Postman mock using fictional data. Both replies matched the expected status and message.",
       "connection": "Artefact 005 explores website-to-Sales reconciliation. Artefact 008 covers enquiries already in Salesforce. This exercise models the intake step that precedes that workflow.",
-      "next": "Use the two results to discuss how the proposed intake rules can be assessed before a live implementation.",
+      "next": "Continue to Artefact 010 for the proposed handoff to Salesforce and its acceptance criteria.",
       "sections": [
         "Trace the proposed email requirement back to Sales follow-up.",
         "Compare the website form fields with the two messages sent in Postman.",
         "See how one mock distinguishes the two request bodies.",
         "Compare each planned reply with what appeared after Send.",
         "Check which behaviours the two mock runs establish and which need further implementation."
+      ]
+    },
+    {
+      "source": "docs/10-website-to-salesforce-integration-design.md",
+      "output": "10-website-to-salesforce-integration-design.html",
+      "short": "Website to Salesforce Design",
+      "step": "Map the Salesforce handoff",
+      "status": "Proposed integration design",
+      "lead": "Follow the website enquiry into the proposed Salesforce record and see what the customer should be told after a save.",
+      "story": "I mapped three enquiry values to proposed Salesforce fields and wrote acceptance criteria for a successful save and a confirmed rejection.",
+      "connection": "Artefact 007 documents the existing Salesforce demo and Artefact 009 shows the intake mock. This design describes the handoff between them.",
+      "next": "Use the map and acceptance criteria when implementing and testing the proposed handoff.",
+      "sections": [
+        "See why Sales needs the enquiry details and why the website needs a clear confirmation.",
+        "Match each website value to its proposed Salesforce field.",
+        "Follow the proposed sequence from submission to save result.",
+        "Check what Sales and the customer should see in both cases.",
+        "See which behaviours this design covers and which require further decisions."
       ]
     }
   ],
