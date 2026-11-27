@@ -210,6 +210,23 @@
         "Check what Sales and the customer should see in both cases.",
         "See which behaviours this design covers and which require further decisions."
       ]
+    },
+    {
+      "source": "docs/11-salesforce-enquiry-api-verification.md",
+      "output": "11-salesforce-enquiry-api-verification.html",
+      "short": "Salesforce API Verification",
+      "step": "Verify the saved enquiry",
+      "status": "Verified in Developer Edition",
+      "lead": "See how a fictional quote request became Salesforce enquiry ENQ-0007.",
+      "story": "I sent the enquiry from Postman and traced the response to the saved record.",
+      "connection": "This test implements the three fields proposed in Artefact 010.",
+      "next": "The website submission and customer confirmation remain open for verification.",
+      "sections": [
+        "Start with the information Sales needs to respond.",
+        "Compare the four inputs with the saved values.",
+        "Follow the Salesforce record ID to the result.",
+        "Distinguish the completed API check from the remaining website checks."
+      ]
     }
   ],
   "glossary": [
