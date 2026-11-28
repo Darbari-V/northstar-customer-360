@@ -2,7 +2,7 @@
 
 **Organisation:** Northstar Services (Fictional)  
 **Project Type:** Independent IT Business Analysis Case Study  
-**Status:** MVP V1 Sales Enquiry demonstration verified in development and two website intake mock checks completed, with a direct Salesforce API create and record check | Started October 2026\
+**Status:** MVP V1 Sales Enquiry demonstration verified in development and two website intake mock checks completed, with direct Salesforce API checks for a successful save and a rejected submission | Started October 2026\
 **Focus:** Business Analysis · CRM · Customer Data · SaaS Implementation
 
 ## Project Overview
@@ -49,7 +49,7 @@ These objectives are provisional and have not been formally approved by real sta
 | 2. Requirements Engineering | Bounded candidate requirements catalogue, business rules, user stories, acceptance criteria, traceability, simulated change analysis and validation-question dispositions | **Completed for Session 4 case-study scope** |
 | 3. Customer Data & SQL | Logical data model, data dictionary, synthetic SQL investigations, data quality analysis, reconciliation and proposed validation controls | **Completed for Session 5 case-study scope** |
 | 4. CRM Data & Solution Design | Proposed CRM objects, fields, relationships, validation and MVP design | **Session 6 proposed design prepared; implementation decisions pending** |
-| 5. CRM Build & Integration | Scoped Salesforce Sales Enquiry MVP, validation rule and three list views. Two intake mock cases and one direct Salesforce API save | **Sessions 7 and 9–11 documented. Live website connection pending** |
+| 5. CRM Build & Integration | Scoped Salesforce Sales Enquiry MVP, validation rule and three list views. Two intake mock cases and two direct Salesforce API outcomes | **Sessions 7 and 9–12 documented. Live website connection pending** |
 | 6. Testing & Analytics | Salesforce development checks, restored test data, regression results and case-study walkthrough | **Session 8 verification complete for the tested scenarios; separate-account access unverified** |
 
 New learning phases will be documented as their corresponding artefacts are developed and reviewed.
@@ -115,6 +115,12 @@ Maps the website's name, email and enquiry message to proposed fields on the Sal
 Submitted a fictional quote request from Postman to Salesforce Developer Edition and verified four saved values on ENQ-0007 using the returned record ID.
 
 [Read the Salesforce API verification](11-salesforce-enquiry-api-verification.html)
+
+### [Artefact 012 — Verifying a Rejected Salesforce Enquiry](docs/12-rejected-enquiry-verification.md)
+
+Traced a rejected field mapping to its Salesforce error and checked all seven saved enquiries for the second submission’s identifying text.
+
+[Read the rejection test](12-rejected-enquiry-verification.html)
 
 ## Techniques Applied So Far
 
