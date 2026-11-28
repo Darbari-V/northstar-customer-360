@@ -227,6 +227,23 @@
         "Follow the Salesforce record ID to the result.",
         "Distinguish the completed API check from the remaining website checks."
       ]
+    },
+    {
+      "source": "docs/12-rejected-enquiry-verification.md",
+      "output": "12-rejected-enquiry-verification.html",
+      "short": "Rejected Enquiry",
+      "step": "Check the failed save",
+      "status": "Verified in Developer Edition",
+      "lead": "Could Sales find an enquiry that Salesforce said it had rejected?",
+      "story": "Two submissions from the same customer made it important to identify the exact quote request.",
+      "connection": "The earlier successful save provided a record to compare after the rejection.",
+      "next": "The website\u2019s response to a failed save still needs a live test.",
+      "sections": [
+        "Identify the expected outcome for each submission.",
+        "Use the description to distinguish two requests from the same person.",
+        "Restore the connection before evaluating the field error.",
+        "Read the saved values to check the business outcome."
+      ]
     }
   ],
   "glossary": [
