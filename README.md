@@ -49,7 +49,7 @@ These objectives are provisional and have not been formally approved by real sta
 | 2. Requirements Engineering | Bounded candidate requirements catalogue, business rules, user stories, acceptance criteria, traceability, simulated change analysis and validation-question dispositions | **Completed for Session 4 case-study scope** |
 | 3. Customer Data & SQL | Logical data model, data dictionary, synthetic SQL investigations, data quality analysis, reconciliation and proposed validation controls | **Completed for Session 5 case-study scope** |
 | 4. CRM Data & Solution Design | Proposed CRM objects, fields, relationships, validation and MVP design | **Session 6 proposed design prepared; implementation decisions pending** |
-| 5. CRM Build & Integration | Scoped Salesforce Sales Enquiry MVP, validation rule and three list views. Two intake mock cases and two direct Salesforce API outcomes | **Sessions 7 and 9–12 documented. Live website connection pending** |
+| 5. CRM Build & Integration | Scoped Salesforce Sales Enquiry MVP, validation rule and three list views. Two intake mock cases and two direct Salesforce API outcomes | **Sessions 7 and 9–13 documented. Live website connection pending** |
 | 6. Testing & Analytics | Salesforce development checks, restored test data, regression results and case-study walkthrough | **Session 8 verification complete for the tested scenarios; separate-account access unverified** |
 
 New learning phases will be documented as their corresponding artefacts are developed and reviewed.
@@ -121,6 +121,12 @@ Submitted a fictional quote request from Postman to Salesforce Developer Edition
 Traced a rejected field mapping to its Salesforce error and checked all seven saved enquiries for the second submission’s identifying text.
 
 [Read the rejection test](12-rejected-enquiry-verification.html)
+
+### [Artefact 013 — Checking the Customer Enquiry Failure Message](docs/13-customer-enquiry-failure-message.md)
+
+Compared the customer-facing message after a simulated rejection with the agreed acceptance criterion. Includes the working practice form and observed screenshot.
+
+[Read the customer message check](13-customer-enquiry-failure-message.html)
 
 ## Techniques Applied So Far
 

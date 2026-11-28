@@ -244,6 +244,23 @@
         "Restore the connection before evaluating the field error.",
         "Read the saved values to check the business outcome."
       ]
+    },
+    {
+      "source": "docs/13-customer-enquiry-failure-message.md",
+      "output": "13-customer-enquiry-failure-message.html",
+      "short": "Customer Failure Message",
+      "step": "Check what Maya sees",
+      "status": "Verified in a practice form",
+      "lead": "What does a customer see when a quote request cannot be saved?",
+      "story": "Maya entered a valid email address. The form needed to explain the failed save and give her a next step.",
+      "connection": "Artefact 012 checked what the sales team could find after a rejection.",
+      "next": "A connected website submission still needs an end-to-end test.",
+      "sections": [
+        "Consider what Maya would do after submitting her request.",
+        "Identify exactly what a tester should see.",
+        "Compare the agreed message with the screenshot.",
+        "Keep the evidence from each test tied to its own setting."
+      ]
     }
   ],
   "glossary": [
