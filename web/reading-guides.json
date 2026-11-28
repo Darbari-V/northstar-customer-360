@@ -261,6 +261,22 @@
         "Compare the agreed message with the screenshot.",
         "Keep the evidence from each test tied to its own setting."
       ]
+    },
+    {
+      "source": "docs/14-customer-matching.md",
+      "output": "14-customer-matching.html",
+      "short": "Customer Matching",
+      "step": "Decide which customer to link",
+      "status": "Case-study design decision",
+      "lead": "When should a new enquiry appear in a customer\u2019s history?",
+      "story": "Sales can keep a request while checking who sent it. The customer\u2019s history should only include confirmed links.",
+      "connection": "This decision resolves the open customer-link question in Artefact 006.",
+      "next": "Configure the relationship and test the expected results in Salesforce.",
+      "sections": [
+        "Consider the trade-off between capturing a request and linking it to the right person.",
+        "Use the observed evidence in each scenario to decide when a link is required.",
+        "Distinguish a new quote from an amendment to a quote already in progress."
+      ]
     }
   ],
   "glossary": [

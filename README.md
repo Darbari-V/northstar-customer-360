@@ -128,6 +128,12 @@ Compared the customer-facing message after a simulated rejection with the agreed
 
 [Read the customer message check](13-customer-enquiry-failure-message.html)
 
+### [Artefact 014 — Customer Matching and Enquiry Linking](docs/14-customer-matching.md)
+
+Defines the matching decisions and expected Salesforce results for new, confirmed returning and uncertain customers.
+
+[Read the customer matching decision](14-customer-matching.html)
+
 ## Techniques Applied So Far
 
 - Business Problem Analysis
