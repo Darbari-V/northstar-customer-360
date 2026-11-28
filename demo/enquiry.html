@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Request a quote | Northstar Services</title>
+<style>
+* { box-sizing: border-box }
+body { margin: 0; background: #f4f4ef; color: #18332d; font: 1rem/1.55 Inter,system-ui,sans-serif }
+header { border-bottom: 1px solid #c8d1c8; padding: 1rem max(5vw,1rem); font-weight: 700 }
+main { max-width: 38rem; margin: clamp(1rem,5vw,4rem) auto; padding: 0 1rem }
+form { background:white; border:1px solid #d5ddd6; border-radius: .8rem; padding:clamp(1.2rem,5vw,2.6rem) }
+h1 { font: 2.6rem/1.15 Georgia,serif; margin:0 0 1.3rem }
+label { display:block; font-weight:600; margin:1rem 0 .3rem }
+input,textarea { width:100%; font:inherit; padding:.65rem .8rem; border:1px solid #84968b; border-radius:.35rem; color:inherit }
+textarea { min-height:6rem; resize:vertical }
+button { margin-top:1rem; background:#174e40; color:white; padding:.7rem 1.5rem; border:0; border-radius:.35rem; font:inherit; font-weight:650; cursor:pointer }
+:focus-visible { outline:3px solid #177eb3; outline-offset:2px }
+#result { border-left:4px solid #ab4629; background:#fff1e9; padding:1rem; color:#752d19; margin:1rem 0 0 }
+aside { color:#455c52; font-size:.92rem; margin:1rem .2rem }
+</style>
+<header>Northstar Services</header>
+<main>
+<form id="enquiry">
+<h1>Request a quote</h1>
+<label for="name">Full name</label>
+<input id="name" required value="Maya Shah">
+<label for="email">Email address</label>
+<input id="email" type="email" required value="maya@example.com">
+<label for="message">What would you like a quote for?</label>
+<textarea id="message" required>I'd like a quote for office chairs.</textarea>
+<button type="submit">Submit enquiry</button>
+<p id="result" role="alert" tabindex="-1" hidden></p>
+</form>
+<aside>Practice form · A completed submission simulates a rejected save. All entries stay in this browser tab.</aside>
+</main>
+<script>
+const form = document.querySelector('#enquiry');
+const result = document.querySelector('#result');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  result.hidden = false;
+  result.textContent = 'We couldn’t save your enquiry. Please try again later.';
+  result.focus();
+});
+form.addEventListener('input', () => {
+  result.hidden = true;
+  result.textContent = '';
+});
+</script>
+</html>
